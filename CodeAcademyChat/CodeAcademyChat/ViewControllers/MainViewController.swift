@@ -13,8 +13,14 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
+            
+        self.navigationItem.setHidesBackButton(true, animated: false)
+     
+        
     }
     
+
 
     /*
     // MARK: - Navigation

@@ -11,27 +11,68 @@ class UserManager {
     
     var userList: [User] = []
     
-    func addNewUser(username: String, password: String, confirmPassword: String) {
+    // -- -- --
+    // New User
+    func addNewUser(username: String, password: String, confirmPassword: String) -> String? {  // ? nes galime ir negrazinti err.
         
         guard !username.isEmpty
                 && !password.isEmpty
                 && password == confirmPassword
                 && !userList.contains(where: {$0.username == username})
         else {
-            return
+            return "Something wrong, check username, password"
         }
         
         // variantas 2, kai patikrinti ar username yra sarase
-//        for user in userList {
-//            if user.username == username {
-//                return  // po sio return baigiasi funkcija
-//            }
-//        }
+        //        for user in userList {
+        //            if user.username == username {
+        //                return  // po sio return baigiasi funkcija
+        //            }
+        //        }
         // sukuriame user objekta
         let newUser = User(username: username, password: password, isOnline: true)
         // prideda user objekta i sarasa
         userList.append(newUser)
+        
+        //print(userList)
+        //print("New user: \(newUser.username), \(newUser.password)")
+
+        
+        return nil // galim ir negrazinti err msg.
     }
     
+
+    
+    
+    
+    // -- -- --
+    // LOGIN
+    func userLogin(username: String, password: String) -> Bool {
+        // kreiva patikra
+        
+        for user in userList {
+            if user.username == username
+                && user.password == password {
+                user.isOnline = true
+                print("Logged in: \(user.username), \(user.password)")
+                return true
+
+            }
+        }
+
+        return false
+    }
+    
+    
+    func getUserList() {
+        print("\n Whole user qnt: \(userList.count)")
+        for user in userList {
+            print("Whole user list: \(user.username)")
+        }
+    }
+    
+    
 }
+
+
 

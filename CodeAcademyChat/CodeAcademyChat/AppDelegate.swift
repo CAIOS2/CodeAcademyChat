@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  CodeAcademyChat
 //
-//  Created by Tadas Petrikas on 2022-11-03.
+//  Created by Romas Petkus on 2022-11-07.
 //
 
 import UIKit

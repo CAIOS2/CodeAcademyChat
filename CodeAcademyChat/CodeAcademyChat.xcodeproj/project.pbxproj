@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		685033DA291979AB00B0BFD1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685033D9291979AB00B0BFD1 /* User.swift */; };
+		685033DD29197A4700B0BFD1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685033DC29197A4700B0BFD1 /* UserManager.swift */; };
 		C1734B4B291969080058AFD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4A291969080058AFD5 /* AppDelegate.swift */; };
 		C1734B4D291969080058AFD5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4C291969080058AFD5 /* SceneDelegate.swift */; };
 		C1734B4F291969080058AFD5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4E291969080058AFD5 /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		685033D9291979AB00B0BFD1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		685033DC29197A4700B0BFD1 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		C1734B47291969080058AFD5 /* CodeAcademyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeAcademyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1734B4A291969080058AFD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1734B4C291969080058AFD5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		685033DB29197A1800B0BFD1 /* DataUsers */ = {
+			isa = PBXGroup;
+			children = (
+				685033D9291979AB00B0BFD1 /* User.swift */,
+				685033DC29197A4700B0BFD1 /* UserManager.swift */,
+			);
+			path = DataUsers;
+			sourceTree = "<group>";
+		};
 		C1734B3E291969080058AFD5 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +69,7 @@
 		C1734B49291969080058AFD5 /* CodeAcademyChat */ = {
 			isa = PBXGroup;
 			children = (
+				685033DB29197A1800B0BFD1 /* DataUsers */,
 				C1734B4A291969080058AFD5 /* AppDelegate.swift */,
 				C1734B4C291969080058AFD5 /* SceneDelegate.swift */,
 				C1734B4E291969080058AFD5 /* ViewController.swift */,
@@ -138,8 +152,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				685033DA291979AB00B0BFD1 /* User.swift in Sources */,
 				C1734B4F291969080058AFD5 /* ViewController.swift in Sources */,
 				C1734B4B291969080058AFD5 /* AppDelegate.swift in Sources */,
+				685033DD29197A4700B0BFD1 /* UserManager.swift in Sources */,
 				C1734B4D291969080058AFD5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

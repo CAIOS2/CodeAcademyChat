@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var actionButton: UIButton!
     
     @IBOutlet weak var errorMessageTextField: UITextField!
+    
     var currentState: State = .register
     
     var userManager: UserManager = UserManager()

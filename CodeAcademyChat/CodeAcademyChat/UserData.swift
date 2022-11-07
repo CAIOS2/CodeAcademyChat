@@ -78,7 +78,6 @@ class UserData {
             userList = users
         }
         let newUser = createNewUser(username: username, password: password)
-        userList = []
         userList.append(newUser)
         
         let jsonString = userList.toJSONString()

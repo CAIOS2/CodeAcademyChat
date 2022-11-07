@@ -77,7 +77,16 @@
                                             </backgroundConfiguration>
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="onActionButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5VS-vx-yTW"/>
+                                        </connections>
                                     </button>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvq-KS-3oA">
+                                        <rect key="frame" x="0.0" y="260.00000000000006" width="350" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -101,6 +110,7 @@
                     <connections>
                         <outlet property="actionButton" destination="79v-VC-jmf" id="vAT-4b-eXT"/>
                         <outlet property="confirmPasswordTextField" destination="MqX-Ya-2OS" id="KwA-3l-vDZ"/>
+                        <outlet property="errorMessageLabel" destination="vvq-KS-3oA" id="ieV-Z3-PGg"/>
                         <outlet property="passwordTextField" destination="k7q-ry-B51" id="ugt-gr-0sT"/>
                         <outlet property="segmentedControl" destination="l3c-xT-cev" id="O7e-P5-d7g"/>
                         <outlet property="usernameTextField" destination="AnR-Vl-eXQ" id="eiB-b8-5xC"/>
@@ -108,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="4"/>
+            <point key="canvasLocation" x="136.92307692307691" y="3.5545023696682461"/>
         </scene>
     </scenes>
     <resources>
@@ -118,6 +128,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

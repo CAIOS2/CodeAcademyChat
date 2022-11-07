@@ -18,8 +18,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var errorMessageLabel: UILabel!
     
     var currentState: State = .register
+    
+    let userManager: UserManager = UserManager()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,5 +46,23 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func onActionButtonClick(_ sender: Any) {
+        switch currentState {
+        case .register:
+            
+            let result = userManager.register(
+                username: usernameTextField.text!,
+                password: passwordTextField.text!,
+                confirmPassword: confirmPasswordTextField.text!)
+            if let errorMessage = result.errorMessage {
+                errorMessageLabel.text = errorMessage
+                errorMessageLabel.isHidden = false
+            } else {
+                errorMessageLabel.isHidden = true
+            }
+        case .login:
+            break
+        }
+    }
 }
 

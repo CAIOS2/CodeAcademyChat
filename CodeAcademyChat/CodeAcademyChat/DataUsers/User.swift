@@ -19,4 +19,4 @@ class User {
     }
 }
 
-let userioObjektas = User(username: "Romas", password: "123", isOnline: true)
+//let userioObjektas = User(username: "Romas", password: "123", isOnline: true)

@@ -9,9 +9,6 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var userManager: UserManager = UserManager()
-    
-    
     enum State {
         case register
         case login
@@ -23,15 +20,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var actionButton: UIButton!
     
+    @IBOutlet weak var errorMessageTextField: UITextField!
     var currentState: State = .register
+    
+    var userManager: UserManager = UserManager()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
-    @IBAction func buttonClick(_ sender: Any) {
-        
-        userManager.register(username: userNameTextField.text!, password: passwordTextField.text!, confirmPassword: confirmPasswordTextField.text!)
+//    }
+//    @IBAction func buttonClick(_ sender: Any) {
+//
+//        userManager.register(username: userNameTextField.text!, password: passwordTextField.text!, confirmPassword: confirmPasswordTextField.text!)
     }
     
     @IBAction func onSegment(_ sender: Any) {
@@ -51,6 +52,26 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func onActionButtonClick(_ sender: Any) {
+        switch currentState {
+        case .register:
+            
+            let result = userManager.register(
+                username: userNameTextField.text!,
+                password: passwordTextField.text!,
+                confirmPassword: confirmPasswordTextField.text!)
+            if let errorMessage = result.errorMessage {
+                errorMessageTextField.text = errorMessage
+                errorMessageTextField.isHidden = false
+            } else {
+                errorMessageTextField.isHidden = true
+            }
+        case .login:
+            break
+            
+        }
+        
+    }
 }
 
 

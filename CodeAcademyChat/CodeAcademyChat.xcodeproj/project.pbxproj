@@ -7,19 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		685033DA291979AB00B0BFD1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685033D9291979AB00B0BFD1 /* User.swift */; };
-		685033DD29197A4700B0BFD1 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685033DC29197A4700B0BFD1 /* UserManager.swift */; };
 		C1734B4B291969080058AFD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4A291969080058AFD5 /* AppDelegate.swift */; };
 		C1734B4D291969080058AFD5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4C291969080058AFD5 /* SceneDelegate.swift */; };
 		C1734B4F291969080058AFD5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4E291969080058AFD5 /* ViewController.swift */; };
 		C1734B52291969080058AFD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1734B50291969080058AFD5 /* Main.storyboard */; };
 		C1734B542919690A0058AFD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1734B532919690A0058AFD5 /* Assets.xcassets */; };
 		C1734B572919690A0058AFD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1734B552919690A0058AFD5 /* LaunchScreen.storyboard */; };
+		C1734B6229198C940058AFD5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B6129198C940058AFD5 /* User.swift */; };
+		C1734B6429198D110058AFD5 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B6329198D110058AFD5 /* UserManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		685033D9291979AB00B0BFD1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		685033DC29197A4700B0BFD1 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		C1734B47291969080058AFD5 /* CodeAcademyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeAcademyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1734B4A291969080058AFD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1734B4C291969080058AFD5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +26,8 @@
 		C1734B532919690A0058AFD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1734B562919690A0058AFD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C1734B582919690A0058AFD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1734B6129198C940058AFD5 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C1734B6329198D110058AFD5 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,15 +41,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		685033DB29197A1800B0BFD1 /* DataUsers */ = {
-			isa = PBXGroup;
-			children = (
-				685033D9291979AB00B0BFD1 /* User.swift */,
-				685033DC29197A4700B0BFD1 /* UserManager.swift */,
-			);
-			path = DataUsers;
-			sourceTree = "<group>";
-		};
 		C1734B3E291969080058AFD5 = {
 			isa = PBXGroup;
 			children = (
@@ -69,7 +60,7 @@
 		C1734B49291969080058AFD5 /* CodeAcademyChat */ = {
 			isa = PBXGroup;
 			children = (
-				685033DB29197A1800B0BFD1 /* DataUsers */,
+				C1734B6129198C940058AFD5 /* User.swift */,
 				C1734B4A291969080058AFD5 /* AppDelegate.swift */,
 				C1734B4C291969080058AFD5 /* SceneDelegate.swift */,
 				C1734B4E291969080058AFD5 /* ViewController.swift */,
@@ -77,6 +68,7 @@
 				C1734B532919690A0058AFD5 /* Assets.xcassets */,
 				C1734B552919690A0058AFD5 /* LaunchScreen.storyboard */,
 				C1734B582919690A0058AFD5 /* Info.plist */,
+				C1734B6329198D110058AFD5 /* UserManager.swift */,
 			);
 			path = CodeAcademyChat;
 			sourceTree = "<group>";
@@ -152,10 +144,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				685033DA291979AB00B0BFD1 /* User.swift in Sources */,
+				C1734B6229198C940058AFD5 /* User.swift in Sources */,
 				C1734B4F291969080058AFD5 /* ViewController.swift in Sources */,
 				C1734B4B291969080058AFD5 /* AppDelegate.swift in Sources */,
-				685033DD29197A4700B0BFD1 /* UserManager.swift in Sources */,
+				C1734B6429198D110058AFD5 /* UserManager.swift in Sources */,
 				C1734B4D291969080058AFD5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

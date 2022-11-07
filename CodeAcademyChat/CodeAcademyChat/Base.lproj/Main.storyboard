@@ -37,6 +37,9 @@
                                     <segment title="Registration"/>
                                     <segment title="Login"/>
                                 </segments>
+                                <connections>
+                                    <action selector="onSegemntChange:" destination="pMv-cB-T3Y" eventType="valueChanged" id="5dC-nV-VUj"/>
+                                </connections>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="C9p-vR-3C7">
                                 <rect key="frame" x="16" y="418" width="361" height="192"/>
@@ -73,6 +76,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Login"/>
                                         <connections>
+                                            <action selector="actionButtonIsPressed:" destination="pMv-cB-T3Y" eventType="touchUpInside" id="fyT-so-N56"/>
                                             <segue destination="2PC-6f-Gh7" kind="show" id="nra-5U-tGW"/>
                                         </connections>
                                     </button>
@@ -127,6 +131,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="U5r-Ev-uOV"/>
+                    <connections>
+                        <outlet property="actionButton" destination="XJA-y2-F5m" id="yGJ-fJ-I0u"/>
+                        <outlet property="confirmPasswordTextField" destination="xQm-Ct-dG2" id="vqx-KN-piq"/>
+                        <outlet property="passwordTextField" destination="2ox-XX-hgf" id="gIq-JI-NxT"/>
+                        <outlet property="segmentControl" destination="sVw-hL-hbU" id="TXQ-4H-lUR"/>
+                        <outlet property="usernameTextField" destination="CWH-Kv-DpS" id="srI-cy-Xj4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="onA-Wk-MVQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

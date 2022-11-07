@@ -21,14 +21,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var actionButton: UIButton!
     
-    var currentState: State = .login
-    //var users: [User]
+    var currentState: State = .register
+    let userManager = UserManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func registerButton(_ sender: Any) {
+        
+        userManager.registration(username: usernameTextField.text!, password: passwordTextField.text!, comfirmPasword: confirmPasswordTextField.text!)
+        
+    }
     @IBAction func onSegmentChange(_ sender: Any) {
         if segmentedControl.selectedSegmentIndex == 0 {
             currentState = .register

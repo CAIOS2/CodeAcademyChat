@@ -23,7 +23,7 @@ class UserManager {
         if password != confirmPassword {
             return RegisterResult(user: nil, errorMessage: "Passwords do not match")
         }
-
+        
         for user in userList {
             if username == user.username {
                 return RegisterResult(user: nil, errorMessage: "User already exists")
@@ -36,6 +36,15 @@ class UserManager {
         
         return RegisterResult(user: user, errorMessage: nil)
     }
+    
+    func login(username: String, password: String) -> User? {
+        
+        for user in userList {
+            if username == user.username && password == user.password {
+                user.isOnline = true
+                return user
+            }
+        }
+        return nil
+    }
 }
-
-

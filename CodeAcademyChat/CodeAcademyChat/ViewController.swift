@@ -61,7 +61,12 @@ class ViewController: UIViewController {
                 errorMessageLabel.isHidden = true
             }
         case .login:
-            break
+            if let user = userManager.login(
+                username: usernameTextField.text!,
+                password: passwordTextField.text!){
+                
+                print("user is logged in")
+            }
         }
     }
 }

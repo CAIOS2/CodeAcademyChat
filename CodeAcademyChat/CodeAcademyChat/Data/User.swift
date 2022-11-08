@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class User {
     
     let username: String
@@ -20,6 +19,7 @@ class User {
         self.username = username
         self.password = password
         self.isOnline = isOnline
+        
     }
 }
 

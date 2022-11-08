@@ -11,11 +11,13 @@ class User {
     let username: String
     let password: String
     var isOnline: Bool
+   
     
     init(username: String, password: String, isOnline: Bool) {
         self.username = username
         self.password = password
         self.isOnline = isOnline
+        
     }
 }
 

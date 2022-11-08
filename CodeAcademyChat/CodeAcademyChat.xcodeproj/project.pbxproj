@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		417470D1291AD72E002FDB18 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417470D0291AD72E002FDB18 /* Message.swift */; };
+		417470D3291AD742002FDB18 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417470D2291AD742002FDB18 /* Room.swift */; };
+		417470D5291AD767002FDB18 /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417470D4291AD767002FDB18 /* RoomManager.swift */; };
 		418DC2EE2919700900F7DD80 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418DC2ED2919700900F7DD80 /* User.swift */; };
 		418DC2F0291976F900F7DD80 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418DC2EF291976F900F7DD80 /* UserManager.swift */; };
 		41A61AA1291805AD008329CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41A61AA0291805AD008329CE /* Main.storyboard */; };
@@ -21,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		417470D0291AD72E002FDB18 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		417470D2291AD742002FDB18 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		417470D4291AD767002FDB18 /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
 		418DC2ED2919700900F7DD80 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		418DC2EF291976F900F7DD80 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		41A61AA0291805AD008329CE /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../Copy/Main.storyboard; sourceTree = "<group>"; };
@@ -51,6 +57,9 @@
 			isa = PBXGroup;
 			children = (
 				418DC2ED2919700900F7DD80 /* User.swift */,
+				417470D0291AD72E002FDB18 /* Message.swift */,
+				417470D2291AD742002FDB18 /* Room.swift */,
+				417470D4291AD767002FDB18 /* RoomManager.swift */,
 				418DC2EF291976F900F7DD80 /* UserManager.swift */,
 			);
 			path = DataUsers;
@@ -164,10 +173,13 @@
 				41A61AA9291808C7008329CE /* SecondViewController.swift in Sources */,
 				41A61AA72918087D008329CE /* NewRoomViewController.swift in Sources */,
 				A0C2A69F29144FA9009A006C /* ViewController.swift in Sources */,
+				417470D1291AD72E002FDB18 /* Message.swift in Sources */,
+				417470D3291AD742002FDB18 /* Room.swift in Sources */,
 				A0C2A69B29144FA9009A006C /* AppDelegate.swift in Sources */,
 				41A61AA529180846008329CE /* SettingsViewController.swift in Sources */,
 				A0C2A69D29144FA9009A006C /* SceneDelegate.swift in Sources */,
 				418DC2F0291976F900F7DD80 /* UserManager.swift in Sources */,
+				417470D5291AD767002FDB18 /* RoomManager.swift in Sources */,
 				418DC2EE2919700900F7DD80 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

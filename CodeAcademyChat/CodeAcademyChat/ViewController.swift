@@ -19,24 +19,36 @@ class ViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var actionButton: UIButton!
-    
     @IBOutlet weak var errorMessageTextField: UITextField!
     
     var currentState: State = .register
     
     var userManager: UserManager = UserManager()
-
+    var userForSegue: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         // Do any additional setup after loading the view.
-//    }
-//    @IBAction func buttonClick(_ sender: Any) {
-//
-//        userManager.register(username: userNameTextField.text!, password: passwordTextField.text!, confirmPassword: confirmPasswordTextField.text!)
+        //    }
+        //    @IBAction func buttonClick(_ sender: Any) {
+        //
+        //        userManager.register(username: userNameTextField.text!, password: passwordTextField.text!, confirmPassword: confirmPasswordTextField.text!)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "home" {
+            if let viewController = segue.destination as? SecondViewController {
+                viewController.user = userForSegue
+                userForSegue = nil
+            }
+            
+        }
     }
     
+    
     @IBAction func onSegment(_ sender: Any) {
+        
         if segmentedControl.selectedSegmentIndex == 0 {
             currentState = .register
         } else if segmentedControl.selectedSegmentIndex == 1 {
@@ -55,12 +67,14 @@ class ViewController: UIViewController {
     
     @IBAction func onActionButtonClick(_ sender: Any) {
         switch currentState {
+            
         case .register:
             
             let result = userManager.register(
                 username: userNameTextField.text!,
                 password: passwordTextField.text!,
                 confirmPassword: confirmPasswordTextField.text!)
+            
             if let errorMessage = result.errorMessage {
                 errorMessageTextField.text = errorMessage
                 errorMessageTextField.isHidden = false
@@ -68,11 +82,32 @@ class ViewController: UIViewController {
                 errorMessageTextField.isHidden = true
             }
         case .login:
-            break
             
+            let result = userManager.login(username: userNameTextField.text!, password: passwordTextField.text!)
+            
+            if let errorMessage = result.errorMessage {
+                errorMessageTextField.text = errorMessage
+                errorMessageTextField.isHidden = false
+            } else {
+                errorMessageTextField.isHidden = true
+                if let user = result.user {
+                    userForSegue = user
+                    performSegue(withIdentifier: "home", sender: nil)
+                }
+            }
+            break
         }
         
     }
 }
-
-
+        
+        //            let login = userManager.login(username: userNameTextField.text!, password:passwordTextField.text!)
+        //
+        //            if login.isLogin != nil {
+        //                performSegue(withIdentifier: "Go to menu", sender: self)
+        //            } else {
+        //                errorMessageTextField.text = login.errorMessageTextField
+        //                errorMessageTextField.isHidden = false
+        
+        
+  

@@ -37,19 +37,19 @@ class LoginViewController: UIViewController {
         errorMessage.text = ""
         passwordTextField.textContentType = .oneTimeCode
         confirmPasswordTextField.textContentType = .oneTimeCode
-        actionButton.titleLabel?.text = "Register"
+        actionButton.setTitle("Register", for: .normal)
     }
     
 
     func changeActionButtonLabel() {
         if segmentControl.selectedSegmentIndex == 0 {
             currentState = .register
-            actionButton.titleLabel?.text = "Register"
+            actionButton.setTitle("Register", for: .normal)
        //     confirmPasswordTextField.isHidden = false
         } else {
             currentState = .login
        //     confirmPasswordTextField.isHidden = true
-            actionButton.titleLabel?.text = "Login"
+            actionButton.setTitle("Login", for: .normal)
         }
     }
     
@@ -63,7 +63,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func actionButtonIsPressed(_ sender: Any) {
         
-        print(currentState)
+//        print(currentState)
         
         
         switch currentState {
@@ -75,20 +75,23 @@ class LoginViewController: UIViewController {
                                     confirmPassword: confirmPasswordTextField.text ?? "") {
                 errorMessage.text       = errMsg
                 errorMessage.isHidden   = false
-                openMainVC              = false
-                
+                openMainVC              = false     //blokuoja sekancio lango atidaryma
+                changeActionButtonLabel()
+
             } else {
                 errorMessage.text       = ""
                 errorMessage.isHidden   = true
                 openMainVC              = true
+                changeActionButtonLabel()
+
             }
             changeActionButtonLabel()
             
         case .login:
             
-            print(userManager.userLogin(
-                username: usernameTextField.text ?? "",
-                password: passwordTextField.text ?? ""))
+//            print(userManager.userLogin(
+//                username: usernameTextField.text ?? "",
+//                password: passwordTextField.text ?? ""))
             
             
             if userManager.userLogin(

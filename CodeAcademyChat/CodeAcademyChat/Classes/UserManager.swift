@@ -11,6 +11,8 @@ class UserManager {
     
     var userList: [User] = []
     
+
+    
     // -- -- --
     // New User
     func addNewUser(username: String, password: String, confirmPassword: String) -> String? {  // ? nes galime ir negrazinti err.
@@ -48,17 +50,27 @@ class UserManager {
     // -- -- --
     // LOGIN
     func userLogin(username: String, password: String) -> Bool {
-        // kreiva patikra
         
-        for user in userList {
-            if user.username == username
-                && user.password == password {
-                user.isOnline = true
-                print("Logged in: \(user.username), \(user.password)")
-                return true
-
-            }
+        // just for test
+        let gedas = User(username: "gedas", password: "gk", isOnline: true)
+        userList.append(gedas)
+        
+        
+        if let login = userList.first(where: {$0.username == username && $0.password == password}) {
+            login.isOnline = true
+            print("Logged in: \(login.username), \(login.password)")
+            return true
         }
+        
+//        for user in userList {
+//            if user.username == username
+//                && user.password == password {
+//                user.isOnline = true
+//                print("Logged in: \(user.username), \(user.password)")
+//                return true
+//
+//            }
+//        }
 
         return false
     }
@@ -67,7 +79,7 @@ class UserManager {
     func getUserList() {
         print("\n Whole user qnt: \(userList.count)")
         for user in userList {
-            print("Whole user list: \(user.username)")
+            print("Whole user list: \(user.username), \(user.password), \(user.isOnline)")
         }
     }
     

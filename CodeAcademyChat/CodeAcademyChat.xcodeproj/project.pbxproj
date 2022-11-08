@@ -15,6 +15,7 @@
 		C1734B572919690A0058AFD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1734B552919690A0058AFD5 /* LaunchScreen.storyboard */; };
 		C1734B6229198C940058AFD5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B6129198C940058AFD5 /* User.swift */; };
 		C1734B6429198D110058AFD5 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B6329198D110058AFD5 /* UserManager.swift */; };
+		C1734B66291AD0300058AFD5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B65291AD0300058AFD5 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		C1734B582919690A0058AFD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C1734B6129198C940058AFD5 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C1734B6329198D110058AFD5 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		C1734B65291AD0300058AFD5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				C1734B4A291969080058AFD5 /* AppDelegate.swift */,
 				C1734B4C291969080058AFD5 /* SceneDelegate.swift */,
 				C1734B4E291969080058AFD5 /* ViewController.swift */,
+				C1734B65291AD0300058AFD5 /* HomeViewController.swift */,
 				C1734B50291969080058AFD5 /* Main.storyboard */,
 				C1734B532919690A0058AFD5 /* Assets.xcassets */,
 				C1734B552919690A0058AFD5 /* LaunchScreen.storyboard */,
@@ -149,6 +152,7 @@
 				C1734B4B291969080058AFD5 /* AppDelegate.swift in Sources */,
 				C1734B6429198D110058AFD5 /* UserManager.swift in Sources */,
 				C1734B4D291969080058AFD5 /* SceneDelegate.swift in Sources */,
+				C1734B66291AD0300058AFD5 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

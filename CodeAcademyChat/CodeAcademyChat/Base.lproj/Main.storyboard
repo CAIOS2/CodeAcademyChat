@@ -114,11 +114,57 @@
                         <outlet property="passwordTextField" destination="k7q-ry-B51" id="ugt-gr-0sT"/>
                         <outlet property="segmentedControl" destination="l3c-xT-cev" id="O7e-P5-d7g"/>
                         <outlet property="usernameTextField" destination="AnR-Vl-eXQ" id="eiB-b8-5xC"/>
+                        <segue destination="Ve9-W9-BIB" kind="show" identifier="home" id="hbK-mt-EhD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.92307692307691" y="3.5545023696682461"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="mef-Fx-uR2">
+            <objects>
+                <viewController id="Ve9-W9-BIB" customClass="HomeViewController" customModule="CodeAcademyChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mpG-ty-9XT">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zMo-yk-gAA">
+                                <rect key="frame" x="12" y="56" width="366" height="100"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="2b0-co-Ucs"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome, x!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQm-OD-T7b">
+                                <rect key="frame" x="12" y="168" width="366" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7UH-bb-yOP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BQm-OD-T7b" firstAttribute="leading" secondItem="7UH-bb-yOP" secondAttribute="leading" constant="12" id="HGp-9F-GN0"/>
+                            <constraint firstItem="7UH-bb-yOP" firstAttribute="trailing" secondItem="BQm-OD-T7b" secondAttribute="trailing" constant="12" id="WRV-KZ-gEk"/>
+                            <constraint firstItem="7UH-bb-yOP" firstAttribute="trailing" secondItem="zMo-yk-gAA" secondAttribute="trailing" constant="12" id="X3p-2q-It3"/>
+                            <constraint firstItem="zMo-yk-gAA" firstAttribute="top" secondItem="7UH-bb-yOP" secondAttribute="top" constant="12" id="X5q-Xs-3H6"/>
+                            <constraint firstItem="zMo-yk-gAA" firstAttribute="leading" secondItem="7UH-bb-yOP" secondAttribute="leading" constant="12" id="XyD-op-ezM"/>
+                            <constraint firstItem="BQm-OD-T7b" firstAttribute="top" secondItem="zMo-yk-gAA" secondAttribute="bottom" constant="12" id="nnj-by-XdZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="bfe-jV-cuf"/>
+                    <connections>
+                        <outlet property="button" destination="zMo-yk-gAA" id="vaE-f1-8pe"/>
+                        <outlet property="welcomeLabel" destination="BQm-OD-T7b" id="Qku-fZ-mth"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aMp-jN-TyN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1226" y="27"/>
         </scene>
     </scenes>
     <resources>
@@ -131,6 +177,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

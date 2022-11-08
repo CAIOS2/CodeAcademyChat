@@ -93,22 +93,32 @@ class LoginViewController: UIViewController {
         switch currentState {
             
         case .register:
-            if let errMsg = userManager.addNewUser(
+            
+            let result = userManager.addNewUser(
                 username: usernameTextField.text ?? "",
                 password: passwordTextField.text ?? "",
-                confirmPassword: confirmPasswordTextField.text ?? "") {
-                errorMessage.text       = errMsg
-                errorMessage.isHidden   = false
-                openMainVC              = false     //blokuoja sekancio lango atidaryma
-                changeActionButtonLabel()
-                
-            } else {
+                confirmPassword: confirmPasswordTextField.text ?? "")
+            
+            if result.user != nil {
                 errorMessage.text       = ""
                 errorMessage.isHidden   = true
                 openMainVC              = true
                 changeActionButtonLabel()
+                userForSegue = result.user
+//                errorMessage.text       = errMsg
+//                errorMessage.isHidden   = false
+//                openMainVC              = false     //blokuoja sekancio lango atidaryma
+//                changeActionButtonLabel()
+                
+            } else {
+
                // userForSegue =
                 //loggedUserName          = usernameTextField.text!
+                errorMessage.text       = result.errorMessage
+                errorMessage.isHidden   = false
+                openMainVC              = false     //blokuoja sekancio lango atidaryma
+                changeActionButtonLabel()
+                
             }
             changeActionButtonLabel()
             

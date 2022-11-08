@@ -22,14 +22,14 @@ class UserManager {
     
     // -- -- --
     // New User
-    func addNewUser(username: String, password: String, confirmPassword: String) -> String? {  // ? nes galime ir negrazinti err.
+    func addNewUser(username: String, password: String, confirmPassword: String) -> UserResult {  // ? nes galime ir negrazinti err.
         
         guard !username.isEmpty
                 && !password.isEmpty
                 && password == confirmPassword
                 && !userList.contains(where: {$0.username == username})
         else {
-            return "Something wrong, check username, password"
+            return UserResult(user: nil, errorMessage: "Something wrong")
         }
         
         // variantas 2, kai patikrinti ar username yra sarase
@@ -47,7 +47,7 @@ class UserManager {
         //print("New user: \(newUser.username), \(newUser.password)")
 
         
-        return nil // galim ir negrazinti err msg.
+        return UserResult(user: newUser, errorMessage: nil)
     }
     
 

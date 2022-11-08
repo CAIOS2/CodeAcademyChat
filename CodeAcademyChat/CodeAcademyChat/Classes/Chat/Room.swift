@@ -8,11 +8,17 @@
 import Foundation
 
 class Room {
-    let datetime: Date
-    let id: String
+    let name: String
+    var onlineUsers: [User]
+    var offlineUsers: [User]
+    var messageHistory: [Message]
+    var message: [Message]
     
-    init(datetime: Date, id: String) {
-        self.datetime = datetime
-        self.id = id
+    init(name: String, onlineUsers: [User], offlineUsers: [User], messageHistory: [Message], message: [Message]) {
+        self.name = name
+        self.onlineUsers = onlineUsers
+        self.offlineUsers = offlineUsers
+        self.messageHistory = messageHistory
+        self.message = message
     }
 }

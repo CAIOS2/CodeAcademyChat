@@ -11,30 +11,41 @@ class RoomManager {
     
     // grazinimui pranesimu apie sukurima/ gavima
     struct RoomResult {
-        let id: Room?
+        let room: Room?
         let errorMessage: String?
     }
     
     var roomList: [Room] = []
+    var loggedUserName: User!
     
-    func addRoom(newID: String) -> RoomResult {
+    
+    // add new room
+    func addRoom(newName: String) -> RoomResult {
         
-        guard !newID.isEmpty
-                && !roomList.contains(where: {$0.id == newID.lowercased()})
+        guard !newName.isEmpty
+                && !roomList.contains(where: {$0.name == newName.lowercased()})
         else {
-            return RoomResult(id: nil, errorMessage: "Sorry, but with these id was created earlier")
+            return RoomResult(room: nil,
+                              errorMessage: "Sorry, but with these id was created earlier")
         }
-        
-        var datetime = NSDate()
-        let newRoom = Room(datetime: datetime as Date, id: newID)
-        
-        
-        
-        // todo, fix return
-        return RoomResult(id: nil, errorMessage: "")
+        let newRoom = Room(name: newName.lowercased(), onlineUsers: [loggedUserName], offlineUsers: [], messageHistory: [], message: [])
+        roomList.append(newRoom)
+        return RoomResult(room: newRoom, errorMessage: "")
     }
     
     
+    // get room by name
+    func getRoom(name: String) -> RoomResult {
+        
+        guard let room = roomList.first(where: { room in
+            room.name == name
+        }) else {
+            return RoomResult(room: nil, errorMessage: "Can't find room")
+        }
+        
+        
+        return RoomResult(room: room, errorMessage: nil)
+    }
     
     
     

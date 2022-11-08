@@ -12,11 +12,12 @@ class MainViewController: UIViewController {
     var loggedUserName: User!
     
     @IBOutlet weak var helloLabel: UILabel!
-    
+    @IBOutlet weak var errorMessage: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        errorMessage.text = ""
+        errorMessage.isHidden = true
         // Do any additional setup after loading the view.
 
             

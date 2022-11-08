@@ -8,36 +8,27 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    let userManager: UserManager = UserManager()
     enum State {
         case register
         case login
     }
     
     @IBOutlet weak var usernameTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
-    
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    
     @IBOutlet weak var confirmPasswordTextField: UITextField!
-    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var errorMessageLabel: UILabel!
     
-    var currentState: State = .login
+    var currentState: State = .register
     
-    //    var users: [User]
-    
+    let userManager: UserManager = UserManager()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
-    @IBAction func buttonClick(_ sender: Any) {
-        
-        userManager.register(username: usernameTextField.text!, password: passwordTextField.text!, confirmPassword: confirmPasswordTextField.text!)
-    }
+
     @IBAction func onSegmentChange(_ sender: Any) {
         if segmentedControl.selectedSegmentIndex == 0 {
             currentState = .register
@@ -46,13 +37,32 @@ class ViewController: UIViewController {
         }
         
         confirmPasswordTextField.isHidden = currentState != .register
-        //        confirmPasswordTextField.isHidden = segmentedControl.selectedSegmentIndex != 0
+        
         switch currentState {
         case .register:
             actionButton.titleLabel?.text = "Register"
         case .login:
             actionButton.titleLabel?.text = "Login"
         }
-        
+    }
+    
+    @IBAction func onActionButtonClick(_ sender: Any) {
+        switch currentState {
+        case .register:
+            
+            let result = userManager.register(
+                username: usernameTextField.text!,
+                password: passwordTextField.text!,
+                confirmPassword: confirmPasswordTextField.text!)
+            if let errorMessage = result.errorMessage {
+                errorMessageLabel.text = errorMessage
+                errorMessageLabel.isHidden = false
+            } else {
+                errorMessageLabel.isHidden = true
+            }
+        case .login:
+            let result = userManager.login(username: usernameTextField.text!, password: passwordTextField.text!)
+            break
+        }
     }
 }

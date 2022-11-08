@@ -6,27 +6,48 @@
 //
 
 import Foundation
+struct UserResult {
+    let user: User?
+    let errorMessage: String?
+}
 
 
 class UserManager {
     
     var userList: [User] = []
     
-    func register(username: String, password: String, confirmPassword: String) {
+    func register(username: String, password: String, confirmPassword: String) -> UserResult {
         guard !username.isEmpty,!password.isEmpty
         else {
-            return
+            return UserResult(user: nil, errorMessage: "Username and password cannot be empty")
         }
         if password != confirmPassword {
-            return
+            return UserResult(user: nil, errorMessage: "Password do not match")
         }
         for user in userList {
             if username == user.username {
-                return
+                return UserResult(user: nil, errorMessage: "User already exists")
             }
         }
         
         let user = User(username: username, password: password, isOnline: true)
         userList.append(user)
+        return UserResult(user: user, errorMessage: nil)
+    }
+    func login(username: String, password: String) -> UserResult {
+        // pirmas variantas
+        let userOptional = userList.first { user in
+            user.username == username
+        }
+        //antras variantas
+        //        let userOptional = userList.first(where: { $0.username == username})
+        
+        guard let user = userOptional else {
+            return UserResult(user: nil, errorMessage: "User with given username not found")
+        }
+        if user.password != password {
+            return UserResult(user: nil, errorMessage: "Entered password is wrong")
+        }
+        return UserResult(user: user, errorMessage: nil)
     }
 }

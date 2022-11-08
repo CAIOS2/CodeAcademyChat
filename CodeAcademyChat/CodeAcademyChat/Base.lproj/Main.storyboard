@@ -39,8 +39,8 @@
                                     <action selector="onSegmentChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="bZI-Hr-iBX"/>
                                 </connections>
                             </segmentedControl>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="47" translatesAutoresizingMaskIntoConstraints="NO" id="Wju-ee-5Nk">
-                                <rect key="frame" x="20" y="313.33333333333331" width="350" height="340.99999999999994"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="61" translatesAutoresizingMaskIntoConstraints="NO" id="Wju-ee-5Nk">
+                                <rect key="frame" x="20" y="313.33333333333331" width="350" height="382.99999999999994"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AnR-Vl-eXQ">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
@@ -51,23 +51,23 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartQuotesType="no"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k7q-ry-B51">
-                                        <rect key="frame" x="0.0" y="97" width="350" height="50"/>
+                                        <rect key="frame" x="0.0" y="111" width="350" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="aDJ-2C-Zhk"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your password confirmation" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MqX-Ya-2OS">
-                                        <rect key="frame" x="0.0" y="194" width="350" height="50"/>
+                                        <rect key="frame" x="0.0" y="222.00000000000006" width="350" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="6FG-Hr-1DT"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79v-VC-jmf">
-                                        <rect key="frame" x="0.0" y="291.00000000000006" width="350" height="50"/>
+                                        <rect key="frame" x="0.0" y="333.00000000000006" width="350" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="3dr-XB-kpe"/>
                                         </constraints>
@@ -83,7 +83,7 @@
                                         </connections>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvq-KS-3oA">
-                                        <rect key="frame" x="0.0" y="341.00000000000006" width="350" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="383.00000000000006" width="350" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>

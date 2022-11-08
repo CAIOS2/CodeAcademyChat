@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RegisterResult {
+struct UserResult {
     let user: User?
     let errorMessage: String?
 }
@@ -15,18 +15,18 @@ struct RegisterResult {
 class UserManager {
     var userList: [User] = []
     
-    func register(username: String, password: String, confirmPassword: String) -> RegisterResult {
+    func register(username: String, password: String, confirmPassword: String) -> UserResult {
         guard !username.isEmpty, !password.isEmpty
         else {
-            return RegisterResult(user: nil, errorMessage: "User name and password cannot be empty")
+            return UserResult(user: nil, errorMessage: "User name and password cannot be empty")
         }
         if password != confirmPassword {
-            return RegisterResult(user: nil, errorMessage: "Passwords do not match")
+            return UserResult(user: nil, errorMessage: "Passwords do not match")
         }
         
         for user in userList {
             if username == user.username {
-                return RegisterResult(user: nil, errorMessage: "User already exists")
+                return UserResult(user: nil, errorMessage: "User already exists")
             }
         }
         
@@ -34,17 +34,19 @@ class UserManager {
         
         userList.append(user)
         
-        return RegisterResult(user: user, errorMessage: nil)
+        return UserResult(user: user, errorMessage: nil)
     }
     
-    func login(username: String, password: String) -> User? {
+    func login(username: String, password: String) -> UserResult {
         
-        for user in userList {
-            if username == user.username && password == user.password {
-                user.isOnline = true
-                return user
+        if let user = userList.first(where: {$0.username == username}) {
+            
+            if password == user.password {
+                
+                return UserResult(user: user, errorMessage: nil)
             }
         }
-        return nil
+        
+        return UserResult(user: nil, errorMessage: "No user \(username) found")
     }
 }

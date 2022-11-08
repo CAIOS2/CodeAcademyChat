@@ -40,9 +40,9 @@ class ViewController: UIViewController {
         
         switch currentState {
         case .register:
-            actionButton.titleLabel?.text = "Register"
+            actionButton.setTitle("Register", for: .normal)
         case .login:
-            actionButton.titleLabel?.text = "Login"
+            actionButton.setTitle("Login", for: .normal)
         }
     }
     
@@ -61,11 +61,15 @@ class ViewController: UIViewController {
                 errorMessageLabel.isHidden = true
             }
         case .login:
-            if let user = userManager.login(
+            
+            let result = userManager.login(
                 username: usernameTextField.text!,
-                password: passwordTextField.text!){
-                
-                print("user is logged in")
+                password: passwordTextField.text!)
+            if let errorMessage = result.errorMessage {
+                errorMessageLabel.text = errorMessage
+                errorMessageLabel.isHidden = false
+            } else {
+                errorMessageLabel.isHidden = true
             }
         }
     }

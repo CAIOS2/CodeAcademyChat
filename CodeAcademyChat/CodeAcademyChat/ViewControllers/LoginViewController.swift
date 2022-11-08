@@ -77,6 +77,10 @@ class LoginViewController: UIViewController {
                 errorMessage.isHidden   = false
                 openMainVC              = false
                 
+            } else {
+                errorMessage.text       = ""
+                errorMessage.isHidden   = true
+                openMainVC              = true
             }
             changeActionButtonLabel()
             

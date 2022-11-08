@@ -237,6 +237,7 @@
                                 <rect key="frame" x="16" y="684" width="361" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="gear" catalog="system" title="Settings">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
                                     <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -290,6 +291,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fEf-gS-KrV"/>
+                    <connections>
+                        <outlet property="helloLabel" destination="gLu-m5-WkR" id="Yko-mq-aZ9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kwb-uw-vZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -318,8 +322,43 @@
                     <view key="view" contentMode="scaleToFill" id="Mbv-e0-UMz">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnD-cN-ABh">
+                                <rect key="frame" x="4" y="107" width="385" height="40.666666666666657"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ae7-CO-fvI">
+                                <rect key="frame" x="24" y="235.66666666666663" width="345" height="128"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="0Rl-so-8pN"/>
+                                </constraints>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXk-en-AXh">
+                                <rect key="frame" x="24" y="407.66666666666669" width="345" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="QOw-eK-Ani"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Message History"/>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="JjW-uC-8ZM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ae7-CO-fvI" firstAttribute="top" secondItem="rnD-cN-ABh" secondAttribute="bottom" constant="88" id="BRS-g4-92t"/>
+                            <constraint firstItem="rnD-cN-ABh" firstAttribute="top" secondItem="JjW-uC-8ZM" secondAttribute="top" constant="4" id="Git-oX-rND"/>
+                            <constraint firstItem="bXk-en-AXh" firstAttribute="top" secondItem="Ae7-CO-fvI" secondAttribute="bottom" constant="44" id="HqI-Qm-JDe"/>
+                            <constraint firstItem="JjW-uC-8ZM" firstAttribute="trailing" secondItem="Ae7-CO-fvI" secondAttribute="trailing" constant="24" id="Kzb-LO-wTp"/>
+                            <constraint firstItem="bXk-en-AXh" firstAttribute="leading" secondItem="JjW-uC-8ZM" secondAttribute="leading" constant="24" id="LGf-tK-Vod"/>
+                            <constraint firstItem="JjW-uC-8ZM" firstAttribute="trailing" secondItem="rnD-cN-ABh" secondAttribute="trailing" constant="4" id="MZt-en-sxR"/>
+                            <constraint firstItem="JjW-uC-8ZM" firstAttribute="trailing" secondItem="bXk-en-AXh" secondAttribute="trailing" constant="24" id="baK-vq-kn1"/>
+                            <constraint firstItem="Ae7-CO-fvI" firstAttribute="leading" secondItem="JjW-uC-8ZM" secondAttribute="leading" constant="24" id="efS-KV-NhJ"/>
+                            <constraint firstItem="rnD-cN-ABh" firstAttribute="centerX" secondItem="Mbv-e0-UMz" secondAttribute="centerX" id="fOH-1O-iUx"/>
+                            <constraint firstItem="rnD-cN-ABh" firstAttribute="leading" secondItem="JjW-uC-8ZM" secondAttribute="leading" constant="4" id="iYc-HD-2e6"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5Vc-mV-ZJs"/>
                 </viewController>

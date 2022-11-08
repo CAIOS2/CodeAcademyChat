@@ -9,6 +9,13 @@ import Foundation
 
 class UserManager {
     
+    struct UserResult {
+        let user: User?
+        let errorMessage: String?
+    }
+    
+    
+    
     var userList: [User] = []
     
 
@@ -49,7 +56,7 @@ class UserManager {
     
     // -- -- --
     // LOGIN
-    func userLogin(username: String, password: String) -> Bool {
+    func userLogin(username: String, password: String) -> UserResult  {
         
         // just for test
         let gedas = User(username: "gedas", password: "gk", isOnline: true)
@@ -59,7 +66,8 @@ class UserManager {
         if let login = userList.first(where: {$0.username == username && $0.password == password}) {
             login.isOnline = true
             print("Logged in: \(login.username), \(login.password)")
-            return true
+           // return true
+            return UserResult(user: login, errorMessage: nil)
         }
         
 //        for user in userList {
@@ -72,7 +80,8 @@ class UserManager {
 //            }
 //        }
 
-        return false
+       // return false
+        return UserResult(user: nil, errorMessage: "No user found")
     }
     
     

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4745A390291AD560007FA1BA /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4745A38F291AD560007FA1BA /* Room.swift */; };
+		4745A392291AD575007FA1BA /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4745A391291AD575007FA1BA /* RoomManager.swift */; };
+		4745A394291AD58B007FA1BA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4745A393291AD58B007FA1BA /* Message.swift */; };
 		47852D0B29197008001DD054 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47852D0A29197008001DD054 /* User.swift */; };
 		47852D0D291976F2001DD054 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47852D0C291976F2001DD054 /* UserManager.swift */; };
 		47A67EFF29183E5D00265490 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A67EFE29183E5D00265490 /* LoginViewController.swift */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4745A38F291AD560007FA1BA /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		4745A391291AD575007FA1BA /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
+		4745A393291AD58B007FA1BA /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		47852D0A29197008001DD054 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		47852D0C291976F2001DD054 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		47A67EFE29183E5D00265490 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -49,11 +55,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		47852D0929196FAF001DD054 /* Classes */ = {
+		4745A38D291AD520007FA1BA /* users */ = {
 			isa = PBXGroup;
 			children = (
 				47852D0A29197008001DD054 /* User.swift */,
 				47852D0C291976F2001DD054 /* UserManager.swift */,
+			);
+			path = users;
+			sourceTree = "<group>";
+		};
+		4745A38E291AD541007FA1BA /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				4745A38F291AD560007FA1BA /* Room.swift */,
+				4745A391291AD575007FA1BA /* RoomManager.swift */,
+				4745A393291AD58B007FA1BA /* Message.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		47852D0929196FAF001DD054 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4745A38E291AD541007FA1BA /* Chat */,
+				4745A38D291AD520007FA1BA /* users */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -176,10 +201,13 @@
 				47A67EFF29183E5D00265490 /* LoginViewController.swift in Sources */,
 				A0C2A69F29144FA9009A006C /* ViewController.swift in Sources */,
 				47A67F0529183EAC00265490 /* SettingsViewController.swift in Sources */,
+				4745A390291AD560007FA1BA /* Room.swift in Sources */,
 				A0C2A69B29144FA9009A006C /* AppDelegate.swift in Sources */,
 				47852D0B29197008001DD054 /* User.swift in Sources */,
 				A0C2A69D29144FA9009A006C /* SceneDelegate.swift in Sources */,
 				47A67F0329183E9C00265490 /* ChatViewController.swift in Sources */,
+				4745A394291AD58B007FA1BA /* Message.swift in Sources */,
+				4745A392291AD575007FA1BA /* RoomManager.swift in Sources */,
 				47A67F0129183E8900265490 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

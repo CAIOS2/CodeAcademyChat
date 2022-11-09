@@ -82,6 +82,8 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "home" {
             if let viewController = segue.destination as? HomeViewController {
+                viewController.modalTransitionStyle = .flipHorizontal
+                viewController.modalPresentationStyle = .fullScreen
                 viewController.user = userForSegue
                 userForSegue = nil
             }

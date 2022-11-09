@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CodeAcademyChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="CodeAcademyChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -289,10 +289,10 @@
             </objects>
             <point key="canvasLocation" x="5575.3846153846152" y="12.796208530805687"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="w77-PB-reQ">
             <objects>
-                <viewController id="yaX-8v-3v2" sceneMemberID="viewController">
+                <viewController id="yaX-8v-3v2" customClass="SettingsViewController" customModule="CodeAcademyChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KmC-Zx-3Mw">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -356,12 +356,14 @@
                             <constraint firstItem="7Xu-M0-dOc" firstAttribute="top" secondItem="bAo-Iw-Am2" secondAttribute="bottom" constant="20" id="Hlx-qh-Dsg"/>
                             <constraint firstItem="jkz-aw-ert" firstAttribute="leading" secondItem="aMx-zE-SUN" secondAttribute="leading" constant="16" id="Oxj-Rk-vI5"/>
                             <constraint firstItem="cF6-Pq-Iml" firstAttribute="leading" secondItem="aMx-zE-SUN" secondAttribute="leading" constant="4" id="SWD-T0-D39"/>
+                            <constraint firstItem="17P-A2-Vbg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Xu-M0-dOc" secondAttribute="trailing" constant="8" symbolic="YES" id="Xqr-UJ-cGA"/>
                             <constraint firstItem="aMx-zE-SUN" firstAttribute="trailing" secondItem="jkz-aw-ert" secondAttribute="trailing" constant="16" id="YNQ-hm-s3D"/>
                             <constraint firstItem="cF6-Pq-Iml" firstAttribute="top" secondItem="aMx-zE-SUN" secondAttribute="top" constant="20" id="dfu-46-hhp"/>
                             <constraint firstItem="aMx-zE-SUN" firstAttribute="trailing" secondItem="17P-A2-Vbg" secondAttribute="trailing" constant="20" id="hCj-jf-kmd"/>
                             <constraint firstItem="bAo-Iw-Am2" firstAttribute="leading" secondItem="aMx-zE-SUN" secondAttribute="leading" constant="20" id="mCt-hC-3OP"/>
                             <constraint firstItem="7Xu-M0-dOc" firstAttribute="leading" secondItem="aMx-zE-SUN" secondAttribute="leading" constant="20" id="srV-Mh-6WL"/>
                             <constraint firstItem="aMx-zE-SUN" firstAttribute="trailing" secondItem="eet-ve-Ez6" secondAttribute="trailing" constant="20" id="yjg-0P-HPI"/>
+                            <constraint firstItem="eet-ve-Ez6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bAo-Iw-Am2" secondAttribute="trailing" constant="8" symbolic="YES" id="z6t-vn-ljh"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

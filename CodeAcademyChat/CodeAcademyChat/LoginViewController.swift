@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
     enum State {
         case register
         case login
@@ -36,7 +36,6 @@ class ViewController: UIViewController {
         } else if segmentedControl.selectedSegmentIndex == 1 {
             currentState = .login
         }
-        
         confirmPasswordTextField.isHidden = currentState != .register
         
         switch currentState {

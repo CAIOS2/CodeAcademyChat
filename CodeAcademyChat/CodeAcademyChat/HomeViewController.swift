@@ -21,7 +21,6 @@ class HomeViewController: UIViewController {
         
         override func viewDidLoad() {
             super.viewDidLoad()
-//            navigationController?.isNavigationBarHidden = true
 
 
             // Do any additional setup after loading the view.
@@ -29,6 +28,7 @@ class HomeViewController: UIViewController {
         
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
+            navigationController?.isNavigationBarHidden = true
             userLabel.text = "Welcome, \(user.username)"
         }
 

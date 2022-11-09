@@ -115,15 +115,160 @@
                         <outlet property="passwordTextField" destination="k7q-ry-B51" id="ugt-gr-0sT"/>
                         <outlet property="segmentedControl" destination="l3c-xT-cev" id="O7e-P5-d7g"/>
                         <outlet property="usernameTextField" destination="AnR-Vl-eXQ" id="eiB-b8-5xC"/>
+                        <segue destination="N56-wS-YzL" kind="show" identifier="home" id="3Pf-65-A9X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="135.38461538461539" y="3.5545023696682461"/>
         </scene>
+        <!--Home View Controller-->
+        <scene sceneID="jNY-ex-4bi">
+            <objects>
+                <viewController id="N56-wS-YzL" customClass="HomeViewController" customModule="CodeAcademyChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ymN-6O-p5Q">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="bubble.left.and.bubble.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="jcg-o9-gJN">
+                                <rect key="frame" x="145" y="96.999999999999986" width="100" height="169.66666666666669"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="hq2-I7-6Ax"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="F6s-yh-mgq">
+                                <rect key="frame" x="12" y="278" width="366" height="485"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter room ID:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDr-fH-7mJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="366" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="cTL-S0-DyB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Room ID" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Tq-xp-qt4">
+                                        <rect key="frame" x="0.0" y="55" width="366" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Y9w-iO-QwD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ImK-Jz-rjh">
+                                        <rect key="frame" x="0.0" y="120" width="366" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="iv1-K0-aad"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Join room">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <buttonConfiguration key="configuration" style="filled" title="Join room">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="797-rN-V1z">
+                                        <rect key="frame" x="0.0" y="185" width="366" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="JTb-dR-sc7"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Create new room">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xD6-do-asW">
+                                        <rect key="frame" x="0.0" y="250" width="366" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="W7a-9p-Sb4"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Show online users">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tAc-Zb-PNn">
+                                        <rect key="frame" x="0.0" y="315" width="366" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Th0-PD-zb5"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Show offline users">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhR-bm-FsM">
+                                        <rect key="frame" x="0.0" y="380" width="366" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="V9Y-9x-68C"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="gear" catalog="system" title="Settings">
+                                            <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" role="destructive" translatesAutoresizingMaskIntoConstraints="NO" id="kd3-Pl-t8K">
+                                        <rect key="frame" x="0.0" y="445" width="366" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="RdJ-z5-Xcc"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Logout">
+                                            <color key="baseForegroundColor" systemColor="systemRedColor"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wjb-kO-76I">
+                                <rect key="frame" x="29" y="59" width="105" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ieZ-85-Cyp"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jcg-o9-gJN" firstAttribute="centerX" secondItem="ieZ-85-Cyp" secondAttribute="centerX" id="MGz-GP-g8k"/>
+                            <constraint firstItem="F6s-yh-mgq" firstAttribute="top" secondItem="jcg-o9-gJN" secondAttribute="bottom" constant="12" id="UEA-Cm-YBS"/>
+                            <constraint firstItem="ieZ-85-Cyp" firstAttribute="trailing" secondItem="F6s-yh-mgq" secondAttribute="trailing" constant="12" id="VN6-Pf-BCg"/>
+                            <constraint firstItem="F6s-yh-mgq" firstAttribute="leading" secondItem="ieZ-85-Cyp" secondAttribute="leading" constant="12" id="fDa-OX-B8U"/>
+                            <constraint firstItem="ieZ-85-Cyp" firstAttribute="bottom" secondItem="F6s-yh-mgq" secondAttribute="bottom" constant="24" id="rge-Px-99R"/>
+                            <constraint firstItem="jcg-o9-gJN" firstAttribute="top" secondItem="ieZ-85-Cyp" secondAttribute="top" constant="50" id="u4D-rj-RK1"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ccH-CQ-P0d"/>
+                    <connections>
+                        <outlet property="roomID" destination="5Tq-xp-qt4" id="5kn-ax-M5Y"/>
+                        <outlet property="welcomeLabel" destination="Wjb-kO-76I" id="AX9-Ne-dpr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VPJ-0l-iZ3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1120" y="14.928909952606634"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="UuW-k1-m0x">
+            <objects>
+                <viewController id="bfc-Nx-ggq" customClass="SettingsViewController" customModule="CodeAcademyChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i2K-Ec-YEP">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Izt-TB-lje"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ju0-Qu-8h8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1961" y="48"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bubble.left.and.bubble.right" catalog="system" width="128" height="96"/>
+        <image name="gear" catalog="system" width="128" height="122"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

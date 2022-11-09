@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		68AA3FF02919954C00B9DCE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AA3FEF2919954C00B9DCE0 /* User.swift */; };
+		68D0A6FB291AD0450048135D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D0A6FA291AD0450048135D /* HomeViewController.swift */; };
 		C1734B4B291969080058AFD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4A291969080058AFD5 /* AppDelegate.swift */; };
 		C1734B4D291969080058AFD5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4C291969080058AFD5 /* SceneDelegate.swift */; };
 		C1734B4F291969080058AFD5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4E291969080058AFD5 /* ViewController.swift */; };
@@ -18,7 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68875CBE291C269400EB8B14 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		68AA3FEF2919954C00B9DCE0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		68D0A6FA291AD0450048135D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C1734B47291969080058AFD5 /* CodeAcademyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeAcademyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1734B4A291969080058AFD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1734B4C291969080058AFD5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +68,8 @@
 				C1734B4C291969080058AFD5 /* SceneDelegate.swift */,
 				C1734B4E291969080058AFD5 /* ViewController.swift */,
 				C1734B50291969080058AFD5 /* Main.storyboard */,
+				68875CBE291C269400EB8B14 /* SettingsViewController.swift */,
+				68D0A6FA291AD0450048135D /* HomeViewController.swift */,
 				C1734B532919690A0058AFD5 /* Assets.xcassets */,
 				C1734B552919690A0058AFD5 /* LaunchScreen.storyboard */,
 				C1734B582919690A0058AFD5 /* Info.plist */,
@@ -146,9 +151,11 @@
 			files = (
 				C1734B4F291969080058AFD5 /* ViewController.swift in Sources */,
 				68AA3FF02919954C00B9DCE0 /* User.swift in Sources */,
+				68875CBF291C269400EB8B14 /* SettingsViewController.swift in Sources */,
 				C1734B4B291969080058AFD5 /* AppDelegate.swift in Sources */,
 				C1734B6429198D110058AFD5 /* UserManager.swift in Sources */,
 				C1734B4D291969080058AFD5 /* SceneDelegate.swift in Sources */,
+				68D0A6FB291AD0450048135D /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

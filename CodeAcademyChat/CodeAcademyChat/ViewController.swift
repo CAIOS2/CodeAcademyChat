@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
     
+    var userForSegue:User?
+    
     var currentState: State = .register
     
     let userManager: UserManager = UserManager()
@@ -29,9 +31,24 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "home" {
+            
+            if let homeVC = segue.destination as? HomeViewController {
+                
+                homeVC.user = userForSegue
+            }
+        }
+    }
+    
     @IBAction func onSegmentChange(_ sender: Any) {
+        
+        usernameTextField.text = ""
+        passwordTextField.text = ""
+        
         if segmentedControl.selectedSegmentIndex == 0 {
             currentState = .register
+    
         } else if segmentedControl.selectedSegmentIndex == 1 {
             currentState = .login
         }
@@ -70,6 +87,9 @@ class ViewController: UIViewController {
                 errorMessageLabel.isHidden = false
             } else {
                 errorMessageLabel.isHidden = true
+                
+                userForSegue = result.user
+                performSegue(withIdentifier: "home", sender: nil)
             }
         }
     }

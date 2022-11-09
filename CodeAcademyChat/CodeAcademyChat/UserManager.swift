@@ -44,6 +44,8 @@ class UserManager {
             if password == user.password {
                 
                 return UserResult(user: user, errorMessage: nil)
+            } else {
+                return UserResult(user: nil,  errorMessage: "Wrong password")
             }
         }
         

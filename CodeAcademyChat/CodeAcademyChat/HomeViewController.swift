@@ -10,12 +10,25 @@ import UIKit
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var userLabel: UILabel!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
     
+    @IBOutlet weak var button: UIButton!
+        
+        var user: User!
+        
+        override func loadView() {
+            super.loadView()
+        }
+        
+        override func viewDidLoad() {
+            super.viewDidLoad()
+
+            // Do any additional setup after loading the view.
+        }
+        
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            userLabel.text = "Welcome, \(user.username)"
+        }
 
     /*
     // MARK: - Navigation

@@ -69,10 +69,19 @@ class ViewController: UIViewController {
             }else {
                 errorMessageLabel.isHidden = true
                 if let user = result.user {
-                    
+                    userForSegue = user
+                    performSegue(withIdentifier: "home", sender: nil)
                 }
             }
             break
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "home" {
+            if let viewController = segue.destination as? HomeViewController {
+                viewController.user = userForSegue
+                userForSegue = nil
+            }
         }
     }
 }

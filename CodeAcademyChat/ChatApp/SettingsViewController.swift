@@ -9,20 +9,22 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    @IBOutlet weak var usernameEdit: UIButton!
+    @IBOutlet weak var passwordEdit: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
+    
+    var user: User!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //navigationController?.navigationBar.isHidden = true
-        // Do any additional setup after loading the view.
+        navigationController?.navigationBar.isHidden = false
+        usernameLabel.text = user.name
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+    }
+        
+    
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewController = segue.destination as? SettingsViewController {
-                viewController.modalPresentationStyle = .fullScreen
-                viewController.modalTransitionStyle = .flipHorizontal
-            }
-        
-        
-        
-        
-    }
-}

@@ -27,15 +27,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        navigationController?.navigationBar.isHidden = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let viewController = segue.destination as? LoginViewController {
             
-            viewController.modalPresentationStyle = .fullScreen
-            viewController.modalTransitionStyle = .flipHorizontal
+//            viewController.modalPresentationStyle = .fullScreen
+//            viewController.modalTransitionStyle = .flipHorizontal
             viewController.user = userForSegue
             userForSegue = nil
         }

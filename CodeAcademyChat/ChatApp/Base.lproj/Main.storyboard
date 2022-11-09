@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="MainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="PTr-xE-IFM">
-                                <rect key="frame" x="0.0" y="47" width="375" height="338.33333333333331"/>
+                                <rect key="frame" x="0.0" y="91" width="375" height="294.33333333333331"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="JFO-m7-0Ns">
@@ -263,8 +263,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="i7p-gO-avM">
                                 <rect key="frame" x="20" y="441.33333333333331" width="335" height="39.333333333333314"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7VY-nl-3DR">
-                                        <rect key="frame" x="0.0" y="0.0" width="94.333333333333329" height="39.333333333333336"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7VY-nl-3DR">
+                                        <rect key="frame" x="0.0" y="0.0" width="88.333333333333329" height="39.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -306,8 +306,14 @@
                             <constraint firstItem="iT9-v0-FFE" firstAttribute="leading" secondItem="4Fk-GN-zjs" secondAttribute="leading" id="r1R-62-dcs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="wqY-hd-5ML"/>
-                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationItem key="navigationItem" id="wqY-hd-5ML">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="4GK-63-jrL"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="passwordEdit" destination="7VY-nl-3DR" id="tb1-By-Y4G"/>
+                        <outlet property="usernameEdit" destination="vY6-Ip-gqH" id="E48-qu-3m0"/>
+                        <outlet property="usernameLabel" destination="gS5-Pe-KTc" id="ZEa-LD-ENN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="igj-jA-7F0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -316,10 +322,10 @@
         <!--Navigation Controller-->
         <scene sceneID="gZu-83-LDQ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Cgn-mA-5Ev" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="Cgn-mA-5Ev" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yj9-cR-OKg">
+                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

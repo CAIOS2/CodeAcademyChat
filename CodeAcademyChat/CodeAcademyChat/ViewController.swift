@@ -21,15 +21,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
+    
     var currentState: State = .register
     let users: UserManager = UserManager()
+    var userForSegue: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordTextField.delegate = self
         // Do any additional setup after loading the view.
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toMainMenu" {
+            if let viewController = segue.destination as? MainMenuVC {
+                viewController.user = userForSegue
+                userForSegue = nil
+                
+            }
+        }
+    }
     @IBAction func onSegmentChange(_ sender: Any) {
         if segmentControl.selectedSegmentIndex == 0 {
             currentState = .register
@@ -41,9 +52,9 @@ class ViewController: UIViewController {
         
         switch currentState {
         case .register:
-            registerButton.titleLabel?.text = "Registration"
+            registerButton.setTitle("Registration", for: .normal)
         case .login:
-            registerButton.titleLabel?.text = "Login"
+            registerButton.setTitle("Login", for: .normal)
             
         }
     }
@@ -63,18 +74,29 @@ class ViewController: UIViewController {
                 errorMessageLabel.isHidden = true
             }
         case .login:
-            let login = users.login(username: usernameTextField.text!, password:passwordTextField.text!)
-            
-            if login.isLogin != nil {
-                performSegue(withIdentifier: "toMainMenu", sender: self)
-            } else {
-                errorMessageLabel.text = login.errorMessage
+//            let login = users.login(username: usernameTextField.text!, password:passwordTextField.text!)
+//            nameText = usernameTextField.text!
+//            if login.isLogin != nil {
+//                performSegue(withIdentifier: "toMainMenu", sender: self)
+//            } else {
+//                errorMessageLabel.text = login.errorMessage
+//                errorMessageLabel.isHidden = false
+//            }
+            let result = users.login(username: usernameTextField.text!, password: passwordTextField.text!)
+            if let errorMessage = result.errorMessage {
+                errorMessageLabel.text = errorMessage
                 errorMessageLabel.isHidden = false
+            } else {
+                errorMessageLabel.isHidden = true
+                if let user = result.user{
+                    userForSegue = user
+                    performSegue(withIdentifier: "toMainMenu", sender: self)
+                }
             }
-            
         }
     }
 }
-        
+    
 
-
+extension ViewController: UITextFieldDelegate {
+}

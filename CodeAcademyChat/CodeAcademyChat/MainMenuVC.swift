@@ -13,7 +13,10 @@ class MainMenuVC: UIViewController {
     @IBOutlet weak var joinRoomButton: UIButton!
     @IBOutlet weak var createNewRoomButton: UIButton!
     @IBOutlet weak var showOnlineButton: UIButton!
+    @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var showOfflineButton: UIButton!
+    
+    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,19 +25,16 @@ class MainMenuVC: UIViewController {
         createNewRoomButton.layer.cornerRadius = 10
         showOnlineButton.layer.cornerRadius = 10
         showOfflineButton.layer.cornerRadius = 10
-
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        greetingLabel.text = "Hello, \(user.username)"
     }
-    */
 
+   
+    @IBAction func logoutButton(_ sender: Any) {
+        performSegue(withIdentifier: "toMain", sender: self)
+    }
+    
 }

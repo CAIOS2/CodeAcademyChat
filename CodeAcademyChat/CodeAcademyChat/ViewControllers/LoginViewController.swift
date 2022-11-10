@@ -77,6 +77,23 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func showLoginErrorMessage(_ errorMessage: String?) {
+        let alerAction = UIAlertAction(title: "Close", style: UIAlertAction.Style.destructive, handler: nil)
+        let alertController = UIAlertController(title: "Error logging in", message: errorMessage, preferredStyle: .alert)
+        
+        alertController.addAction(alerAction)
+        self.present(alertController, animated: true)
+    }
+    
+    func showRegistrationErrorMessage(_ errorMessage: String?) {
+        let alerAction = UIAlertAction(title: "Close", style: UIAlertAction.Style.destructive, handler: nil)
+        let alertController = UIAlertController(title: "Error creating user", message: errorMessage, preferredStyle: .alert)
+        
+        alertController.addAction(alerAction)
+        self.present(alertController, animated: true)
+    }
+    
+    
     
     @IBAction func onSegemntChange(_ sender: Any) {
         changeActionButtonLabel()
@@ -105,17 +122,12 @@ class LoginViewController: UIViewController {
                 openMainVC              = true
                 changeActionButtonLabel()
                 userForSegue = result.user
-//                errorMessage.text       = errMsg
-//                errorMessage.isHidden   = false
-//                openMainVC              = false     //blokuoja sekancio lango atidaryma
-//                changeActionButtonLabel()
                 
             } else {
 
-               // userForSegue =
-                //loggedUserName          = usernameTextField.text!
-                errorMessage.text       = result.errorMessage
-                errorMessage.isHidden   = false
+                showRegistrationErrorMessage(result.errorMessage)
+//                errorMessage.text       = result.errorMessage
+//                errorMessage.isHidden   = false
                 openMainVC              = false     //blokuoja sekancio lango atidaryma
                 changeActionButtonLabel()
                 
@@ -134,8 +146,9 @@ class LoginViewController: UIViewController {
                 userForSegue = loggedUser
                 
             } else {
-                errorMessage.text       = "User can't login"
-                errorMessage.isHidden   = false
+                //errorMessage.text       = "User can't login"
+                //errorMessage.isHidden   = false
+                showLoginErrorMessage(result.errorMessage)
                 openMainVC              = false
             }
             changeActionButtonLabel()

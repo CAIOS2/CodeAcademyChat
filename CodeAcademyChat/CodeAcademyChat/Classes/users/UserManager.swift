@@ -29,7 +29,7 @@ class UserManager {
                 && password == confirmPassword
                 && !userList.contains(where: {$0.username == username})
         else {
-            return UserResult(user: nil, errorMessage: "Something wrong")
+            return UserResult(user: nil, errorMessage: "Something wrong in registration data")
         }
         
         // variantas 2, kai patikrinti ar username yra sarase

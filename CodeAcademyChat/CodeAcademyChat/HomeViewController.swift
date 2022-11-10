@@ -45,6 +45,10 @@ class HomeViewController: UIViewController {
         showAlert(title: "Offline users:")
     }
     
+    @IBAction private func logoutTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     private func showAlert(title: String, message: String = "") {
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

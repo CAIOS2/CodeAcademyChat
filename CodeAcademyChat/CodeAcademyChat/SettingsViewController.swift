@@ -20,7 +20,7 @@ class SettingsViewController: UIViewController {
         usernameLabel.text = user.username
     }
     
-    @IBAction func usernameEditTapped(_ sender: Any) {
+    @IBAction private func usernameEditTapped(_ sender: Any) {
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         let cancelAction = UIAlertAction(title: "Cancel", style: .default)
         
@@ -36,7 +36,7 @@ class SettingsViewController: UIViewController {
     }
     
     
-    @IBAction func passwordEditTapped(_ sender: Any) {
+    @IBAction private func passwordEditTapped(_ sender: Any) {
         let alertController = UIAlertController(title: "Edit password", message: "Enter your new password", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             
@@ -44,7 +44,7 @@ class SettingsViewController: UIViewController {
             let confirmPasswordTextField = alertController.textFields![1] as UITextField
             
             if passwordTextField.text == confirmPasswordTextField.text {
-//                self.user.password = passwordTextField.text!
+                self.user.password = passwordTextField.text!
                 print("Good")
             } else {
                 print("Bad")

@@ -75,6 +75,8 @@ class SettingsViewController: UIViewController {
         
         let alertController = UIAlertController(title: "Edit password:", message: "Your new password", preferredStyle: .alert)
         
+        
+        
         alertController.addTextField{ field in
             field.placeholder = "Password"
             field.returnKeyType = .next
@@ -89,6 +91,7 @@ class SettingsViewController: UIViewController {
         }
         
 
+        
         let alerActionCancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.destructive, handler: nil)
         let alerActionOk = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
             guard let fields = alertController.textFields, fields.count == 2 else {

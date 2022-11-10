@@ -259,6 +259,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Logout">
                                     <color key="baseForegroundColor" systemColor="systemRedColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="logoutTapped:" destination="2PC-6f-Gh7" eventType="touchUpInside" id="5oC-Cu-Rc5"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qh-mp-OuO">
                                 <rect key="frame" x="16" y="103" width="361" height="21"/>

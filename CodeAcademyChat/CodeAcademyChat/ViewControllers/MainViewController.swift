@@ -72,9 +72,20 @@ class MainViewController: UIViewController {
     }
     
     
+    @IBAction func logoutTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+        
+        
+    }
+    
+    
     
     @IBAction func actionSettings(_ sender: Any) {
         userForSegue = loggedUserName
     }
     
 }
+
+
+
+

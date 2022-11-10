@@ -82,9 +82,17 @@ class ViewController: UIViewController {
             let result = userManager.login(
                 username: usernameTextField.text!,
                 password: passwordTextField.text!)
+            
             if let errorMessage = result.errorMessage {
-                errorMessageLabel.text = errorMessage
-                errorMessageLabel.isHidden = false
+                
+                let alertController = UIAlertController(title: "Error logging in", message: "Wrong user credentials", preferredStyle: .alert)
+                
+                let alertAction = UIAlertAction(title: "OK", style: .cancel)
+                alertController.addAction(alertAction)
+                self.present(alertController, animated: true)
+                
+//                errorMessageLabel.text = errorMessage
+//                errorMessageLabel.isHidden = false
             } else {
                 errorMessageLabel.isHidden = true
                 

@@ -21,6 +21,7 @@ struct LoginResult {
 class UserManager {
     
     var userList: [User] = [User(username: "Nikita", password: "12345", isOnline: false)]
+    
     func register(username: String, password: String, confirmPassword: String) -> RegisterResult {
         guard !username.isEmpty, !password.isEmpty
         else {

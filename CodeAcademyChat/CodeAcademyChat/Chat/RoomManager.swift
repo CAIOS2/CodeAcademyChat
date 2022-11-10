@@ -11,6 +11,7 @@ struct RoomResult {
     let errorMessage: String?
     let room: Room?
     
+    
 }
 
 class RoomManager {

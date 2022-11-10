@@ -20,7 +20,6 @@ class MainMenuVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         joinRoomButton.layer.cornerRadius = 10
         createNewRoomButton.layer.cornerRadius = 10
         showOnlineButton.layer.cornerRadius = 10
@@ -28,13 +27,23 @@ class MainMenuVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toSettings" {
+            if let viewController = segue.destination as? SettingsVC {
+                viewController.user = user
+                
+            }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
         greetingLabel.text = "Hello, \(user.username)"
     }
 
-   
-    @IBAction func logoutButton(_ sender: Any) {
-        performSegue(withIdentifier: "toMain", sender: self)
+    
+    @IBAction func toSettings(_ sender: Any) {
+        performSegue(withIdentifier: "toSettings", sender: self)
     }
     
 }

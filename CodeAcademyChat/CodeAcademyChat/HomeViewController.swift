@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     enum State {
         case register
@@ -28,7 +28,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        passwordTextField.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -84,6 +83,11 @@ class ViewController: UIViewController {
 //            }
             let result = users.login(username: usernameTextField.text!, password: passwordTextField.text!)
             if let errorMessage = result.errorMessage {
+                let alert = UIAlertController(title: "Attention", message: errorMessage, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                present(alert, animated: true, completion: {
+                    return
+                })
                 errorMessageLabel.text = errorMessage
                 errorMessageLabel.isHidden = false
             } else {
@@ -95,8 +99,4 @@ class ViewController: UIViewController {
             }
         }
     }
-}
-    
-
-extension ViewController: UITextFieldDelegate {
 }

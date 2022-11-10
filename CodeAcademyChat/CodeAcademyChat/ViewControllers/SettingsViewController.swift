@@ -22,14 +22,61 @@ class SettingsViewController: UIViewController {
         
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-     //   if let username = loggedUserName.username {
         usernameLabel.text = loggedUserName.username
-            
-        
     }
 
 
+    @IBAction func usernameEditPerssed(_ sender: Any) {
+      
+    
+        
+        let alerActionCancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.destructive, handler: nil)
+        let alerActionOk = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        
+        let alertController = UIAlertController(title: "Edit username:", message: "Your new username", preferredStyle: .alert)
+        
+        alertController.addTextField{ field in
+            field.placeholder = "New username"
+            field.returnKeyType = .next
+            field.keyboardType = .default
+        }
+        
+        alertController.addAction(alerActionOk)
+        alertController.addAction(alerActionCancel)
+        
+        self.present(alertController, animated: true)
+        
+        
+    }
+    
+    
+    @IBAction func passwordEditTapped(_ sender: Any) {
+        let alerActionCancel = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.destructive, handler: nil)
+        let alerActionOk = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        
+        let alertController = UIAlertController(title: "Edit password:", message: "Your new password", preferredStyle: .alert)
+        
+        alertController.addTextField{ field in
+            field.placeholder = "Password"
+            field.returnKeyType = .next
+            field.keyboardType = .default
+        }
+        alertController.addTextField{ field in
+            field.placeholder = "Confirm password"
+            field.returnKeyType = .next
+            field.keyboardType = .default
+        }
+        
+        alertController.addAction(alerActionOk)
+        alertController.addAction(alerActionCancel)
+        
+        self.present(alertController, animated: true)
+    }
+    
+    
+    
+    
 }

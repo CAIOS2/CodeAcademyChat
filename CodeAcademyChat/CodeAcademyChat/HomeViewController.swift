@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var roomID: UITextField!
     
+    
 var user: User!
     
     override func viewDidLoad() {
@@ -20,5 +21,21 @@ var user: User!
         welcomeLabel.text = "Welcome \(user.username)"
     }
     
-
+    @IBAction func joinRoomButton(_ sender: Any) {
+        
+        let alertAction = UIAlertAction(title: "OK", style: .default)
+        let alertController = UIAlertController(title: "Error joining room", message: "Room not found", preferredStyle: .alert)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true)
+    }
+    
+    @IBAction func showOnlineUsersButton(_ sender: Any) {
+        let alertAction = UIAlertAction(title: "OK", style: .default)
+        let alertController = UIAlertController(title: "These users are online:", message: "\(user.username)", preferredStyle: .alert)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true)
+        
+    }
+    
+    
 }

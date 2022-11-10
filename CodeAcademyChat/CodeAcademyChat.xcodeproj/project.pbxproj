@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A03C81E3291C2EAC00B08DB5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */; };
+		A08A1A4E291D8EFA006CB563 /* RoomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A08A1A4D291D8EFA006CB563 /* RoomView.xib */; };
+		A08A1A50291D8F4E006CB563 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */; };
 		C1734B4B291969080058AFD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4A291969080058AFD5 /* AppDelegate.swift */; };
 		C1734B4D291969080058AFD5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4C291969080058AFD5 /* SceneDelegate.swift */; };
 		C1734B4F291969080058AFD5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4E291969080058AFD5 /* LoginViewController.swift */; };
@@ -21,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A08A1A4D291D8EFA006CB563 /* RoomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomView.xib; sourceTree = "<group>"; };
+		A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
 		C1734B47291969080058AFD5 /* CodeAcademyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeAcademyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1734B4A291969080058AFD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1734B4C291969080058AFD5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 				C1734B4E291969080058AFD5 /* LoginViewController.swift */,
 				C1734B65291AD0300058AFD5 /* HomeViewController.swift */,
 				C1734B50291969080058AFD5 /* Main.storyboard */,
+				A08A1A4D291D8EFA006CB563 /* RoomView.xib */,
+				A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */,
 				A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */,
 				C1734B532919690A0058AFD5 /* Assets.xcassets */,
 				C1734B552919690A0058AFD5 /* LaunchScreen.storyboard */,
@@ -138,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1734B572919690A0058AFD5 /* LaunchScreen.storyboard in Resources */,
+				A08A1A4E291D8EFA006CB563 /* RoomView.xib in Resources */,
 				C1734B542919690A0058AFD5 /* Assets.xcassets in Resources */,
 				C1734B52291969080058AFD5 /* Main.storyboard in Resources */,
 			);
@@ -157,6 +164,7 @@
 				C1734B6429198D110058AFD5 /* UserManager.swift in Sources */,
 				C1734B4D291969080058AFD5 /* SceneDelegate.swift in Sources */,
 				C1734B66291AD0300058AFD5 /* HomeViewController.swift in Sources */,
+				A08A1A50291D8F4E006CB563 /* RoomViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

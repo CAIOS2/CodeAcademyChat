@@ -29,7 +29,13 @@ class HomeViewController: UIViewController {
         welcomeLabel.text = "Hello, \(user.username)"
     }
     
-
+    @IBAction private func joinRoomTapped(_ sender: Any) {
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alertController = UIAlertController(title: "Error joining room", message: "Room not found", preferredStyle: .alert)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true)
+    }
+    
     
     // MARK: - Navigation
 

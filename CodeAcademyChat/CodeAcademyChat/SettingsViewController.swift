@@ -15,15 +15,42 @@ class SettingsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func editUsername(_ sender: Any) {
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+        
+        let alertController = UIAlertController(title: "Edit username", message: "Enter your username", preferredStyle: .alert)
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+    
+        alertController.addTextField {text in
+            
+            text.placeholder = "username"
+        }
+        self.present(alertController, animated: true)
     }
-    */
-
+    
+    @IBAction func editPassword(_ sender: Any) {
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+        
+        let alertController = UIAlertController(title: "Edit username", message: "Enter your username", preferredStyle: .alert)
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+    
+        alertController.addTextField {text in
+            
+            text.placeholder = "password"
+        }
+        
+        alertController.addTextField {text in
+            
+            text.placeholder = "confirm password"
+        }
+        
+        self.present(alertController, animated: true)
+        
+    }
 }

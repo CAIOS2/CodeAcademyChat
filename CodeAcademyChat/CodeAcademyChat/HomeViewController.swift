@@ -38,4 +38,7 @@ var user: User!
     }
     
     
+    @IBAction func settingsButton(_ sender: Any) {
+        performSegue(withIdentifier: "settings", sender: nil)
+    }
 }

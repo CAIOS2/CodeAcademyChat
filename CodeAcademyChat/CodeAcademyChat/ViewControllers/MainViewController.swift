@@ -22,7 +22,7 @@ class MainViewController: UIViewController {
         // Do any additional setup after loading the view.
 
             
-        self.navigationItem.setHidesBackButton(false, animated: false)
+        self.navigationItem.setHidesBackButton(true, animated: false)
       //  helloLabel.text = "Hello, \(loggedUserName)"
         
     }

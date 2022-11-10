@@ -9,6 +9,7 @@ import Foundation
 
 struct UserResult {
     let user: User?
+    let errorTitle: String?
     let errorMessage: String?
 }
 
@@ -18,17 +19,19 @@ class UserManager {
         User(username: "petras", password: "12345", isOnline: false)]
     
     func register(username: String, password: String, confirmPassword: String) -> UserResult {
+        let registerErrorTitle = "Error creating user"
+        
         guard !username.isEmpty, !password.isEmpty
         else {
-            return UserResult(user: nil, errorMessage: "User name and password cannot be empty")
+            return UserResult(user: nil, errorTitle: registerErrorTitle, errorMessage: "User name and password cannot be empty")
         }
         if password != confirmPassword {
-            return UserResult(user: nil, errorMessage: "Passwords do not match")
+            return UserResult(user: nil, errorTitle: registerErrorTitle, errorMessage: "Passwords do not match")
         }
 
         for user in userList {
             if username == user.username {
-                return UserResult(user: nil, errorMessage: "User already exists")
+                return UserResult(user: nil, errorTitle: registerErrorTitle, errorMessage: "User already exists")
             }
         }
         
@@ -36,7 +39,7 @@ class UserManager {
         
         userList.append(user)
         
-        return UserResult(user: user, errorMessage: nil)
+        return UserResult(user: user, errorTitle: nil, errorMessage: nil)
     }
     
     func arPetras(user: User) -> Bool {
@@ -44,6 +47,7 @@ class UserManager {
     }
     
     func login(username: String, password: String) -> UserResult {
+        let loginErrorTitle = "Error logged in"
         /* pirmas variantas */
         let userOptional = userList.first { user in
             user.username == username
@@ -59,13 +63,13 @@ class UserManager {
         
         
         guard let user = userOptional else {
-            return UserResult(user: nil, errorMessage: "User with given username not found")
+            return UserResult(user: nil, errorTitle: loginErrorTitle, errorMessage: "User with given username not found")
         }
         
         if user.password != password {
-            return UserResult(user: nil, errorMessage: "Entered password is wrong")
+            return UserResult(user: nil, errorTitle: loginErrorTitle, errorMessage: "Entered password is wrong")
         }
         
-        return UserResult(user: user, errorMessage: nil)
+        return UserResult(user: user, errorTitle: loginErrorTitle, errorMessage: nil)
     }
 }

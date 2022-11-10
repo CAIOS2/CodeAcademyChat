@@ -62,8 +62,8 @@ class LoginViewController: UIViewController {
     }
     
     private func validateUser(from userResult: UserResult) {
-        if let errorMessage = userResult.errorMessage {
-            showError(message: errorMessage)
+        if let errorTitle = userResult.errorTitle, let errorMessage = userResult.errorMessage {
+            showError(title: errorTitle, message: errorMessage)
         } else {
             if let user = userResult.user {
                 userForSegue = user
@@ -72,8 +72,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func showError(message: String) {
-        let title = "Error logged in"
+    private func showError(title: String, message: String) {
         let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(alertAction)

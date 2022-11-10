@@ -14,7 +14,6 @@ class SettingsVC: UIViewController {
     
     var user: User!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
@@ -26,21 +25,23 @@ class SettingsVC: UIViewController {
     
     
     @IBAction func editUsername(_ sender: Any) {
-        let alert = UIAlertController(title: "Change username", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default))
+        let alert = UIAlertController(title: "Enter your new username", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { UIAlertAction in
+//            self.user.username = "naujas vardas"
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         alert.addTextField { textField in
             textField.placeholder = "new username"
         }
-        alert.addTextField { textField in
-            textField.placeholder = "confirm new username"
-        }
         present(alert, animated: true)
     }
     
+    
     @IBAction func editPassword(_ sender: Any) {
-        let alert = UIAlertController(title: "Change password", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Enter your new password", message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Confirm", style: .default))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         alert.addTextField { textField in
             textField.placeholder = "new password"

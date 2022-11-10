@@ -46,4 +46,32 @@ class MainMenuVC: UIViewController {
         performSegue(withIdentifier: "toSettings", sender: self)
     }
     
+    
+    @IBAction func joinRoomButton(_ sender: Any) {
+        let alert = UIAlertController(title: "Error joining room", message: "Room no found", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+    
+    
+    @IBAction func createRoomButton(_ sender: Any) {
+        let alert = UIAlertController(title: "Error creating room", message: "Room name can't be empty", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alert, animated: true)
+    }
+    
+    
+    @IBAction func onlineUsersButton(_ sender: Any) {
+        let alert = UIAlertController(title: "Online users:", message: user.username, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alert, animated: true)
+    }
+    
+    
+    @IBAction func offlineUsersButton(_ sender: Any) {
+        let alert = UIAlertController(title: "Offline users:", message: "#users", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alert, animated: true)
+    }
+    
 }

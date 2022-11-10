@@ -198,6 +198,7 @@
                                     <color key="baseBackgroundColor" systemColor="systemGreenColor"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="actionJoinRoom:" destination="2PC-6f-Gh7" eventType="touchUpInside" id="T3z-H6-ved"/>
                                     <segue destination="me4-bW-Htn" kind="show" id="1Pz-V5-pCI"/>
                                 </connections>
                             </button>
@@ -223,6 +224,9 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Show online users">
                                     <color key="baseBackgroundColor" systemColor="systemYellowColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="actionShowOnlineUsers:" destination="2PC-6f-Gh7" eventType="touchUpInside" id="Kzt-Ri-yRY"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXa-jp-8sw">
                                 <rect key="frame" x="16" y="632" width="361" height="36"/>
@@ -230,9 +234,12 @@
                                     <constraint firstAttribute="height" constant="36" id="biW-gJ-dss"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Show online users">
+                                <buttonConfiguration key="configuration" style="filled" title="Show offline users">
                                     <color key="baseBackgroundColor" systemColor="systemCyanColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="actionShowOfflineUsers:" destination="2PC-6f-Gh7" eventType="touchUpInside" id="eiP-0h-VL9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8N-Ra-SCP">
                                 <rect key="frame" x="16" y="684" width="361" height="35"/>
@@ -242,7 +249,8 @@
                                     <color key="baseForegroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="wL7-D3-fSS" kind="show" id="jQD-5m-09x"/>
+                                    <action selector="actionSettings:" destination="2PC-6f-Gh7" eventType="touchUpInside" id="FuZ-ZJ-qxk"/>
+                                    <segue destination="wL7-D3-fSS" kind="show" identifier="goToSettings" id="jQD-5m-09x"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IwV-gW-eco">
@@ -340,42 +348,65 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ae7-CO-fvI">
-                                <rect key="frame" x="24" y="235.66666666666663" width="345" height="128"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="0Rl-so-8pN"/>
-                                </constraints>
-                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXk-en-AXh">
-                                <rect key="frame" x="24" y="407.66666666666669" width="345" height="36"/>
+                                <rect key="frame" x="24" y="408" width="345" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="QOw-eK-Ani"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Message History"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ps-0g-PZM">
+                                <rect key="frame" x="24" y="363" width="74" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DfQ-cy-5iL">
+                                <rect key="frame" x="24" y="318" width="76" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXd-VM-aro">
+                                <rect key="frame" x="316" y="356" width="53" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="edit"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IQO-qI-ZSH">
+                                <rect key="frame" x="316" y="311" width="53" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="edit"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JjW-uC-8ZM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Ae7-CO-fvI" firstAttribute="top" secondItem="rnD-cN-ABh" secondAttribute="bottom" constant="88" id="BRS-g4-92t"/>
                             <constraint firstItem="rnD-cN-ABh" firstAttribute="top" secondItem="JjW-uC-8ZM" secondAttribute="top" constant="4" id="Git-oX-rND"/>
-                            <constraint firstItem="bXk-en-AXh" firstAttribute="top" secondItem="Ae7-CO-fvI" secondAttribute="bottom" constant="44" id="HqI-Qm-JDe"/>
-                            <constraint firstItem="JjW-uC-8ZM" firstAttribute="trailing" secondItem="Ae7-CO-fvI" secondAttribute="trailing" constant="24" id="Kzb-LO-wTp"/>
+                            <constraint firstItem="bXk-en-AXh" firstAttribute="centerY" secondItem="Mbv-e0-UMz" secondAttribute="centerY" id="JM7-HM-APX"/>
+                            <constraint firstItem="IQO-qI-ZSH" firstAttribute="centerY" secondItem="DfQ-cy-5iL" secondAttribute="centerY" id="Jxt-uC-sgT"/>
                             <constraint firstItem="bXk-en-AXh" firstAttribute="leading" secondItem="JjW-uC-8ZM" secondAttribute="leading" constant="24" id="LGf-tK-Vod"/>
                             <constraint firstItem="JjW-uC-8ZM" firstAttribute="trailing" secondItem="rnD-cN-ABh" secondAttribute="trailing" constant="4" id="MZt-en-sxR"/>
+                            <constraint firstItem="IQO-qI-ZSH" firstAttribute="trailing" secondItem="MXd-VM-aro" secondAttribute="trailing" id="X2x-mR-EOY"/>
+                            <constraint firstItem="MXd-VM-aro" firstAttribute="trailing" secondItem="bXk-en-AXh" secondAttribute="trailing" id="X7W-Yz-1gZ"/>
                             <constraint firstItem="JjW-uC-8ZM" firstAttribute="trailing" secondItem="bXk-en-AXh" secondAttribute="trailing" constant="24" id="baK-vq-kn1"/>
-                            <constraint firstItem="Ae7-CO-fvI" firstAttribute="leading" secondItem="JjW-uC-8ZM" secondAttribute="leading" constant="24" id="efS-KV-NhJ"/>
+                            <constraint firstItem="bXk-en-AXh" firstAttribute="top" secondItem="9Ps-0g-PZM" secondAttribute="bottom" constant="24" id="dEh-3Q-2lv"/>
                             <constraint firstItem="rnD-cN-ABh" firstAttribute="centerX" secondItem="Mbv-e0-UMz" secondAttribute="centerX" id="fOH-1O-iUx"/>
+                            <constraint firstItem="9Ps-0g-PZM" firstAttribute="centerY" secondItem="MXd-VM-aro" secondAttribute="centerY" id="iCV-v9-EnZ"/>
                             <constraint firstItem="rnD-cN-ABh" firstAttribute="leading" secondItem="JjW-uC-8ZM" secondAttribute="leading" constant="4" id="iYc-HD-2e6"/>
+                            <constraint firstItem="9Ps-0g-PZM" firstAttribute="leading" secondItem="bXk-en-AXh" secondAttribute="leading" id="qgV-3z-LhY"/>
+                            <constraint firstItem="DfQ-cy-5iL" firstAttribute="leading" secondItem="9Ps-0g-PZM" secondAttribute="leading" id="sSm-9s-dR8"/>
+                            <constraint firstItem="9Ps-0g-PZM" firstAttribute="top" secondItem="DfQ-cy-5iL" secondAttribute="bottom" constant="24" id="wf9-e6-mnV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5Vc-mV-ZJs"/>
+                    <connections>
+                        <outlet property="usernameLabel" destination="DfQ-cy-5iL" id="cQ2-YM-7Ig"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tjd-qN-Y6B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="985" y="1085"/>
+            <point key="canvasLocation" x="983.96946564885491" y="1084.5070422535211"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="o8l-OW-Dln">

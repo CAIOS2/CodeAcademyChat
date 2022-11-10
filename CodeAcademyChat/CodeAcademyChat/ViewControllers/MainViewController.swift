@@ -10,6 +10,7 @@ import UIKit
 class MainViewController: UIViewController {
 
     var loggedUserName: User!
+    var userForSegue: User!
     
     @IBOutlet weak var helloLabel: UILabel!
     @IBOutlet weak var errorMessage: UILabel!
@@ -31,16 +32,49 @@ class MainViewController: UIViewController {
         helloLabel.text = "Hello, \(loggedUserName.username)"
     }
     
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "goToSettings" {
+            if let viewController = segue.destination as? SettingsViewController {
+                viewController.loggedUserName = userForSegue
+            }
+        }
     }
-    */
+    
+    
+    
 
+    @IBAction func actionJoinRoom(_ sender: Any) {
+        
+        let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        let alertController = UIAlertController(title: "Error joining room", message: "Room not found", preferredStyle: UIAlertController.Style.alert)
+        
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true)
+    }
+    
+    
+    @IBAction func actionShowOnlineUsers(_ sender: Any) {
+        
+        let alerAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        let alertController = UIAlertController(title: "Online users:", message: "must_be_online_user_list", preferredStyle: .alert)
+        
+        alertController.addAction(alerAction)
+        self.present(alertController, animated: true)
+        
+    }
+    
+    @IBAction func actionShowOfflineUsers(_ sender: Any) {
+        let alerAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        let alertController = UIAlertController(title: "Online users:", message: "must_be_offline_user_list", preferredStyle: .alert)
+        
+        alertController.addAction(alerAction)
+        self.present(alertController, animated: true)
+    }
+    
+    
+    
+    @IBAction func actionSettings(_ sender: Any) {
+        userForSegue = loggedUserName
+    }
+    
 }

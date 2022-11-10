@@ -18,5 +18,5 @@ class User {
         self.isOnline = isOnline
     }
 }
-
+//test commit
 //let userioObjektas = User(username: "romas", password: "123", isOnline: true)

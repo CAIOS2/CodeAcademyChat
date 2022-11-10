@@ -153,7 +153,7 @@
                                     <action selector="editUsername:" destination="YrX-tp-FVW" eventType="touchUpInside" id="in7-xw-gRR"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHI-Qi-77n">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHI-Qi-77n">
                                 <rect key="frame" x="20" y="296" width="150" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Usz-Ou-zhr"/>

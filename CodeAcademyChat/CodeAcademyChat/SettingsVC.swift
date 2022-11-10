@@ -26,10 +26,29 @@ class SettingsVC: UIViewController {
     
     
     @IBAction func editUsername(_ sender: Any) {
+        let alert = UIAlertController(title: "Change username", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default))
+        
+        alert.addTextField { textField in
+            textField.placeholder = "new username"
+        }
+        alert.addTextField { textField in
+            textField.placeholder = "confirm new username"
+        }
+        present(alert, animated: true)
     }
     
-    
     @IBAction func editPassword(_ sender: Any) {
+        let alert = UIAlertController(title: "Change password", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default))
+        
+        alert.addTextField { textField in
+            textField.placeholder = "new password"
+        }
+        alert.addTextField { textField in
+            textField.placeholder = "confirm new password"
+        }
+        present(alert, animated: true)
     }
     
 

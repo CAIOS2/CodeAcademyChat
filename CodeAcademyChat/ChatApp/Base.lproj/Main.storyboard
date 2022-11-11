@@ -96,7 +96,6 @@
                     <connections>
                         <outlet property="actionButton" destination="PNB-5f-uqQ" id="M9g-U6-hGf"/>
                         <outlet property="confirmPasswordTextField" destination="xkX-gL-2rb" id="W5G-a5-gpM"/>
-                        <outlet property="errorMessageLabel" destination="yV8-bT-vQs" id="oyT-nD-xjw"/>
                         <outlet property="imageView" destination="PTr-xE-IFM" id="dEb-tg-WKJ"/>
                         <outlet property="passwordTextField" destination="uc4-c1-264" id="Dz4-tt-YGU"/>
                         <outlet property="segmentedControl" destination="5P2-gL-Ns4" id="O6n-OC-Izs"/>
@@ -136,6 +135,9 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Join room"/>
+                                        <connections>
+                                            <action selector="joinRoomTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="wvw-oU-PXd"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SrS-g4-MI7">
                                         <rect key="frame" x="0.0" y="125.33333333333331" width="315" height="40"/>
@@ -146,6 +148,9 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Create new room"/>
+                                        <connections>
+                                            <action selector="createNewRoomTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="CRh-Jx-9P0"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bk8-IM-nlx">
                                         <rect key="frame" x="0.0" y="189.33333333333337" width="315" height="40"/>
@@ -156,6 +161,9 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Show online users"/>
+                                        <connections>
+                                            <action selector="showOnlineUsersTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="ezP-xo-IOy"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dot-a7-E46">
                                         <rect key="frame" x="0.0" y="253.33333333333337" width="315" height="40"/>
@@ -166,6 +174,9 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Show offline users"/>
+                                        <connections>
+                                            <action selector="showOfflineUserTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="ajx-Ac-y2G"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -186,6 +197,9 @@
                                         <color key="tintColor" red="0.83738797899999995" green="0.39660590890000003" blue="0.33504050969999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Logout"/>
+                                        <connections>
+                                            <action selector="logOutButtonTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="O4u-jR-gp1"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -221,6 +235,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="yMg-b8-MXd"/>
                     <connections>
+                        <outlet property="joinRoomButton" destination="ecJ-45-p7c" id="lb8-dL-bVG"/>
                         <outlet property="welcomeLabel" destination="rkK-1p-Oan" id="0om-tW-kRd"/>
                     </connections>
                 </viewController>
@@ -257,6 +272,9 @@
                                         <buttonConfiguration key="configuration" style="plain" title="Edit">
                                             <fontDescription key="titleFontDescription" type="system" pointSize="21"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="editUserNameTapped:" destination="2wR-Ls-wmH" eventType="touchUpInside" id="Hcj-fs-bM3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -275,6 +293,9 @@
                                         <buttonConfiguration key="configuration" style="plain" title="Edit">
                                             <fontDescription key="titleFontDescription" type="system" pointSize="21"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="editPasswordTapped:" destination="2wR-Ls-wmH" eventType="touchUpInside" id="uaq-t9-GWf"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

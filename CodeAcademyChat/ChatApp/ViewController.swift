@@ -34,8 +34,8 @@ class ViewController: UIViewController {
         
         if let viewController = segue.destination as? LoginViewController {
             
-//            viewController.modalPresentationStyle = .fullScreen
-//            viewController.modalTransitionStyle = .flipHorizontal
+            //            viewController.modalPresentationStyle = .fullScreen
+            //            viewController.modalTransitionStyle = .flipHorizontal
             viewController.user = userForSegue
             userForSegue = nil
         }
@@ -66,26 +66,30 @@ class ViewController: UIViewController {
                 username: usernameTextField.text!,
                 password: passwordTextField.text!,
                 confirmPassword: confirmPasswordTextField.text!)
-            if let errorMessage = result.errorMessage {
-                errorMessageLabel.text = errorMessage
-                errorMessageLabel.isHidden = false
-            } else {
-                errorMessageLabel.isHidden = true
-            }
+                validateUser(from: result)
         case .login:
             let result = userManager.login(username: usernameTextField.text!, password: passwordTextField.text!)
-            if let errorMessage = result.errorMessage {
-                errorMessageLabel.text = errorMessage
-                errorMessageLabel.isHidden = false
-            } else {
-                errorMessageLabel.isHidden = true
-                if let user = result.user {
-                    userForSegue = user
-                    performSegue(withIdentifier: "login", sender: self)
-                }
-                
-            }
+            validateUser(from: result)
             
         }
+    }
+    
+    func validateUser(from userResult: UserResult) {
+        if let errorMessage = userResult.errorMessage {
+            showError(message: errorMessage)
+        } else {
+            if let user = userResult.user {
+                userForSegue = user
+                performSegue(withIdentifier: "login", sender: self)
+            }
+        }
+    }
+    func showError(message: String) {
+        let title = "Error logging in"
+        let message = "Wrong user credentials!"
+        let alertController = UIAlertController(title: title, message: message , preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .cancel)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true)
     }
 }

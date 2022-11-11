@@ -11,6 +11,8 @@ class UserManager {
     var userList: [User] = []
     
     func registration(username: String, password: String, confirmPassword: String) -> UserResult {
+        let registerErrorTitle = ""
+        let loginErrorTitle = ""
         guard !username.isEmpty, !password.isEmpty else {
             return UserResult(user: nil, errorMessage: "Username and password cannot be empty")
         }

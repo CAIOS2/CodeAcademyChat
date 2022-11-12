@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var actionButton: UIButton!
-    @IBOutlet weak var errorMessageLabel: UILabel!
+//    @IBOutlet weak var errorMessageLabel: UILabel!
     
     var currentState: State = .register
     
@@ -45,6 +45,7 @@ class LoginViewController: UIViewController {
             actionButton.titleLabel?.text = "Login"
         }
     }
+
     
     @IBAction func onActionButtonClick(_ sender: Any) {
         switch currentState {
@@ -54,26 +55,34 @@ class LoginViewController: UIViewController {
                 username: usernameTextField.text!,
                 password: passwordTextField.text!,
                 confirmPassword: confirmPasswordTextField.text!)
-            if let errorMessage = result.errorMessage {
-                errorMessageLabel.text = errorMessage
-                errorMessageLabel.isHidden = false
-            } else {
-                errorMessageLabel.isHidden = true
-            }
+            validateUser(from: result)
         case .login:
             let result = userManager.login(username: usernameTextField.text!, password: passwordTextField.text!)
-            if let errorMessage = result.errorMessage {
-                errorMessageLabel.text = errorMessage
-                errorMessageLabel.isHidden = false
-            }else {
-                errorMessageLabel.isHidden = true
-                if let user = result.user {
-                    userForSegue = user
-                    performSegue(withIdentifier: "home", sender: nil)
-                }
-            }
-            break
+            validateUser(from: result)
         }
+    }
+    
+    private func validateUser(from userResult: UserResult) {
+        if let errorMessage = userResult.errorMessage {
+            showError(message: errorMessage)
+
+//            errorMessageLabel.text = errorMessage
+//            errorMessageLabel.isHidden = false
+        }else {
+//            errorMessageLabel.isHidden = true
+            if let user = userResult.user {
+                userForSegue = user
+                performSegue(withIdentifier: "home", sender: nil)
+            }
+        }
+    }
+    private func showError(message: String) {
+        let title = "Error logging in"
+        let alertAction = UIAlertAction(title: "OK", style: .default)
+    
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert )
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "home" {

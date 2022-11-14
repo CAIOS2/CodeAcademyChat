@@ -15,6 +15,18 @@ struct RoomResult {
 class RoomManager {
     var rooms: [Room] = []
     
+    func createRoom(roomName: String) -> RoomResult {
+        guard !roomName.isEmpty else {
+            return RoomResult(errorMessage: "empty id", room: nil)
+        }
+        
+        for room in rooms {
+            if room.name == roomName {
+                return RoomResult(errorMessage: "Room name already exists", room: nil)
+            }
+        }
+    }
+    
     func getRoom(roomName: String) -> RoomResult {
         guard let room = rooms.first(where: { room in
             room.name == roomName

@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class SettingsViewController: UIViewController {
     
     @IBOutlet private weak var usernameLabel: UILabel!
@@ -17,14 +16,25 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
+        updateUI()
+    }
+    
+    private func updateUI() {
         usernameLabel.text = user.username
     }
     
     @IBAction private func usernameEditTapped(_ sender: Any) {
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alertController = UIAlertController(title: "Edit Username", message: "Enter your new username", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            if let userName = alertController.textFields?.first?.text, userName.isEmpty  {
+                self.user.username = userName
+                self.updateUI()
+            }
+        }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .default)
         
-        let alertController = UIAlertController(title: "Edit Username", message: "Enter your new username", preferredStyle: .alert)
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         
@@ -45,9 +55,7 @@ class SettingsViewController: UIViewController {
             
             if passwordTextField.text == confirmPasswordTextField.text {
                 self.user.password = passwordTextField.text!
-                print("Good")
             } else {
-                print("Bad")
             }
         }
         

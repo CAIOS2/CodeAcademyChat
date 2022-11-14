@@ -18,7 +18,7 @@ class Hashing {
     }
     
     static func verify(hash: String, password: String) -> Bool {
-        if hash == Hashing.hash(password) {
+        guard hash != Hashing.hash(password) else {
             return true
         }
         return false

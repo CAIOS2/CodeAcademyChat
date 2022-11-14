@@ -12,6 +12,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var welcomeLabel: UILabel!
     
+    @IBOutlet weak var roomIdTextField: UITextField!
+    
     var user: User!
     
     override func loadView() {
@@ -33,12 +35,16 @@ class HomeViewController: UIViewController {
         showAlert(title: "Error joining room", message: "Room not found")
     }
     
+//    Uzduotis nr 2
+//    * HomeViewControllery iskviesti RoomManager createRoom funkcija kai yra paspaudziamas "Create Room" mygtukas
+//    * Sukurta kambari priskirti RoomViewController properciui room ir parodyt roomo name labely
     @IBAction private func createNewRoomTapped(_ sender: Any) {
         //TODO: Reimplement error message
 //        showAlert(title: "Error creating room", message: "Room name can't be empty!")
         
         let roomViewController = RoomViewController()
         
+        //roomIdTextField.text! -- kaip parametra roomNamePaduodam
         // let roomResult = roomManager.createRoom ........
         //roomViewController.room = ????????
         show(roomViewController, sender: nil)

@@ -8,7 +8,7 @@
 import Foundation
 
 class User {
-    let username: String
+    var username: String
     var password: String
     var isOnline: Bool
     

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41E6C2172922B4A9008F59CC /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6C2162922B4A9008F59CC /* RoomManager.swift */; };
+		41E6C2192922B4ED008F59CC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6C2182922B4ED008F59CC /* Message.swift */; };
+		41E6C21B2922B546008F59CC /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6C21A2922B546008F59CC /* Room.swift */; };
 		A03C81E3291C2EAC00B08DB5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */; };
 		A08A1A4E291D8EFA006CB563 /* RoomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A08A1A4D291D8EFA006CB563 /* RoomView.xib */; };
 		A08A1A50291D8F4E006CB563 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		41E6C2162922B4A9008F59CC /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoomManager.swift; path = ../RoomManager.swift; sourceTree = "<group>"; };
+		41E6C2182922B4ED008F59CC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Message.swift; path = ../Message.swift; sourceTree = "<group>"; };
+		41E6C21A2922B546008F59CC /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Room.swift; path = ../Room.swift; sourceTree = "<group>"; };
 		A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A08A1A4D291D8EFA006CB563 /* RoomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomView.xib; sourceTree = "<group>"; };
 		A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
@@ -59,13 +65,6 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
-		41E6C212292259B6008F59CC /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Support Files";
-			sourceTree = "<group>";
-		};
 		C1734B3E291969080058AFD5 = {
 			isa = PBXGroup;
 			children = (
@@ -85,17 +84,19 @@
 		C1734B49291969080058AFD5 /* CodeAcademyChat */ = {
 			isa = PBXGroup;
 			children = (
+				41E6C21A2922B546008F59CC /* Room.swift */,
+				41E6C2162922B4A9008F59CC /* RoomManager.swift */,
+				41E6C2182922B4ED008F59CC /* Message.swift */,
 				C1734B6129198C940058AFD5 /* User.swift */,
 				C1734B4A291969080058AFD5 /* AppDelegate.swift */,
 				C1734B4C291969080058AFD5 /* SceneDelegate.swift */,
 				C1734B4E291969080058AFD5 /* LoginViewController.swift */,
 				C1734B65291AD0300058AFD5 /* HomeViewController.swift */,
-				A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */,
 				A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */,
+				A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */,
 				C1734B6329198D110058AFD5 /* UserManager.swift */,
-				C1734B532919690A0058AFD5 /* Assets.xcassets */,
 				C1734B582919690A0058AFD5 /* Info.plist */,
-				41E6C212292259B6008F59CC /* Support Files */,
+				C1734B532919690A0058AFD5 /* Assets.xcassets */,
 				41E6C20F292258DB008F59CC /* Storyboards */,
 			);
 			path = CodeAcademyChat;
@@ -174,13 +175,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1734B6229198C940058AFD5 /* User.swift in Sources */,
+				41E6C2172922B4A9008F59CC /* RoomManager.swift in Sources */,
 				C1734B4F291969080058AFD5 /* LoginViewController.swift in Sources */,
 				A03C81E3291C2EAC00B08DB5 /* SettingsViewController.swift in Sources */,
 				C1734B4B291969080058AFD5 /* AppDelegate.swift in Sources */,
 				C1734B6429198D110058AFD5 /* UserManager.swift in Sources */,
 				C1734B4D291969080058AFD5 /* SceneDelegate.swift in Sources */,
+				41E6C2192922B4ED008F59CC /* Message.swift in Sources */,
 				C1734B66291AD0300058AFD5 /* HomeViewController.swift in Sources */,
 				A08A1A50291D8F4E006CB563 /* RoomViewController.swift in Sources */,
+				41E6C21B2922B546008F59CC /* Room.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

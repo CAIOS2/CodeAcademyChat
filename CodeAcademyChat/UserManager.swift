@@ -13,7 +13,7 @@ struct UserResult {
     let errorMessage: String?
 }
 
-class UserManager {    
+class UserManager {
     var userList: [User] = [
         User(username: "romas", password: "12345", isOnline: false),
         User(username: "petras", password: "12345", isOnline: false)]

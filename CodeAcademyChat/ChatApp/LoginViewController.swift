@@ -34,7 +34,8 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func createNewRoomTapped(_ sender: UIButton) {
-        
+        let roomViewController = RoomViewController()
+        navigationController?.present(roomViewController, animated: true)
     }
     
     @IBAction func showOnlineUsersTapped(_ sender: UIButton) {

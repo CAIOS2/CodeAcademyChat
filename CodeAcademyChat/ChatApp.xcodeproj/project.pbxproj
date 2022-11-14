@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0A7FD5D2922F39900E363B9 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A7FD5B2922F39900E363B9 /* RoomViewController.swift */; };
+		B0A7FD5E2922F39900E363B9 /* RoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0A7FD5C2922F39900E363B9 /* RoomViewController.xib */; };
 		B0DA5023291BEB8F00819D04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DA5022291BEB8F00819D04 /* AppDelegate.swift */; };
 		B0DA5025291BEB8F00819D04 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DA5024291BEB8F00819D04 /* SceneDelegate.swift */; };
 		B0DA5027291BEB8F00819D04 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0DA5026291BEB8F00819D04 /* ViewController.swift */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B0A7FD5B2922F39900E363B9 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
+		B0A7FD5C2922F39900E363B9 /* RoomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomViewController.xib; sourceTree = "<group>"; };
 		B0DA501F291BEB8F00819D04 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0DA5022291BEB8F00819D04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B0DA5024291BEB8F00819D04 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 			isa = PBXGroup;
 			children = (
 				B0DA5022291BEB8F00819D04 /* AppDelegate.swift */,
+				B0A7FD5B2922F39900E363B9 /* RoomViewController.swift */,
+				B0A7FD5C2922F39900E363B9 /* RoomViewController.xib */,
 				B0DA5024291BEB8F00819D04 /* SceneDelegate.swift */,
 				B0DA5026291BEB8F00819D04 /* ViewController.swift */,
 				B0DA5044291BF9A300819D04 /* LoginViewController.swift */,
@@ -155,6 +161,7 @@
 				B0DA502F291BEB9000819D04 /* LaunchScreen.storyboard in Resources */,
 				B0DA502C291BEB9000819D04 /* Assets.xcassets in Resources */,
 				B0DA502A291BEB8F00819D04 /* Main.storyboard in Resources */,
+				B0A7FD5E2922F39900E363B9 /* RoomViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +174,7 @@
 			files = (
 				B0DA5037291BF36500819D04 /* User.swift in Sources */,
 				B0DA503D291BF48D00819D04 /* RoomManager.swift in Sources */,
+				B0A7FD5D2922F39900E363B9 /* RoomViewController.swift in Sources */,
 				B0DA503F291BF4B200819D04 /* Room.swift in Sources */,
 				B0DA5041291BF4CA00819D04 /* Message.swift in Sources */,
 				B0DA5027291BEB8F00819D04 /* ViewController.swift in Sources */,

@@ -2,56 +2,35 @@
 //  SettingsViewController.swift
 //  CodeAcademyChat
 //
-//  Created by Dmitrij Aneicik on 2022-11-09.
+//  Created by Tadas Petrikas on 2022-11-09.
 //
 
 import UIKit
 
 class SettingsViewController: UIViewController {
-
+    
+    @IBOutlet private weak var usernameLabel: UILabel!
+    
+    var user: User!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationController?.isNavigationBarHidden = false
+        updateUI()
     }
     
-    @IBAction func editUsername(_ sender: Any) {
-        
-        let okAction = UIAlertAction(title: "OK", style: .default)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
-        
-        let alertController = UIAlertController(title: "Edit username", message: "Enter your username", preferredStyle: .alert)
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-    
-        alertController.addTextField {text in
-            
-            text.placeholder = "username"
-        }
-        self.present(alertController, animated: true)
+    private func updateUI() {
+        usernameLabel.text = user.username
     }
     
-    @IBAction func editPassword(_ sender: Any) {
+    @IBAction private func usernameEditTapped(_ sender: Any) {
         
-        let alertController = UIAlertController(title: "Change password", message: "Enter your password", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Edit Username", message: "Enter your new username", preferredStyle: .alert)
         
-        alertController.addTextField { textfield in
-            textfield.placeholder = "Password"
-        }
-
-        alertController.addTextField { textfield in
-            textfield.placeholder = "Confirm password"
-        }
-        
-        let okAction = UIAlertAction(title: "OK", style: .default) { action in
-            
-            let passwordTextField = alertController.textFields![0] as UITextField
-            let confirmPasswordTextField = alertController.textFields![1] as UITextField
-            
-            if passwordTextField.text == confirmPasswordTextField.text {
-                //        self.user.password = passwordTextField.text!
-                print("Good")
-            } else {
-                print("Bad")
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            if let userName = alertController.textFields?.first?.text, !userName.isEmpty  {
+                self.user.username = userName
+                self.updateUI()
             }
         }
         
@@ -60,6 +39,42 @@ class SettingsViewController: UIViewController {
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         
+        alertController.addTextField { textField in
+            textField.placeholder = "Username"
+        }
+        
+        self.present(alertController, animated: true)
+    }
+    
+    
+    @IBAction private func passwordEditTapped(_ sender: Any) {
+        let alertController = UIAlertController(title: "Edit password", message: "Enter your new password", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            
+            let passwordTextField = alertController.textFields![0] as UITextField
+            let confirmPasswordTextField = alertController.textFields![1] as UITextField
+            
+            if passwordTextField.text == confirmPasswordTextField.text {
+                self.user.password = passwordTextField.text!
+            } else {
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        
+        alertController.addTextField { textfield in
+            textfield.placeholder = "Password"
+        }
+
+        alertController.addTextField { textfield in
+            textfield.placeholder = "Confirm password"
+        }
+
+        
         self.present(alertController, animated: true)
     }
 }
+

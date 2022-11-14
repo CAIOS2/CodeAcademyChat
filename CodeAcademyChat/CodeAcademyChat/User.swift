@@ -8,8 +8,8 @@
 import Foundation
 
 class User {
-    let username: String
-    let password: String
+    var username: String
+    var password: String
     var isOnline: Bool
     
     init(username: String, password: String, isOnline: Bool) {

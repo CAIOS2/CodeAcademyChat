@@ -9,10 +9,13 @@ import Foundation
 
 struct UserResult {
     let user: User?
+    let errorTitle: String?
     let errorMessage: String?
     
-    init(user: User?, errorMessage: String?) {
+    init(user: User?, errorTitle: String?, errorMessage: String?) {
         self.user = user
+        self.errorTitle = errorTitle
         self.errorMessage = errorMessage
+        
     }
 }

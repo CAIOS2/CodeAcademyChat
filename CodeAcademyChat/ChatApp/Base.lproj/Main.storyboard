@@ -51,18 +51,7 @@
                                             <action selector="actionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hCR-eF-euP"/>
                                         </connections>
                                     </button>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yV8-bT-vQs">
-                                        <rect key="frame" x="0.0" y="220" width="335" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.83921568629999999" green="0.39660590890000003" blue="0.33504050969999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="yV8-bT-vQs" secondAttribute="bottom" id="9n3-wr-Upr"/>
-                                    <constraint firstAttribute="trailing" secondItem="yV8-bT-vQs" secondAttribute="trailing" id="dlL-vu-c0h"/>
-                                    <constraint firstItem="yV8-bT-vQs" firstAttribute="leading" secondItem="JFO-m7-0Ns" secondAttribute="leading" id="rwe-lN-27w"/>
-                                </constraints>
                             </stackView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5P2-gL-Ns4">
                                 <rect key="frame" x="16" y="435.33333333333331" width="343" height="32"/>
@@ -100,7 +89,7 @@
                         <outlet property="passwordTextField" destination="uc4-c1-264" id="Dz4-tt-YGU"/>
                         <outlet property="segmentedControl" destination="5P2-gL-Ns4" id="O6n-OC-Izs"/>
                         <outlet property="usernameTextField" destination="Ajz-WN-Kof" id="uyy-z1-e2x"/>
-                        <segue destination="S2f-Rf-HWu" kind="show" identifier="login" id="fKj-L8-3iQ"/>
+                        <segue destination="S2f-Rf-HWu" kind="show" identifier="loginView" id="fKj-L8-3iQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -136,7 +125,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Join room"/>
                                         <connections>
-                                            <action selector="joinRoomTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="wvw-oU-PXd"/>
+                                            <action selector="joinRoomTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="LMg-Hh-Dfq"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SrS-g4-MI7">
@@ -149,7 +138,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Create new room"/>
                                         <connections>
-                                            <action selector="createNewRoomTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="CRh-Jx-9P0"/>
+                                            <action selector="createNewRoomTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="gi0-KV-2iH"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bk8-IM-nlx">
@@ -162,7 +151,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Show online users"/>
                                         <connections>
-                                            <action selector="showOnlineUsersTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="ezP-xo-IOy"/>
+                                            <action selector="showOnlineUsersTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="T3v-Yn-DkC"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dot-a7-E46">
@@ -175,7 +164,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Show offline users"/>
                                         <connections>
-                                            <action selector="showOfflineUserTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="ajx-Ac-y2G"/>
+                                            <action selector="showOfflineUsersTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="4m7-bQ-aPl"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -198,7 +187,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Logout"/>
                                         <connections>
-                                            <action selector="logOutButtonTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="O4u-jR-gp1"/>
+                                            <action selector="logoutTapped:" destination="S2f-Rf-HWu" eventType="touchUpInside" id="mtZ-H4-PLm"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -235,7 +224,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="yMg-b8-MXd"/>
                     <connections>
-                        <outlet property="joinRoomButton" destination="ecJ-45-p7c" id="lb8-dL-bVG"/>
                         <outlet property="welcomeLabel" destination="rkK-1p-Oan" id="0om-tW-kRd"/>
                     </connections>
                 </viewController>
@@ -273,7 +261,7 @@
                                             <fontDescription key="titleFontDescription" type="system" pointSize="21"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="editUserNameTapped:" destination="2wR-Ls-wmH" eventType="touchUpInside" id="Hcj-fs-bM3"/>
+                                            <action selector="usernameEditTapped:" destination="2wR-Ls-wmH" eventType="touchUpInside" id="MmP-jf-4rb"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -294,7 +282,7 @@
                                             <fontDescription key="titleFontDescription" type="system" pointSize="21"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="editPasswordTapped:" destination="2wR-Ls-wmH" eventType="touchUpInside" id="uaq-t9-GWf"/>
+                                            <action selector="passwordEditTapped:" destination="2wR-Ls-wmH" eventType="touchUpInside" id="YZr-DS-gUA"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
-    @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var actionButton: UIButton!
     
     enum State {
@@ -27,19 +26,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let viewController = segue.destination as? LoginViewController {
-            
-            //            viewController.modalPresentationStyle = .fullScreen
-            //            viewController.modalTransitionStyle = .flipHorizontal
-            viewController.user = userForSegue
-            userForSegue = nil
-        }
-    }
+    
     
     
     @IBAction func onSegmentChange(_ sender: Any) {
@@ -69,27 +58,33 @@ class ViewController: UIViewController {
                 validateUser(from: result)
         case .login:
             let result = userManager.login(username: usernameTextField.text!, password: passwordTextField.text!)
-            validateUser(from: result)
-            
+                validateUser(from: result)
         }
     }
     
     func validateUser(from userResult: UserResult) {
-        if let errorMessage = userResult.errorMessage {
-            showError(message: errorMessage)
+        if let errorTitle = userResult.errorTitle, let errorMessage = userResult.errorMessage {
+            showError(title: errorTitle, message: errorMessage)
         } else {
             if let user = userResult.user {
                 userForSegue = user
-                performSegue(withIdentifier: "login", sender: self)
+                performSegue(withIdentifier: "loginView", sender: nil)
             }
         }
     }
-    func showError(message: String) {
-        let title = "Error logging in"
-        let message = "Wrong user credentials!"
-        let alertController = UIAlertController(title: title, message: message , preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .cancel)
+    func showError(title: String, message: String) {
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(alertAction)
         self.present(alertController, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "loginView" {
+            if let viewController = segue.destination as? LoginViewController {
+                viewController.user = userForSegue
+                userForSegue = nil
+            }
+        }
     }
 }

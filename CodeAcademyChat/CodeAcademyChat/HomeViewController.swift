@@ -24,6 +24,9 @@ class HomeViewController: UIViewController {
 // kuriamas kintamasis user su Class User nurodytais parametrais
     var user: User!
     
+    var chat: Room!
+
+    
     override func loadView() {
         super.loadView()
     }
@@ -56,17 +59,22 @@ class HomeViewController: UIViewController {
          }*/
 
     @IBAction func createNewChatButtonTap(_ sender: Any) {
-        #warning ("TODO: sukurti RoomViewControlleri")
-//        let roomViewController = RoomViewController()
+        let roomViewController = RoomViewController()
+        let roomRes = roomManager.createRoom(roomName: enterRoomIdTextField.text)
+
+//        createRoom(roomName: enterRoomIdTextField.text)
+        show(roomViewController, sender: nil)
 //        navigationController?.present(roomViewController, animated: true)
     }
     
     @IBAction func onlineUsersButtonTap(_ sender: Any) {
         showAlert(title: "Online users:", message: "\(user.username)")
+        print("\(user.username) and \(user.isOnline)")
     }
     
     @IBAction func offlineUsersButtonTap(_ sender: Any) {
         showAlert(title: "Offline users:", message: "")
+//        print("\(user.username) and \(user.isOnline)")
     }
     
     @IBAction func logoutButtonTap(_ sender: Any) {

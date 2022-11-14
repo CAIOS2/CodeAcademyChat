@@ -11,9 +11,11 @@ class MainViewController: UIViewController {
 
     var loggedUserName: User!
     var userForSegue: User!
+    var roomManager = RoomManager()
     
     @IBOutlet weak var helloLabel: UILabel!
     @IBOutlet weak var errorMessage: UILabel!
+    @IBOutlet weak var newRoomIDTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,7 @@ class MainViewController: UIViewController {
 
             
         self.navigationItem.setHidesBackButton(true, animated: false)
+        print("main view controller opened")
       //  helloLabel.text = "Hello, \(loggedUserName)"
         
     }
@@ -46,11 +49,54 @@ class MainViewController: UIViewController {
     @IBAction func actionJoinRoom(_ sender: Any) {
         
         let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        
+        
         let alertController = UIAlertController(title: "Error joining room", message: "Room not found", preferredStyle: UIAlertController.Style.alert)
         
         alertController.addAction(alertAction)
         self.present(alertController, animated: true)
     }
+    
+    
+    @IBAction func actionCreateNewRoom(_ sender: Any) {
+        
+  //      print("aaa")
+  //      roomManager.printRoomList()
+
+        
+        let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:  { _ in
+            guard let newRoomID = self.newRoomIDTextField.text  else {
+                return
+            }
+
+            let newRoom = self.roomManager.addRoom(newName: newRoomID)
+            self.roomManager.printRoomList()   //to test
+            
+            let roomViewController = RoomViewController()
+            
+            roomViewController.currentRoom = newRoom.room
+            roomViewController.currentUser = self.loggedUserName
+            
+            self.show(roomViewController, sender: nil)
+            self.navigationController?.present(roomViewController, animated: true)
+        }
+                                        
+                                        
+        )
+        let alertController = UIAlertController(title: "Error creating new room", message: "is some issues", preferredStyle: UIAlertController.Style.alert)
+        
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true)
+    }
+    
+    
+    
+    
+    
+    
+    
+
+    
     
     
     @IBAction func actionShowOnlineUsers(_ sender: Any) {

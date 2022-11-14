@@ -186,7 +186,7 @@
                                     <constraint firstAttribute="height" constant="36" id="xdX-E9-V9f"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HwN-yL-vwi">
                                 <rect key="frame" x="16" y="476" width="361" height="36"/>
@@ -199,7 +199,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="actionJoinRoom:" destination="2PC-6f-Gh7" eventType="touchUpInside" id="T3z-H6-ved"/>
-                                    <segue destination="me4-bW-Htn" kind="show" id="1Pz-V5-pCI"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yd4-9e-GaV">
@@ -212,7 +211,7 @@
                                     <color key="baseBackgroundColor" systemColor="tintColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="me4-bW-Htn" kind="show" id="1yI-iJ-lOO"/>
+                                    <action selector="actionCreateNewRoom:" destination="2PC-6f-Gh7" eventType="touchUpInside" id="roV-b9-YzH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iYh-jU-apG">
@@ -315,27 +314,12 @@
                     <connections>
                         <outlet property="errorMessage" destination="2qh-mp-OuO" id="1Di-HM-OH5"/>
                         <outlet property="helloLabel" destination="gLu-m5-WkR" id="Yko-mq-aZ9"/>
+                        <outlet property="newRoomIDTextField" destination="ZFr-Ty-Dkn" id="6if-Y6-AAT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kwb-uw-vZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="985.49618320610682" y="360.56338028169017"/>
-        </scene>
-        <!--Chat View Controller-->
-        <scene sceneID="xm1-dh-v8b">
-            <objects>
-                <viewController id="me4-bW-Htn" customClass="ChatViewController" customModule="CodeAcademyChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ObK-wZ-hgW">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="ww1-Ow-Xxx"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="wLe-LN-vAc"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vqs-me-gDh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1732" y="361"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="xmb-c9-y74">
@@ -436,9 +420,6 @@
             <point key="canvasLocation" x="-729.00763358778624" y="360.56338028169017"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="1yI-iJ-lOO"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="bubble.left.and.bubble.right" catalog="system" width="128" height="96"/>
         <image name="bubble.left.and.bubble.right.fill" catalog="system" width="128" height="97"/>

@@ -10,6 +10,8 @@
 		4745A390291AD560007FA1BA /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4745A38F291AD560007FA1BA /* Room.swift */; };
 		4745A392291AD575007FA1BA /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4745A391291AD575007FA1BA /* RoomManager.swift */; };
 		4745A394291AD58B007FA1BA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4745A393291AD58B007FA1BA /* Message.swift */; };
+		4756776B2922CDAA00A5FF24 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475677692922CDAA00A5FF24 /* RoomViewController.swift */; };
+		4756776C2922CDAA00A5FF24 /* RoomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4756776A2922CDAA00A5FF24 /* RoomViewController.xib */; };
 		47852D0B29197008001DD054 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47852D0A29197008001DD054 /* User.swift */; };
 		47852D0D291976F2001DD054 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47852D0C291976F2001DD054 /* UserManager.swift */; };
 		47A67EFF29183E5D00265490 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A67EFE29183E5D00265490 /* LoginViewController.swift */; };
@@ -28,6 +30,8 @@
 		4745A38F291AD560007FA1BA /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		4745A391291AD575007FA1BA /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
 		4745A393291AD58B007FA1BA /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		475677692922CDAA00A5FF24 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
+		4756776A2922CDAA00A5FF24 /* RoomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomViewController.xib; sourceTree = "<group>"; };
 		47852D0A29197008001DD054 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		47852D0C291976F2001DD054 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		47A67EFE29183E5D00265490 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +78,15 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
+		475677682922CD8400A5FF24 /* XibViews */ = {
+			isa = PBXGroup;
+			children = (
+				475677692922CDAA00A5FF24 /* RoomViewController.swift */,
+				4756776A2922CDAA00A5FF24 /* RoomViewController.xib */,
+			);
+			path = XibViews;
+			sourceTree = "<group>";
+		};
 		47852D0929196FAF001DD054 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +127,7 @@
 		A0C2A69929144FA9009A006C /* CodeAcademyChat */ = {
 			isa = PBXGroup;
 			children = (
+				475677682922CD8400A5FF24 /* XibViews */,
 				47852D0929196FAF001DD054 /* Classes */,
 				47A67EFD29183D4D00265490 /* ViewControllers */,
 				A0C2A69A29144FA9009A006C /* AppDelegate.swift */,
@@ -187,6 +201,7 @@
 				A0C2A6A729144FAB009A006C /* LaunchScreen.storyboard in Resources */,
 				A0C2A6A429144FAB009A006C /* Assets.xcassets in Resources */,
 				A0C2A6A229144FA9009A006C /* Main.storyboard in Resources */,
+				4756776C2922CDAA00A5FF24 /* RoomViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +214,7 @@
 			files = (
 				47852D0D291976F2001DD054 /* UserManager.swift in Sources */,
 				47A67EFF29183E5D00265490 /* LoginViewController.swift in Sources */,
+				4756776B2922CDAA00A5FF24 /* RoomViewController.swift in Sources */,
 				A0C2A69F29144FA9009A006C /* ViewController.swift in Sources */,
 				47A67F0529183EAC00265490 /* SettingsViewController.swift in Sources */,
 				4745A390291AD560007FA1BA /* Room.swift in Sources */,

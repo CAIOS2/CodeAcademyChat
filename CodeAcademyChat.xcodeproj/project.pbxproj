@@ -49,6 +49,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41E6C20F292258DB008F59CC /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				C1734B50291969080058AFD5 /* Main.storyboard */,
+				A08A1A4D291D8EFA006CB563 /* RoomView.xib */,
+				C1734B552919690A0058AFD5 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		41E6C212292259B6008F59CC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
 		C1734B3E291969080058AFD5 = {
 			isa = PBXGroup;
 			children = (
@@ -73,14 +90,13 @@
 				C1734B4C291969080058AFD5 /* SceneDelegate.swift */,
 				C1734B4E291969080058AFD5 /* LoginViewController.swift */,
 				C1734B65291AD0300058AFD5 /* HomeViewController.swift */,
-				C1734B50291969080058AFD5 /* Main.storyboard */,
-				A08A1A4D291D8EFA006CB563 /* RoomView.xib */,
 				A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */,
 				A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */,
-				C1734B532919690A0058AFD5 /* Assets.xcassets */,
-				C1734B552919690A0058AFD5 /* LaunchScreen.storyboard */,
-				C1734B582919690A0058AFD5 /* Info.plist */,
 				C1734B6329198D110058AFD5 /* UserManager.swift */,
+				C1734B532919690A0058AFD5 /* Assets.xcassets */,
+				C1734B582919690A0058AFD5 /* Info.plist */,
+				41E6C212292259B6008F59CC /* Support Files */,
+				41E6C20F292258DB008F59CC /* Storyboards */,
 			);
 			path = CodeAcademyChat;
 			sourceTree = "<group>";

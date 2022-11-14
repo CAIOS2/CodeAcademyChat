@@ -25,11 +25,10 @@ class RoomManager {
                 return RoomResult(errorMessage: "Room name already exists", room: nil)
             }
         }
-
-   let room =  Room(name: roomName, messages: [])
-     rooms.append(room)
-
-    return RoomResult(errorMessage: nil, room: room)
+        
+        let room =  Room(name: roomName, messages: [])
+        rooms.append(room)
+        return RoomResult(errorMessage: nil, room: room)
     }
     
     func getRoom(roomName: String) -> RoomResult {

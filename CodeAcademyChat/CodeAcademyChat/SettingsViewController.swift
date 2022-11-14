@@ -24,10 +24,11 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction private func usernameEditTapped(_ sender: Any) {
+        
         let alertController = UIAlertController(title: "Edit Username", message: "Enter your new username", preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-            if let userName = alertController.textFields?.first?.text, userName.isEmpty  {
+            if let userName = alertController.textFields?.first?.text, !userName.isEmpty  {
                 self.user.username = userName
                 self.updateUI()
             }

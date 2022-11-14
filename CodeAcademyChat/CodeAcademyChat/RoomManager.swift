@@ -13,26 +13,31 @@ struct RoomResult {
 }
 
 class RoomManager {
-    var rooms: [Room] = []
+    var propertyRooms: [Room] = []
     
-    func createRoom(roomName: String) -> RoomResult {
-        guard !roomName.isEmpty else {
+    init() {
+        
+    }
+    
+    func createRoom(parameterRoomName: String) -> RoomResult {
+        guard !parameterRoomName.isEmpty else {
             return RoomResult(errorMessage: "empty id", room: nil)
         }
         
-        for room in rooms {
-            if room.name == roomName {
+        for eachRoom in propertyRooms {
+            if eachRoom.name == parameterRoomName {
                 return RoomResult(errorMessage: "Room name already exists", room: nil)
             }
         }
         
-        let room =  Room(name: roomName, messages: [])
-        rooms.append(room)
-        return RoomResult(errorMessage: nil, room: room)
+        let resultRoom = Room(name: parameterRoomName, messages: [])
+        
+        propertyRooms.append(resultRoom)
+        return RoomResult(errorMessage: nil, room: resultRoom)
     }
     
     func getRoom(roomName: String) -> RoomResult {
-        guard let room = rooms.first(where: { room in
+        guard let room = propertyRooms.first(where: { room in
             room.name == roomName
         }) else {
             return RoomResult(errorMessage: "Room does not exist", room: nil)

@@ -36,8 +36,13 @@ class HomeViewController: UIViewController {
     @IBAction private func createNewRoomTapped(_ sender: Any) {
         //TODO: Reimplement error message
 //        showAlert(title: "Error creating room", message: "Room name can't be empty!")
+        
         let roomViewController = RoomViewController()
-        navigationController?.present(roomViewController, animated: true)
+        
+        // let roomResult = roomManager.createRoom ........
+        //roomViewController.room = ????????
+        show(roomViewController, sender: nil)
+//        navigationController?.present(roomViewController, animated: true)
     }
     
     @IBAction private func showOnlineUserTapped(_ sender: Any) {

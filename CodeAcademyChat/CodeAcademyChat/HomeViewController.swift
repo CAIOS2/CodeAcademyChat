@@ -33,13 +33,24 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction private func joinRoomTapped(_ sender: Any) {
-        showAlert(title: "Error joining room", message: "Room not found")
+        guard roomIDfield.text != "" else {
+            print("empty room ID")
+            return
+        }
+        let roomResult = roomManager.getRoom(roomName: roomIDfield.text!)
+        
+        if let room = roomResult.room {
+            let roomViewController = RoomViewController()
+            roomViewController.room = room
+            show(roomViewController, sender: nil)
+        } else {
+            showAlert(title: "Error joining room", message: "Room not found")
+        }
     }
     
     @IBAction private func createNewRoomTapped(_ sender: Any) {
         
         let roomViewController = RoomViewController()
-        
         let roomResult = roomManager.createRoom(parameterRoomName: roomIDfield.text!)
         
         if let room = roomResult.room {
@@ -49,8 +60,8 @@ class HomeViewController: UIViewController {
             return
         }
         
-        show(roomViewController, sender: nil)
-        //        navigationController?.present(roomViewController, animated: true)
+        //show(roomViewController, sender: nil)
+        navigationController?.present(roomViewController, animated: true)
     }
     
     @IBAction private func showOnlineUserTapped(_ sender: Any) {

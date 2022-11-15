@@ -34,6 +34,8 @@ class HomeViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction private func joinRoomTapped(_ sender: Any) {
+        let roomResult = roomManager.getRoom(roomName: roomIdTextField.text!)
+        
         showAlert(title: "Error joining room", message: "Room not found")
     }
     

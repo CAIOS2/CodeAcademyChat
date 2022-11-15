@@ -17,13 +17,9 @@
 		8473CAD2291C0BA300FEAF5D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473CAD1291C0BA300FEAF5D /* Result.swift */; };
 		8473CAD5291C5AF800FEAF5D /* ErrorCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473CAD4291C5AF800FEAF5D /* ErrorCodes.swift */; };
 		84C7317D2916DD4700B4F19A /* AppEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7317C2916DD4700B4F19A /* AppEntryViewController.swift */; };
-		84C7317F2916F35200B4F19A /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7317E2916F35200B4F19A /* UserData.swift */; };
 		84C7318129170ED400B4F19A /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7318029170ED400B4F19A /* Hashing.swift */; };
 		84C731852917D68000B4F19A /* Crypto in Frameworks */ = {isa = PBXBuildFile; productRef = 84C731842917D68000B4F19A /* Crypto */; };
 		84C73188291AD10A00B4F19A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C73187291AD10A00B4F19A /* HomeViewController.swift */; };
-		84C7318A291ADA2900B4F19A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C73189291ADA2900B4F19A /* Message.swift */; };
-		84C7318C291ADA3400B4F19A /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7318B291ADA3400B4F19A /* Room.swift */; };
-		84C7318E291AEA7800B4F19A /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7318D291AEA7800B4F19A /* RoomManager.swift */; };
 		A0C2A69B29144FA9009A006C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C2A69A29144FA9009A006C /* AppDelegate.swift */; };
 		A0C2A69D29144FA9009A006C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C2A69C29144FA9009A006C /* SceneDelegate.swift */; };
 		A0C2A69F29144FA9009A006C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C2A69E29144FA9009A006C /* ViewController.swift */; };
@@ -43,13 +39,9 @@
 		8473CAD1291C0BA300FEAF5D /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		8473CAD4291C5AF800FEAF5D /* ErrorCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodes.swift; sourceTree = "<group>"; };
 		84C7317C2916DD4700B4F19A /* AppEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryViewController.swift; sourceTree = "<group>"; };
-		84C7317E2916F35200B4F19A /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		84C7318029170ED400B4F19A /* Hashing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
 		84C731862917DCAB00B4F19A /* CodeAcademyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeAcademyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84C73187291AD10A00B4F19A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		84C73189291ADA2900B4F19A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		84C7318B291ADA3400B4F19A /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
-		84C7318D291AEA7800B4F19A /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
 		A0C2A69A29144FA9009A006C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0C2A69C29144FA9009A006C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A0C2A69E29144FA9009A006C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -116,11 +108,7 @@
 				A0C2A6A529144FAB009A006C /* LaunchScreen.storyboard */,
 				A0C2A6A829144FAB009A006C /* Info.plist */,
 				84C7317C2916DD4700B4F19A /* AppEntryViewController.swift */,
-				84C7317E2916F35200B4F19A /* UserData.swift */,
 				84C73187291AD10A00B4F19A /* HomeViewController.swift */,
-				84C73189291ADA2900B4F19A /* Message.swift */,
-				84C7318B291ADA3400B4F19A /* Room.swift */,
-				84C7318D291AEA7800B4F19A /* RoomManager.swift */,
 			);
 			path = CodeAcademyChat;
 			sourceTree = "<group>";
@@ -209,13 +197,9 @@
 				8473CACE291C022900FEAF5D /* DataManager.swift in Sources */,
 				846E5348292016F200539A1E /* Extendables.swift in Sources */,
 				A0C2A69B29144FA9009A006C /* AppDelegate.swift in Sources */,
-				84C7317F2916F35200B4F19A /* UserData.swift in Sources */,
 				A0C2A69D29144FA9009A006C /* SceneDelegate.swift in Sources */,
-				84C7318C291ADA3400B4F19A /* Room.swift in Sources */,
 				8473CAD5291C5AF800FEAF5D /* ErrorCodes.swift in Sources */,
 				846E534A29202D1300539A1E /* Encryptor.swift in Sources */,
-				84C7318E291AEA7800B4F19A /* RoomManager.swift in Sources */,
-				84C7318A291ADA2900B4F19A /* Message.swift in Sources */,
 				84C73188291AD10A00B4F19A /* HomeViewController.swift in Sources */,
 				8473CACA291C013B00FEAF5D /* Message.swift in Sources */,
 				84C7318129170ED400B4F19A /* Hashing.swift in Sources */,

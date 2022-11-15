@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Room2ViewController" customModule="CodeAcademyChat" customModuleProvider="target">
+            <connections>
+                <outlet property="messagesTextField" destination="H26-n1-Y5X" id="cGV-ig-dDl"/>
+                <outlet property="messagesTextView" destination="biV-kD-fwM" id="Lg3-co-Eau"/>
+                <outlet property="sendButton" destination="pQe-OJ-NPB" id="Wob-DG-qpD"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="welcomeLabel" destination="jiJ-no-215" id="Wz2-5Z-F19"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jiJ-no-215">
+                    <rect key="frame" x="12" y="71" width="369" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="biV-kD-fwM">
+                    <rect key="frame" x="12" y="104" width="369" height="533"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                    <color key="textColor" systemColor="labelColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H26-n1-Y5X">
+                    <rect key="frame" x="12" y="649" width="369" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pQe-OJ-NPB">
+                    <rect key="frame" x="12" y="695" width="369" height="35"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="H26-n1-Y5X" secondAttribute="trailing" constant="12" id="18a-ai-LUl"/>
+                <constraint firstItem="pQe-OJ-NPB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="5iN-GV-FDp"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pQe-OJ-NPB" secondAttribute="bottom" constant="88" id="EFX-zd-Irz"/>
+                <constraint firstItem="jiJ-no-215" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="MMp-HZ-5Bc"/>
+                <constraint firstItem="jiJ-no-215" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="PD3-Mv-wnk"/>
+                <constraint firstItem="biV-kD-fwM" firstAttribute="top" secondItem="jiJ-no-215" secondAttribute="bottom" constant="12" id="Pcf-tA-CqD"/>
+                <constraint firstItem="H26-n1-Y5X" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="QEb-fo-gid"/>
+                <constraint firstItem="biV-kD-fwM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="T6b-Zz-nnv"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pQe-OJ-NPB" secondAttribute="trailing" constant="12" id="YmN-58-7rU"/>
+                <constraint firstItem="H26-n1-Y5X" firstAttribute="top" secondItem="biV-kD-fwM" secondAttribute="bottom" constant="12" id="aYR-1M-VV9"/>
+                <constraint firstItem="pQe-OJ-NPB" firstAttribute="top" secondItem="H26-n1-Y5X" secondAttribute="bottom" constant="12" id="d69-g2-5aW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="biV-kD-fwM" secondAttribute="trailing" constant="12" id="ldH-WV-K9d"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jiJ-no-215" secondAttribute="trailing" constant="12" id="zcW-py-GSO"/>
+            </constraints>
+            <point key="canvasLocation" x="12" y="-11"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

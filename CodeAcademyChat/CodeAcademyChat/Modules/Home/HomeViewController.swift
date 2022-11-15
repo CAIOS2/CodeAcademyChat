@@ -36,7 +36,13 @@ class HomeViewController: UIViewController {
     @IBAction private func joinRoomTapped(_ sender: Any) {
         let roomResult = roomManager.getRoom(roomName: roomIdTextField.text!)
         
-        showAlert(title: "Error joining room", message: "Room not found")
+        if let room = roomResult.room {
+            let roomVC = RoomViewController()
+            roomVC.room = room
+            show(roomVC, sender: nil)
+        } else {
+            showAlert(title: "Error joining room", message: roomResult.errorMessage ?? "")
+        }
     }
     
     //    Uzduotis nr 2
@@ -85,7 +91,7 @@ class HomeViewController: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewController = segue.destination as? SettingsViewController { waefkawefwaefawefawefawef
+        if let viewController = segue.destination as? SettingsViewController { 
             viewController.user = user
         }
     }

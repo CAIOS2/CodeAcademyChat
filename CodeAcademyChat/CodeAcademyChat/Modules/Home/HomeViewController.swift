@@ -36,7 +36,15 @@ class HomeViewController: UIViewController {
     // 2022-11-15 Uzduotis
     // Parasyti logika kas turi buti kai paspaudi join mytgtuka
     @IBAction private func joinRoomTapped(_ sender: Any) {
-        showAlert(title: "Error joining room", message: "Room not found")
+        let roomResult = roomManager.getRoom(roomName: roomIdTextField.text!)
+        
+        if let room = roomResult.room {
+            let roomVC = RoomViewController()
+            roomVC.room = room
+            show(roomVC, sender: nil)
+        } else {
+            showAlert(title: "Error joining room", message: roomResult.errorMessage ?? "")
+        }
     }
     
     //    Uzduotis nr 2

@@ -33,6 +33,8 @@ class HomeViewController: UIViewController {
     
     // MARK: - Actions
     
+    // 2022-11-15 Uzduotis
+    // Parasyti logika kas turi buti kai paspaudi join mytgtuka
     @IBAction private func joinRoomTapped(_ sender: Any) {
         showAlert(title: "Error joining room", message: "Room not found")
     }
@@ -53,8 +55,7 @@ class HomeViewController: UIViewController {
             roomViewController.room = room
             show(roomViewController, sender: nil)
         } else {
-            // FIXME: - show alert
-            print(roomResult.errorMessage)
+            showAlert(title: "Error creating room", message: roomResult.errorMessage ?? "")
         }
         
         //roomViewController.room = ????????
@@ -83,7 +84,7 @@ class HomeViewController: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewController = segue.destination as? SettingsViewController { waefkawefwaefawefawefawef
+        if let viewController = segue.destination as? SettingsViewController { 
             viewController.user = user
         }
     }

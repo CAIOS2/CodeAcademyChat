@@ -23,6 +23,7 @@ class Room {
         self.name = name
         self.messages = messages
     }
+    
     func writeMessage(messageContent: String, sender: User) {
         var message = Message(content: messageContent, date: .now, username: sender.username)
         messages.append(message)

@@ -13,8 +13,10 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var button: UIButton!
         
+    @IBOutlet weak var IdTextField: UITextField!
     
     var user: User!
+    let roomManager = RoomManager()
         
         override func loadView() {
             super.loadView()
@@ -40,6 +42,15 @@ showAlert(title: "Error joining room", message: "Room not found")
         let roomViewController = RoomViewController()
                 navigationController?.present(roomViewController, animated: true)
         showAlert(title: "Error creating room", message: "Room name can't be empty!")
+        let roomResult = roomManager.createRoom(roomName: IdTextField.text!)
+
+                 if let room = roomResult.room {
+                     roomViewController.room = room
+                     show(roomViewController, sender: nil)
+                 } else {
+                     // FIXME: - show alert
+                     print(roomResult.errorMessage)
+                 }
     }
     @IBAction private func onlineUsersTapped(_ sender: Any) {
         showAlert(title: "Online users:", message: "\(user.username)")

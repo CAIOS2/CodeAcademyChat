@@ -17,11 +17,20 @@ class SettingsViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
         usernameLabel.text = user.username
     }
+    private func updateUI() {
+        usernameLabel.text = user.username
+    }
     
-    @IBAction func usernameEditTapped(_ sender: Any) {
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
-        let okAction = UIAlertAction(title: "OK", style: .default)
+    @IBAction private func usernameEditTapped(_ sender: Any) {
+        
         let alertController = UIAlertController(title: "Edit username", message: "Enter your new username", preferredStyle: .alert )
+        let okAction = UIAlertAction(title: "OK", style: .default) { alertAction in
+            if let userName = alertController.textFields?.first?.text, userName.isEmpty {
+                self.user.username = userName
+                self.updateUI()
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         alertController.addTextField { textField in

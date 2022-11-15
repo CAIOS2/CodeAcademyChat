@@ -3,9 +3,75 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController id="Rsj-3A-RdZ" customClass="RoomViewController" customModule="CodeAcademyChat" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="xIz-h7-1DD">
+                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ve-Gp-huz">
+                        <rect key="frame" x="12" y="71" width="369" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nMa-wy-FfY">
+                        <rect key="frame" x="12" y="104" width="369" height="546"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="textColor" systemColor="labelColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="THb-AD-jom">
+                        <rect key="frame" x="12" y="662" width="369" height="34"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5TI-uU-jnB">
+                        <rect key="frame" x="12" y="708" width="369" height="35"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                    </button>
+                </subviews>
+                <viewLayoutGuide key="safeArea" id="feZ-P9-qte"/>
+                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                <constraints>
+                    <constraint firstItem="5TI-uU-jnB" firstAttribute="top" secondItem="THb-AD-jom" secondAttribute="bottom" constant="12" id="AeL-Rc-xe5"/>
+                    <constraint firstItem="THb-AD-jom" firstAttribute="top" secondItem="nMa-wy-FfY" secondAttribute="bottom" constant="12" id="Cqb-Df-LZh"/>
+                    <constraint firstItem="9ve-Gp-huz" firstAttribute="leading" secondItem="feZ-P9-qte" secondAttribute="leading" constant="12" id="FoH-b6-2oK"/>
+                    <constraint firstItem="THb-AD-jom" firstAttribute="leading" secondItem="feZ-P9-qte" secondAttribute="leading" constant="12" id="HGO-mL-Q6n"/>
+                    <constraint firstItem="nMa-wy-FfY" firstAttribute="top" secondItem="9ve-Gp-huz" secondAttribute="bottom" constant="12" id="UuN-ke-hae"/>
+                    <constraint firstItem="feZ-P9-qte" firstAttribute="trailing" secondItem="nMa-wy-FfY" secondAttribute="trailing" constant="12" id="YIT-WI-367"/>
+                    <constraint firstItem="9ve-Gp-huz" firstAttribute="top" secondItem="feZ-P9-qte" secondAttribute="top" constant="12" id="ZO2-7H-JGn"/>
+                    <constraint firstItem="feZ-P9-qte" firstAttribute="bottom" secondItem="5TI-uU-jnB" secondAttribute="bottom" constant="75" id="f18-0D-16U"/>
+                    <constraint firstItem="feZ-P9-qte" firstAttribute="trailing" secondItem="THb-AD-jom" secondAttribute="trailing" constant="12" id="gRC-Bf-OB6"/>
+                    <constraint firstItem="feZ-P9-qte" firstAttribute="trailing" secondItem="5TI-uU-jnB" secondAttribute="trailing" constant="12" id="kHR-30-qjr"/>
+                    <constraint firstItem="nMa-wy-FfY" firstAttribute="leading" secondItem="feZ-P9-qte" secondAttribute="leading" constant="12" id="lH0-DM-1vr"/>
+                    <constraint firstItem="5TI-uU-jnB" firstAttribute="leading" secondItem="feZ-P9-qte" secondAttribute="leading" constant="12" id="m7E-s6-uzH"/>
+                    <constraint firstItem="feZ-P9-qte" firstAttribute="trailing" secondItem="9ve-Gp-huz" secondAttribute="trailing" constant="12" id="xYT-o0-XUU"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="messagesTextField" destination="THb-AD-jom" id="FXF-Ad-7kX"/>
+                <outlet property="messagesTextView" destination="nMa-wy-FfY" id="K7g-ar-in9"/>
+                <outlet property="sendButton" destination="5TI-uU-jnB" id="OIG-ns-5c4"/>
+                <outlet property="welcomeLabel" destination="9ve-Gp-huz" id="jnJ-7v-nAK"/>
+            </connections>
+            <point key="canvasLocation" x="-628" y="-301"/>
+        </viewController>
     </objects>
+    <resources>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

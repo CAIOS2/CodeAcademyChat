@@ -128,7 +128,7 @@ struct UserData: Decodable, Encodable {
     }
     
     func getAllRooms(from storage: Storage, password: String) throws -> [(RoomData, SymmetricKey)] {
-        var res = storage.get(by: "room")
+        let res = storage.get(by: "room")
         if res.error != nil {
             throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
         }

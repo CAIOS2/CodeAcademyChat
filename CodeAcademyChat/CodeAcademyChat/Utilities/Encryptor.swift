@@ -15,10 +15,6 @@ class Encryptor {
     }
     
     static func encrypt(symKey: SymmetricKey, data: String) -> String {
-        // TODO: create .env
-        let iv = ">YZ1rq!@#agnost1heev3421"
-        
-        
         let preparedData: Data? = data.data(using: .utf8)
         
         let sealedBoxData = try! ChaChaPoly.seal(preparedData!, using: symKey).combined
@@ -32,9 +28,6 @@ class Encryptor {
     }
     
     static func decrypt(symKey: SymmetricKey, data: String) -> String {
-        // TODO: create .env
-        let iv = ">YZ1rq!@#agnost1heev3421"
-        
         let cipherData = Data(base64Encoded: data, options: .ignoreUnknownCharacters)
         
         let box = try! ChaChaPoly.SealedBox(combined: cipherData!)

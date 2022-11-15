@@ -75,7 +75,7 @@ class DataManager {
     /// Load shorted user data in list to shortUserAccounts
     /// Contains username and password hash
     func loadShortUsers() throws {
-        var res = self.storage.get(by: "user")
+        let res = self.storage.get(by: "user")
         if res.error != nil {
             throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
         }

@@ -41,9 +41,9 @@ class Storage {
     init() {
         // check if required lists are already created in UD
         // create required list in UD
-        var keys = ["user", "room", "message"]
+        let keys = ["user", "room", "message"]
         for key in keys {
-            var res = get(by: key)
+            let res = get(by: key)
             if res.error != nil {
                 precondition(false, (res.error as! ErrorCodes).getString())
             }

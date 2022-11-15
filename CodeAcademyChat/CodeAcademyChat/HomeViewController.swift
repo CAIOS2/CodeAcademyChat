@@ -42,9 +42,10 @@ class HomeViewController: UIViewController {
         if let room = roomResult.room {
             let roomViewController = RoomViewController()
             roomViewController.room = room
-            show(roomViewController, sender: nil)
+           // show(roomViewController, sender: nil)
+            navigationController?.present(roomViewController, animated: true)
         } else {
-            showAlert(title: "Error joining room", message: "Room not found")
+            showAlert(title: "Error joining room", message: roomResult.errorMessage!)
         }
     }
     

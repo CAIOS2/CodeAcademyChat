@@ -41,6 +41,7 @@ class HomeViewController: UIViewController {
         if let room = roomResult.room {
             let roomVC = RoomViewController()
             roomVC.room = room
+            roomVC.currentUser = user
             show(roomVC, sender: nil)
         } else {
             showAlert(title: "Error joining room", message: roomResult.errorMessage ?? "")
@@ -61,11 +62,13 @@ class HomeViewController: UIViewController {
         
         if let room = roomResult.room {
             roomViewController.room = room
+            roomViewController.currentUser = user
             show(roomViewController, sender: nil)
         } else {
             showAlert(title: "Error creating room", message: roomResult.errorMessage ?? "")
         }
-        
+
+
         //roomViewController.room = ????????
         //        navigationController?.present(roomViewController, animated: true)
     }

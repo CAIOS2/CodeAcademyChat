@@ -31,7 +31,12 @@ class Room2ViewController: UIViewController {
         welcomeLabel.text = "Welcome to \(room.name)"
     }
 
-
+    @IBAction func sendButtonTapped(_ sender: Any) {
+        room.writeMessage(messageContent: messagesTextField.text!, sender: currentUser)
+//        func addMessage(
+//        var message = Message(content: <#T##String#>, date: <#T##Date#>, username: <#T##String#>)
+//        room.messages.append(mes)
+    }
     /*
     // MARK: - Navigation
 

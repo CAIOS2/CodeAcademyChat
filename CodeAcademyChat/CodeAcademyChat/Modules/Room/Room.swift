@@ -11,16 +11,20 @@ class Room {
     var name: String
     var messages: [Message]
     
-//    init(name: String, onlineUsers: [User], offlineUsers: [User], messageHistory: [Message], messages: [Message]) {
-//        self.name = name
-//        self.onlineUsers = onlineUsers
-//        self.offlineUsers = offlineUsers
-//        self.messageHistory = messageHistory
-//        self.messages = messages
-//    }
+    //    init(name: String, onlineUsers: [User], offlineUsers: [User], messageHistory: [Message], messages: [Message]) {
+    //        self.name = name
+    //        self.onlineUsers = onlineUsers
+    //        self.offlineUsers = offlineUsers
+    //        self.messageHistory = messageHistory
+    //        self.messages = messages
+    //    }
     
     init(name: String, messages: [Message]) {
         self.name = name
         self.messages = messages
+    }
+    func writeMessage(messageContent: String, sender: User) {
+        var message = Message(content: messageContent, date: .now, username: sender.username)
+        messages.append(message)
     }
 }

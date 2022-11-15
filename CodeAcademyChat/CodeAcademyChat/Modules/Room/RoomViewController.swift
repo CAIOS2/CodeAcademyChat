@@ -27,6 +27,11 @@ class RoomViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         welcomeLabel.text = "Welcome to \(room.name)"
     }
+    
+    @IBAction func sendButtonTapped(_ sender: Any) {
+        room.writeMessage(messageContent: messageTextField.text!, sender: currentUser)
+        
+    }
 
     /*
     // MARK: - Navigation

@@ -40,8 +40,8 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSO-GJ-zny">
-                    <rect key="frame" x="158" y="729" width="74" height="35"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSO-GJ-zny">
+                    <rect key="frame" x="158" y="729" width="90" height="35"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
                 </button>
@@ -56,10 +56,9 @@
                 <constraint firstItem="vfH-nF-AlV" firstAttribute="bottom" secondItem="sSO-GJ-zny" secondAttribute="bottom" constant="46" id="eh0-ZP-33F"/>
                 <constraint firstItem="sSO-GJ-zny" firstAttribute="leading" secondItem="vfH-nF-AlV" secondAttribute="leading" constant="158" id="ehH-kf-gan"/>
                 <constraint firstItem="ruD-tW-y0S" firstAttribute="leading" secondItem="vfH-nF-AlV" secondAttribute="leading" constant="12" id="qZB-If-JHM"/>
-                <constraint firstItem="sSO-GJ-zny" firstAttribute="centerX" secondItem="0XA-4o-VN5" secondAttribute="centerX" id="sGL-lC-Unq"/>
                 <constraint firstItem="0XA-4o-VN5" firstAttribute="top" secondItem="ruD-tW-y0S" secondAttribute="bottom" constant="30" id="trv-vT-Zbw"/>
             </constraints>
-            <point key="canvasLocation" x="405" y="-189"/>
+            <point key="canvasLocation" x="404.61538461538458" y="-189.09952606635071"/>
         </view>
     </objects>
     <resources>

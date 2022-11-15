@@ -12,7 +12,11 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var welcomeLabel: UILabel!
     
+    @IBOutlet weak var roomIdTextField:UITextField!
+    
     var user: User!
+    
+    let roomManager = RoomManager()
     
     override func loadView() {
         super.loadView()
@@ -31,27 +35,36 @@ class HomeViewController: UIViewController {
     
     @IBAction private func joinRoomTapped(_ sender: Any) {
         showAlert(title: "Error joining room", message: "Room not found")
-    }
-    //Uzduotis nr 2
-    //    * HomeViewControllery iskviesti RoomManager createRoom funkcija kai yra paspaudziamas "Create Room" mygtukas
-    //    * Sukurta kambari priskirti RoomViewController properciui room ir parodyt roomo name labely
-    
-    @IBAction private func createNewRoomTapped(_ sender: Any) {
-        //TODO: Reimplement error message
-//        showAlert(title: "Error creating room", message: "Room name can't be empty!")
+        
         
         let roomViewController = RoomViewController()
-        var arTuscias: Bool?
-        if arTuscias == true {}
-     
-//            roomIDTextField.text != "" {
-//            if roomIDTextField
         
-       // let roomResult = roomManager.createRoom .....
-        // let roomResult = roommanager.createRoom....
-        // roomViewController.room =.....
+        let roomResult = roomManager.getRoom(roomName: roomIdTextField.text!)
+        if let room = roomResult.room {
+            roomViewController.room = room
+            show(roomViewController, sender: nil)
+        } else {
+            print(roomResult.errorMessage)
+        }
+    }
+            
+   
+    @IBAction private func createNewRoomTapped(_ sender: Any) {
+        //TODO: Reimplement error message
+        //        showAlert(title: "Error creating room", message: "Room name can't be empty!")
         
-        show(roomViewController, sender: nil)
+        let roomViewController = RoomViewController()
+                
+                //roomIdTextField.text! -- kaip parametra roomNamePaduodam
+        let roomResult = roomManager.createRoom(roomName: roomIdTextField.text!)
+                
+                if let room = roomResult.room {
+                    roomViewController.room = room
+                    show(roomViewController, sender: nil)
+                } else {
+                    showAlert(title: "Error creating room", message: roomResult.errorMessage ?? "")
+                }
+        
 //        navigationController?.present(roomViewController, animated: true)
     }
     

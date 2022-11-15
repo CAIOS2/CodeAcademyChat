@@ -25,9 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		41E6C2162922B4A9008F59CC /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoomManager.swift; path = ../RoomManager.swift; sourceTree = "<group>"; };
-		41E6C2182922B4ED008F59CC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Message.swift; path = ../Message.swift; sourceTree = "<group>"; };
-		41E6C21A2922B546008F59CC /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Room.swift; path = ../Room.swift; sourceTree = "<group>"; };
+		41E6C2162922B4A9008F59CC /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
+		41E6C2182922B4ED008F59CC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		41E6C21A2922B546008F59CC /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A08A1A4D291D8EFA006CB563 /* RoomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomView.xib; sourceTree = "<group>"; };
 		A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
@@ -55,11 +55,66 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4146EA6C2923F4B5000A4055 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				4146EA6F2923F4F2000A4055 /* Home */,
+				4146EA702923F542000A4055 /* Settings */,
+				4146EA6E2923F4E0000A4055 /* Login */,
+				4146EA6D2923F4CD000A4055 /* Room */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		4146EA6D2923F4CD000A4055 /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */,
+				41E6C21A2922B546008F59CC /* Room.swift */,
+				A08A1A4D291D8EFA006CB563 /* RoomView.xib */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
+		4146EA6E2923F4E0000A4055 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				C1734B6329198D110058AFD5 /* UserManager.swift */,
+				C1734B4E291969080058AFD5 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		4146EA6F2923F4F2000A4055 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C1734B65291AD0300058AFD5 /* HomeViewController.swift */,
+				41E6C2162922B4A9008F59CC /* RoomManager.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		4146EA702923F542000A4055 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		4146EA712923FF34000A4055 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				41E6C2182922B4ED008F59CC /* Message.swift */,
+				C1734B6129198C940058AFD5 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		41E6C20F292258DB008F59CC /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				C1734B50291969080058AFD5 /* Main.storyboard */,
-				A08A1A4D291D8EFA006CB563 /* RoomView.xib */,
 				C1734B552919690A0058AFD5 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
@@ -84,20 +139,13 @@
 		C1734B49291969080058AFD5 /* CodeAcademyChat */ = {
 			isa = PBXGroup;
 			children = (
-				41E6C21A2922B546008F59CC /* Room.swift */,
-				41E6C2162922B4A9008F59CC /* RoomManager.swift */,
-				41E6C2182922B4ED008F59CC /* Message.swift */,
-				C1734B6129198C940058AFD5 /* User.swift */,
+				4146EA712923FF34000A4055 /* Models */,
+				4146EA6C2923F4B5000A4055 /* Modules */,
+				41E6C20F292258DB008F59CC /* Storyboards */,
 				C1734B4A291969080058AFD5 /* AppDelegate.swift */,
 				C1734B4C291969080058AFD5 /* SceneDelegate.swift */,
-				C1734B4E291969080058AFD5 /* LoginViewController.swift */,
-				C1734B65291AD0300058AFD5 /* HomeViewController.swift */,
-				A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */,
-				A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */,
-				C1734B6329198D110058AFD5 /* UserManager.swift */,
 				C1734B582919690A0058AFD5 /* Info.plist */,
 				C1734B532919690A0058AFD5 /* Assets.xcassets */,
-				41E6C20F292258DB008F59CC /* Storyboards */,
 			);
 			path = CodeAcademyChat;
 			sourceTree = "<group>";

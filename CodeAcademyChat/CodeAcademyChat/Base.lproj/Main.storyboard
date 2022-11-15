@@ -284,6 +284,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bfe-jV-cuf"/>
                     <connections>
+                        <outlet property="roomIDfield" destination="pOD-8V-cCQ" id="dTP-1C-Rw5"/>
                         <outlet property="welcomeLabel" destination="BQm-OD-T7b" id="Qku-fZ-mth"/>
                     </connections>
                 </viewController>

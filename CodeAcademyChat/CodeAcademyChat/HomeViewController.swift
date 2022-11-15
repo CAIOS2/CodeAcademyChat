@@ -11,6 +11,9 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var roomIDfield: UITextField!
+    
+    let roomManager = RoomManager()
     
     var user: User!
     
@@ -34,15 +37,20 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction private func createNewRoomTapped(_ sender: Any) {
-        //TODO: Reimplement error message
-//        showAlert(title: "Error creating room", message: "Room name can't be empty!")
         
         let roomViewController = RoomViewController()
         
-        // let roomResult = roomManager.createRoom ........
-        //roomViewController.room = ????????
+        let roomResult = roomManager.createRoom(parameterRoomName: roomIDfield.text!)
+        
+        if let room = roomResult.room {
+            roomViewController.room = room
+        } else {
+            print(roomResult.errorMessage)
+            return
+        }
+        
         show(roomViewController, sender: nil)
-//        navigationController?.present(roomViewController, animated: true)
+        //        navigationController?.present(roomViewController, animated: true)
     }
     
     @IBAction private func showOnlineUserTapped(_ sender: Any) {

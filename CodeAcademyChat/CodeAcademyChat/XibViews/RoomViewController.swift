@@ -16,25 +16,43 @@ class RoomViewController: UIViewController {
     
     var currentUser: User!
     var currentRoom: Room!
-    
-    
-    
+    @IBOutlet weak var messageTextField: UITextField!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getRoomMesssages()
         // Do any additional setup after loading the view.
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         helloLabel.text = "Room: \(currentRoom.name)"
+
+    }
+    
+    func getRoomMesssages() {
+        let messageList = currentRoom.getMessages()
+        print(messageList)
+        textArea.text = messageList.joined(separator: "\n")
     }
     
     
+    
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        
+        if let newMessage = messageTextField {
+            currentRoom.writeMessage(messageContent: newMessage.text!, sender: currentUser)
+
+            getRoomMesssages()
+
+            
+            
+            
+        }
+        
+    }
     
     
     /*

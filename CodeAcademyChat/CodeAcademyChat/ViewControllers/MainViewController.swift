@@ -8,7 +8,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
     var loggedUserName: User!
     var userForSegue: User!
     var roomManager = RoomManager()
@@ -17,16 +17,19 @@ class MainViewController: UIViewController {
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var newRoomIDTextField: UITextField!
     
+    
+    // MARK: - Override
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         errorMessage.text = ""
         errorMessage.isHidden = true
         // Do any additional setup after loading the view.
-
-            
+        
+        
         self.navigationItem.setHidesBackButton(true, animated: false)
         print("main view controller opened")
-      //  helloLabel.text = "Hello, \(loggedUserName)"
+        //  helloLabel.text = "Hello, \(loggedUserName)"
         
     }
     
@@ -44,70 +47,62 @@ class MainViewController: UIViewController {
     }
     
     
+    // MARK: - Actions
     
-
     @IBAction func actionJoinRoom(_ sender: Any) {
         
-        let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        guard let currentRoomID = self.newRoomIDTextField.text  else {
+            return
+        }
         
+        let currentRoom = self.roomManager.getRoom(name: currentRoomID)
+        let roomViewController = RoomViewController()
         
-        let alertController = UIAlertController(title: "Error joining room", message: "Room not found", preferredStyle: UIAlertController.Style.alert)
-        
-        alertController.addAction(alertAction)
-        self.present(alertController, animated: true)
+        if let room = currentRoom.room {
+            roomViewController.currentRoom = currentRoom.room
+            roomViewController.currentUser = self.loggedUserName
+            self.show(roomViewController, sender: nil)
+        } else {
+            let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+            let alertController = UIAlertController(title: "Error joining room", message: currentRoom.errorMessage, preferredStyle: UIAlertController.Style.alert)
+            alertController.addAction(alertAction)
+            self.present(alertController, animated: true)
+        }
+
     }
     
     
     @IBAction func actionCreateNewRoom(_ sender: Any) {
         
-  //      print("aaa")
-  //      roomManager.printRoomList()
-
         guard let newRoomID = self.newRoomIDTextField.text  else {
             return
         }
-
+        
         let newRoom = self.roomManager.addRoom(newName: newRoomID)
-        self.roomManager.printRoomList()   //to test
+      //  self.roomManager.printRoomList()   //to test
         
         let roomViewController = RoomViewController()
         
         if let room = newRoom.room {
             roomViewController.currentRoom = newRoom.room
             roomViewController.currentUser = self.loggedUserName
-            
-           // print(newRoom.errorMessage)
-            
             self.show(roomViewController, sender: nil)
-            self.navigationController?.present(roomViewController, animated: true)
             
         } else {
-                    let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil
-            //         { _ in
-            //
-            //        }
-                    )
-                    let alertController = UIAlertController(title: "Error creating new room", message: newRoom.errorMessage, preferredStyle: UIAlertController.Style.alert)
+            let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+            let alertController = UIAlertController(title: "Error creating new room", message: newRoom.errorMessage, preferredStyle: UIAlertController.Style.alert)
             
-                    alertController.addAction(alertAction)
-                    self.present(alertController, animated: true)
+            alertController.addAction(alertAction)
+            self.present(alertController, animated: true)
         }
-
-
+        
+        
     }
     
     
     
-    
-    
-    
-    
-
-    
-    
-    
     @IBAction func actionShowOnlineUsers(_ sender: Any) {
-        
+        // TODO: need complete this
         let alerAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
         let alertController = UIAlertController(title: "Online users:", message: "must_be_online_user_list", preferredStyle: .alert)
         
@@ -117,6 +112,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func actionShowOfflineUsers(_ sender: Any) {
+        // TODO: need complete this
         let alerAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
         let alertController = UIAlertController(title: "Online users:", message: "must_be_offline_user_list", preferredStyle: .alert)
         

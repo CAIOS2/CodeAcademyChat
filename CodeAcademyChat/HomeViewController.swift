@@ -32,12 +32,27 @@ class HomeViewController: UIViewController {
     @IBAction private func joinRoomTapped(_ sender: Any) {
         showAlert(title: "Error joining room", message: "Room not found")
     }
+    //Uzduotis nr 2
+    //    * HomeViewControllery iskviesti RoomManager createRoom funkcija kai yra paspaudziamas "Create Room" mygtukas
+    //    * Sukurta kambari priskirti RoomViewController properciui room ir parodyt roomo name labely
     
     @IBAction private func createNewRoomTapped(_ sender: Any) {
         //TODO: Reimplement error message
 //        showAlert(title: "Error creating room", message: "Room name can't be empty!")
+        
         let roomViewController = RoomViewController()
-        navigationController?.present(roomViewController, animated: true)
+        var arTuscias: Bool?
+        if arTuscias == true {}
+     
+//            roomIDTextField.text != "" {
+//            if roomIDTextField
+        
+       // let roomResult = roomManager.createRoom .....
+        // let roomResult = roommanager.createRoom....
+        // roomViewController.room =.....
+        
+        show(roomViewController, sender: nil)
+//        navigationController?.present(roomViewController, animated: true)
     }
     
     @IBAction private func showOnlineUserTapped(_ sender: Any) {

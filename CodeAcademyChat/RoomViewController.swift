@@ -9,9 +9,26 @@ import UIKit
 
 class RoomViewController: UIViewController {
 
+    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var messageTextField: UITextField!
+    @IBOutlet weak var messagesTextView: UITextView!
+    @IBOutlet weak var sendButton: UIButton!
+    
+    var currentUser: User!
+    var room: Room!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        //welcomeLabel.text = "Welcome to \(room.name)"
+    }
+    
         // Do any additional setup after loading the view.
     }
     
@@ -26,4 +43,4 @@ class RoomViewController: UIViewController {
     }
     */
 
-}
+

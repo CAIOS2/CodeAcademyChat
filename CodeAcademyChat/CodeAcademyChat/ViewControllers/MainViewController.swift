@@ -63,30 +63,37 @@ class MainViewController: UIViewController {
   //      print("aaa")
   //      roomManager.printRoomList()
 
-        
-        let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler:  { _ in
-            guard let newRoomID = self.newRoomIDTextField.text  else {
-                return
-            }
+        guard let newRoomID = self.newRoomIDTextField.text  else {
+            return
+        }
 
-            let newRoom = self.roomManager.addRoom(newName: newRoomID)
-            self.roomManager.printRoomList()   //to test
-            
-            let roomViewController = RoomViewController()
-            
+        let newRoom = self.roomManager.addRoom(newName: newRoomID)
+        self.roomManager.printRoomList()   //to test
+        
+        let roomViewController = RoomViewController()
+        
+        if let room = newRoom.room {
             roomViewController.currentRoom = newRoom.room
             roomViewController.currentUser = self.loggedUserName
             
+           // print(newRoom.errorMessage)
+            
             self.show(roomViewController, sender: nil)
             self.navigationController?.present(roomViewController, animated: true)
+            
+        } else {
+                    let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil
+            //         { _ in
+            //
+            //        }
+                    )
+                    let alertController = UIAlertController(title: "Error creating new room", message: newRoom.errorMessage, preferredStyle: UIAlertController.Style.alert)
+            
+                    alertController.addAction(alertAction)
+                    self.present(alertController, animated: true)
         }
-                                        
-                                        
-        )
-        let alertController = UIAlertController(title: "Error creating new room", message: "is some issues", preferredStyle: UIAlertController.Style.alert)
-        
-        alertController.addAction(alertAction)
-        self.present(alertController, animated: true)
+
+
     }
     
     

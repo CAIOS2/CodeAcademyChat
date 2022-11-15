@@ -8,7 +8,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    
+
     var loggedUserName: User!
     var userForSegue: User!
     var roomManager = RoomManager()
@@ -22,11 +22,11 @@ class MainViewController: UIViewController {
         errorMessage.text = ""
         errorMessage.isHidden = true
         // Do any additional setup after loading the view.
-        
-        
+
+            
         self.navigationItem.setHidesBackButton(true, animated: false)
         print("main view controller opened")
-        //  helloLabel.text = "Hello, \(loggedUserName)"
+      //  helloLabel.text = "Hello, \(loggedUserName)"
         
     }
     
@@ -45,7 +45,7 @@ class MainViewController: UIViewController {
     
     
     
-    
+
     @IBAction func actionJoinRoom(_ sender: Any) {
         
         let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
@@ -59,12 +59,14 @@ class MainViewController: UIViewController {
     
     
     @IBAction func actionCreateNewRoom(_ sender: Any) {
-
         
+  //      print("aaa")
+  //      roomManager.printRoomList()
+
         guard let newRoomID = self.newRoomIDTextField.text  else {
             return
         }
-        
+
         let newRoom = self.roomManager.addRoom(newName: newRoomID)
         self.roomManager.printRoomList()   //to test
         
@@ -74,20 +76,24 @@ class MainViewController: UIViewController {
             roomViewController.currentRoom = newRoom.room
             roomViewController.currentUser = self.loggedUserName
             
-            // print(newRoom.errorMessage)
+           // print(newRoom.errorMessage)
             
             self.show(roomViewController, sender: nil)
             self.navigationController?.present(roomViewController, animated: true)
             
         } else {
-            let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
-            let alertController = UIAlertController(title: "Error creating new room", message: newRoom.errorMessage, preferredStyle: UIAlertController.Style.alert)
+                    let alertAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil
+            //         { _ in
+            //
+            //        }
+                    )
+                    let alertController = UIAlertController(title: "Error creating new room", message: newRoom.errorMessage, preferredStyle: UIAlertController.Style.alert)
             
-            alertController.addAction(alertAction)
-            self.present(alertController, animated: true)
+                    alertController.addAction(alertAction)
+                    self.present(alertController, animated: true)
         }
-        
-        
+
+
     }
     
     
@@ -96,7 +102,7 @@ class MainViewController: UIViewController {
     
     
     
-    
+
     
     
     

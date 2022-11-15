@@ -18,14 +18,26 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = false
+        updateUsername()
+    }
+    
+    private func updateUsername() {
         usernameLabel.text = user.name
     }
-
+    
     @IBAction func usernameEditTapped(_ sender: UIButton) {
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         let alertController = UIAlertController(title: "Edit Username", message: "Enter your new username", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { alertAction in
+            if let userName = alertController.textFields?.first?.text {
+                self.user.name = userName
+                self.updateUsername()
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         
@@ -42,9 +54,9 @@ class SettingsViewController: UIViewController {
             let confirmpasswordTextField = alertController.textFields![1] as UITextField
             if passwordTextField.text == confirmpasswordTextField.text {
                 self.user.password = passwordTextField.text!
-                print("Good")
+                
             } else {
-                print("Bad")
+                
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -60,5 +72,5 @@ class SettingsViewController: UIViewController {
         self.present(alertController, animated: true)
     }
     
-    }
+}
 

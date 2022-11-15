@@ -52,9 +52,9 @@ class ViewController: UIViewController {
         switch currentState {
         case .register:
             let result = userManager.registration(
-                username: usernameTextField.text!,
-                password: passwordTextField.text!,
-                confirmPassword: confirmPasswordTextField.text!)
+                parameter_username: usernameTextField.text!,
+                parameter_password: passwordTextField.text!,
+                parameter_confirmPassword: confirmPasswordTextField.text!)
                 validateUser(from: result)
         case .login:
             let result = userManager.login(username: usernameTextField.text!, password: passwordTextField.text!)

@@ -8,29 +8,29 @@
 import Foundation
 
 class UserManager {
-    var userList: [User] = []
+    var property_userList: [User] = []
     
-    func registration(username: String, password: String, confirmPassword: String) -> UserResult {
+    func registration(parameter_username: String, parameter_password: String, parameter_confirmPassword: String) -> UserResult {
         let registerErrorTitle = "Error creating user"
-        guard !username.isEmpty, !password.isEmpty else {
+        guard !parameter_username.isEmpty, !parameter_password.isEmpty else {
             return UserResult(user: nil,errorTitle: registerErrorTitle, errorMessage: "Username and password cannot be empty")
         }
-        if password != confirmPassword {
+        if parameter_password != parameter_confirmPassword {
             return UserResult(user: nil, errorTitle: registerErrorTitle, errorMessage: "Passwords do not match")
         }
-        for user in userList {
-            if username == user.name {
+        for user in property_userList {
+            if parameter_username == user.name {
                 return UserResult(user: nil, errorTitle: registerErrorTitle, errorMessage: "User is already exists")
             }
         }
-        let user = User(name: username, password: password, isOnline: true)
-        userList.append(user)
+        let user = User(name: parameter_username, password: parameter_password, isOnline: true)
+        property_userList.append(user)
         return UserResult(user: user, errorTitle: nil, errorMessage: nil)
     }
     
     func login(username: String, password: String) -> UserResult {
         let loginErrorTitle = "Error logged in"
-        let userOptional = userList.first { user in
+        let userOptional = property_userList.first { user in
             user.name == username
         }
         guard let user = userOptional else {

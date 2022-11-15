@@ -30,7 +30,7 @@ class SettingsViewController: UIViewController {
         let alertController = UIAlertController(title: "Edit Username", message: "Enter your new username", preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "OK", style: .default) { alertAction in
-            if let userName = alertController.textFields?.first?.text {
+            if let userName = alertController.textFields?.first?.text, !userName.isEmpty {
                 self.user.name = userName
                 self.updateUsername()
             }

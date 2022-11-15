@@ -16,4 +16,7 @@ class Room {
         self.name = name
         self.messages = messages
     }
+    func writeMessage(messageContent: String, sender: User) {
+        
+    }
 }

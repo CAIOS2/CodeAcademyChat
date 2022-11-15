@@ -46,11 +46,12 @@ class DataManager {
     var currentPassword: String? = nil
     
     var user: UserData? = nil
-    var rooms: [Room]? = nil
+    var roomsAndKeys: [(Room, SymmetricKey)]? = nil
+    
+    var onlineUsers: [RoomUser]? = nil
+    var offlineUsers: [RoomUser]? = nil
     
     var shortUserAccounts: [ShortUserAccount]? = nil
-    
-    var roomUUIDKeyPair: [(String, SymmetricKey)]? = nil
     
     // user enters application
     init() {
@@ -90,13 +91,64 @@ class DataManager {
         self.shortUserAccounts = list
     }
     
+    func getOnlineOfflineUsers() {
+        var savedUsers: [RoomUser] = []
+        
+        // check every room
+        for each in self.roomsAndKeys! {
+            // check for every user in room
+            for every in each.0.users! {
+                var toAdd = true
+                // check if user is in savedUsers
+            savedUsers: for one in savedUsers {
+                    if one.username == every.username {
+                        toAdd = false
+                        break savedUsers
+                    }
+                }
+                if toAdd {
+                    savedUsers.append(every)
+                }
+            }
+        }
+        
+        // collect online/offline users
+        var onlineUsers: [RoomUser] = []
+        var offlineUsers: [RoomUser] = []
+        
+        for each in savedUsers {
+            if each.online {
+                onlineUsers.append(each)
+            } else {
+                offlineUsers.append(each)
+            }
+        }
+        // set to self
+        self.onlineUsers = onlineUsers
+        self.offlineUsers = offlineUsers
+    }
+    
     func login(username: String, password: String) throws {
         let user = try UserData(by: username, from: self.storage)
         if Hashing.verify(hash: user.passwordHash, password: password) {
             self.currentPassword = password
             self.currentUsername = username
             self.user = user
+            let roomDataAndKeys: [(RoomData, SymmetricKey)] = try self.user!.getAllRooms(from: storage, password: password)
+            var roomsAndKeys: [(Room, SymmetricKey)] = []
+            for each in roomDataAndKeys {
+                let room = Room(each.0.self)
+                try room.load(in: storage, decrypting: each.1)
+                roomsAndKeys.append((room, each.1))
+            }
+            self.roomsAndKeys = roomsAndKeys
+            getOnlineOfflineUsers()
+            self.storage.setUserLoginData(username: username, password: password)
         }
+    }
+    
+    func logout() {
+        self.storage.removeUserLoginData()
     }
     
     // User must be able to be found to login

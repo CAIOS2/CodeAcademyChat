@@ -25,14 +25,10 @@ struct RoomData: Decodable, Encodable {
     let uuid: String
     let roomName: String
     var usersUUIDs: [String]
-//    var onlineUsersKeys: [String]
-//    var offlineUsersKeys: [String]
     var messagesUUIDs: [String]
-    // UUID:EncryptedKey
+    // userUUID:EncryptedKey
     // every key is encrypted with user password
     var userEncryptionKeys: [String]
-    
-//    var currentEncryptionKey: String? = nil
     
     init(uuid: String, roomName: String, usersUUIDs: [String], messagesUUIDs: [String], userEncryptionKeys: [String]) {
         self.uuid = uuid
@@ -51,9 +47,6 @@ struct RoomData: Decodable, Encodable {
         
         let key = Encryptor.createKey(password: password)
         self.userEncryptionKeys = ["\(self.usersUUIDs[0]):\(key)"]
-        
-        
-        
     }
     
     func getUserEncryptionKey(userUUID: String, password: String) throws -> SymmetricKey {
@@ -177,29 +170,27 @@ class Room {
     // key is the same for every user, encrypted with every user's password
     
     // obtain
-    init(roomData: RoomData) {
+    init(_ roomData: RoomData) {
         self.data = roomData
     }
     
-    
-    
     func load(in storage: Storage, decrypting symKey: SymmetricKey) throws {
         let res = try self.data.load(from: storage, symKey: symKey)
-        self.messages = res.1
-        
-        var roomUsers: [RoomUser] = []
-        for each in res.0 {
-            roomUsers.append(RoomUser(username: each.username, online: each.online))
-        }
-        self.users = roomUsers
+        loadToSelf(messages: res.1, users: res.0)
     }
     
     func addMessage(in storage: Storage, message: String, username: String, symKey: SymmetricKey) throws {
         let res = try self.data.addMessage(to: storage, message: message, username: username, symKey: symKey)
-        self.messages = res.1
+        loadToSelf(messages: res.1, users: res.0)
+    }
+    
+    
+    
+    private func loadToSelf(messages: [RoomMessage], users: [ShortUserAccount]) {
+        self.messages = messages
         
         var roomUsers: [RoomUser] = []
-        for each in res.0 {
+        for each in users {
             roomUsers.append(RoomUser(username: each.username, online: each.online))
         }
         self.users = roomUsers

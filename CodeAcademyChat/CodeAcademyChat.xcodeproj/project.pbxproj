@@ -55,14 +55,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3F6DA3EE29196FAD00F32F5B /* Data */ = {
+		3F71117829241629005A6D7A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3F037F01291AE73100FCD66F /* Message.swift */,
+				3F6DA3EF2919700900F32F5B /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3F7111792924164E005A6D7A /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				3F71117E2924168B005A6D7A /* Settings */,
+				3F71117C2924167A005A6D7A /* Room */,
+				3F71117B2924166F005A6D7A /* Login */,
+				3F71117A29241666005A6D7A /* Home */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		3F71117A29241666005A6D7A /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				3F6DA3F1291976F300F32F5B /* UserManager.swift */,
-				3F6DA3EF2919700900F32F5B /* User.swift */,
 				3F037F05291AE96E00FCD66F /* RoomManager.swift */,
+				3F037EFF291ADE8B00FCD66F /* HomeViewController.swift */,
 			);
-			path = Data;
+			path = Home;
+			sourceTree = "<group>";
+		};
+		3F71117B2924166F005A6D7A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				A0C2A69E29144FA9009A006C /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		3F71117C2924167A005A6D7A /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				3F711174292407C6005A6D7A /* Room2ViewController.swift */,
+				3F711175292407C6005A6D7A /* Room2ViewController.xib */,
+				3F037F03291AE86800FCD66F /* Room.swift */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
+		3F71117E2924168B005A6D7A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3F2B066E291C2EC400D751DD /* SettingsViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		A0C2A68E29144FA9009A006C = {
@@ -84,20 +130,14 @@
 		A0C2A69929144FA9009A006C /* CodeAcademyChat */ = {
 			isa = PBXGroup;
 			children = (
-				3F6DA3EE29196FAD00F32F5B /* Data */,
+				3F7111792924164E005A6D7A /* Modules */,
+				3F71117829241629005A6D7A /* Models */,
 				A0C2A69A29144FA9009A006C /* AppDelegate.swift */,
 				A0C2A69C29144FA9009A006C /* SceneDelegate.swift */,
-				A0C2A69E29144FA9009A006C /* LoginViewController.swift */,
-				3F037EFF291ADE8B00FCD66F /* HomeViewController.swift */,
-				3F2B066E291C2EC400D751DD /* SettingsViewController.swift */,
-				3F037F01291AE73100FCD66F /* Message.swift */,
-				3F037F03291AE86800FCD66F /* Room.swift */,
 				A0C2A6A029144FA9009A006C /* Main.storyboard */,
 				A0C2A6A329144FAB009A006C /* Assets.xcassets */,
 				A0C2A6A529144FAB009A006C /* LaunchScreen.storyboard */,
 				A0C2A6A829144FAB009A006C /* Info.plist */,
-				3F711174292407C6005A6D7A /* Room2ViewController.swift */,
-				3F711175292407C6005A6D7A /* Room2ViewController.xib */,
 			);
 			path = CodeAcademyChat;
 			sourceTree = "<group>";

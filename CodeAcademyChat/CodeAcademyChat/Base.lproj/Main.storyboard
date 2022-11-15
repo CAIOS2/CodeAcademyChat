@@ -303,6 +303,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="WKQ-50-E9V"/>
                     <connections>
+                        <outlet property="IdTextField" destination="OxE-Qz-X8X" id="ap2-fd-idf"/>
                         <outlet property="userLabel" destination="mKg-eR-NHV" id="XEY-fo-ZMa"/>
                     </connections>
                 </viewController>

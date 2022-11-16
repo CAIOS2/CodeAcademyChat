@@ -25,19 +25,10 @@ class LoginViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    navigationController?.navigationBar.isHidden = true
+    navigationController?.setNavigationBarHidden(true, animated: true)
     welcomeLabel.text = "Hello, \(user.name.capitalized)!"
     
   }
-  
-  //  func getRoom(parameter_roomName: String) -> RoomResult {
-  //    guard let room = property_rooms.first(where: { room in
-  //      room.name == parameter_roomName
-  //    }) else {
-  //      return RoomResult(errorMessage: "Room does not exit", room: nil)
-  //    }
-  //    return RoomResult(errorMessage: nil, room: room)
-  //  }
   
   @IBAction func joinRoomTapped(_ sender: UIButton) {
     let roomViewController = RoomViewController()

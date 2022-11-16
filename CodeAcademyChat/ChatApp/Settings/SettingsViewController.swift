@@ -17,7 +17,7 @@ class SettingsViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationController?.navigationBar.isHidden = false
+    navigationController?.setNavigationBarHidden(false, animated: true)
     updateUsername()
   }
   

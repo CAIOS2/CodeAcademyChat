@@ -98,9 +98,9 @@
 		B0BA490A2924E43900D1CDA5 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				B0BA490D2924E4A700D1CDA5 /* Room */,
-				B0BA490B2924E47700D1CDA5 /* Home */,
 				B0BA490C2924E48E00D1CDA5 /* Login */,
+				B0BA490B2924E47700D1CDA5 /* Home */,
+				B0BA490D2924E4A700D1CDA5 /* Room */,
 			);
 			path = Modules;
 			sourceTree = "<group>";

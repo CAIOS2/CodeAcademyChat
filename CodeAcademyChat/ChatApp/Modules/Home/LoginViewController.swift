@@ -35,9 +35,10 @@ class LoginViewController: UIViewController {
     let joinRoom = roomManage.getRoom(parameter_roomName: roomIDTextField.text!)
     if let room = joinRoom.room {
       roomViewController.property_room = room
+//      navigationController?.present(roomViewController, animated: true)
       show(roomViewController, sender: nil)
     } else {
-      showAlert(title: "Error joining room", message: "Room not found")
+      showAlert(title: "Error joining room", message: joinRoom.errorMessage ?? "")
     }
   }
   
@@ -50,7 +51,6 @@ class LoginViewController: UIViewController {
       show(roomViewController, sender: nil)
     } else {
       showAlert(title: "Error creating room", message: roomResult.errorMessage ?? "")
-      return
     }
     
   }

@@ -30,10 +30,25 @@ class LoginViewController: UIViewController {
     
   }
   
-  @IBAction func joinRoomTapped(_ sender: UIButton) {
-    showAlert(title: "Error joining room", message: "Room not found")
-  }
+  //  func getRoom(parameter_roomName: String) -> RoomResult {
+  //    guard let room = property_rooms.first(where: { room in
+  //      room.name == parameter_roomName
+  //    }) else {
+  //      return RoomResult(errorMessage: "Room does not exit", room: nil)
+  //    }
+  //    return RoomResult(errorMessage: nil, room: room)
+  //  }
   
+  @IBAction func joinRoomTapped(_ sender: UIButton) {
+    let roomViewController = RoomViewController()
+    let joinRoom = roomManage.getRoom(parameter_roomName: roomIDTextField.text!)
+    if let room = joinRoom.room {
+      roomViewController.property_room = room
+      show(roomViewController, sender: nil)
+    } else {
+      showAlert(title: "Error joining room", message: "Room not found")
+    }
+  }
   
   @IBAction func createNewRoomTapped(_ sender: Any) {
     let roomViewController = RoomViewController()
@@ -43,7 +58,7 @@ class LoginViewController: UIViewController {
       roomViewController.property_room = room
       show(roomViewController, sender: nil)
     } else {
-      print(roomResult.errorMessage!)
+      showAlert(title: "Error creating room", message: roomResult.errorMessage ?? "")
       return
     }
     
@@ -53,7 +68,6 @@ class LoginViewController: UIViewController {
     showAlert(title: "Online Users:", message: "\(user.name)")
   }
   
-  
   @IBAction func showOfflineUsersTapped(_ sender: UIButton) {
     showAlert(title: "Offline Users:")
   }
@@ -62,15 +76,12 @@ class LoginViewController: UIViewController {
     self.navigationController?.popViewController(animated: true)
   }
   
-  
-  
   func showAlert(title: String, message: String = "" ) {
     let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
     alertController.addAction(alertAction)
     self.present(alertController, animated: true)
   }
-  
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "settings" {

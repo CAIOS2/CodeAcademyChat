@@ -19,13 +19,13 @@ class RoomViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    navigationController?.setNavigationBarHidden(false, animated: true)
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     //Sutvarkyti
-    self.navigationController?.setNavigationBarHidden(false, animated: true)
+    navigationController?.setNavigationBarHidden(false, animated: true)
     welcomeLabel.text = "Welcome to \(property_room.name)"
   }
   

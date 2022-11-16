@@ -8,6 +8,10 @@
 import Foundation
 import CryptoKit
 
+enum SHA {
+    case SHA512, SHA256
+}
+
 class Hashing {
     static func hash(_ password: String) -> String {
         let data = password.data(using: .utf8)!
@@ -23,4 +27,13 @@ class Hashing {
         }
         return false
     }
+    
+    static func MD5(string: String) -> String {
+        let digest = Insecure.MD5.hash(data: string.data(using: .utf8) ?? Data())
+
+        return digest.map {
+            String(format: "%02hhx", $0)
+        }.joined()
+    }
+
 }

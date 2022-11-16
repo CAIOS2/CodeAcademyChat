@@ -49,6 +49,7 @@ class DataManager {
     // created on user login and be updated while use
     var currentUsername: String? = nil
     var currentPassword: String? = nil
+    var currentRoom: (Room, SymmetricKey)? = nil
     
     var user: UserData? = nil
     var roomsAndKeys: [(Room, SymmetricKey)]? = nil
@@ -182,8 +183,22 @@ class DataManager {
         }
     }
     
-    func logout() {
+    func logout() throws {
+        self.user!.online = false
+        try self.user!.update(in: self.storage)
         self.storage.removeUserLoginData()
+        emptyIt()
+    }
+    
+    private func emptyIt() {
+        self.currentUsername = nil
+        self.currentPassword = nil
+        self.currentRoom = nil
+        self.user = nil
+        self.roomsAndKeys = nil
+        self.onlineUsers = nil
+        self.offlineUsers = nil
+        self.shortUserAccounts = nil
     }
     
     // User must be able to be found to login

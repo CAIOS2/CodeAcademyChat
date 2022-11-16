@@ -174,7 +174,7 @@
                                     </backgroundConfiguration>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="JHd-HJ-7UL" kind="modal" id="ibv-aB-yfJ"/>
+                                    <action selector="joinRoom:" destination="uah-V4-pSb" eventType="touchUpInside" id="c4C-9f-2c1"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fqf-YW-LbS">
@@ -190,6 +190,9 @@
                                         <color key="backgroundColor" systemColor="systemBlueColor"/>
                                     </backgroundConfiguration>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="createRoom:" destination="uah-V4-pSb" eventType="touchUpInside" id="Yvc-5E-VnG"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgr-dd-02J">
                                 <rect key="frame" x="10" y="517.66666666666663" width="370" height="45"/>
@@ -219,7 +222,7 @@
                                     <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="eye-Hu-C5O" kind="show" id="y72-Pm-z4Z"/>
+                                    <action selector="openSettings:" destination="uah-V4-pSb" eventType="touchUpInside" id="Vk6-2I-17b"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lS0-mj-ZLh">
@@ -272,16 +275,19 @@
                     <navigationItem key="navigationItem" id="MqG-rZ-eTX"/>
                     <connections>
                         <outlet property="helloUsername" destination="Zc3-Wz-SCM" id="aGB-1R-EwA"/>
+                        <outlet property="roomNameTextField" destination="zDa-nQ-fCz" id="D3f-ku-6gi"/>
+                        <segue destination="JHd-HJ-7UL" kind="showDetail" identifier="room" id="9Ja-PU-taC"/>
+                        <segue destination="eye-Hu-C5O" kind="show" identifier="settings" id="e3H-jM-dYB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFF-fr-brm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-846" y="734"/>
         </scene>
-        <!--View Controller-->
+        <!--Room View Controller-->
         <scene sceneID="cVU-QZ-INY">
             <objects>
-                <viewController id="JHd-HJ-7UL" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Room" id="JHd-HJ-7UL" customClass="RoomViewController" customModule="CodeAcademyChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3gI-Ub-CEs">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="787"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -292,37 +298,54 @@
                                 <color key="textColor" name="AccentColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hQz-Pj-7Ue">
-                                <rect key="frame" x="147" y="639" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hQz-Pj-7Ue">
+                                <rect key="frame" x="10" y="639" width="370" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3T-df-SvQ">
-                                <rect key="frame" x="158" y="681" width="75" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3T-df-SvQ">
+                                <rect key="frame" x="10" y="681" width="370" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Send"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HjH-wY-yci">
+                                <rect key="frame" x="16" y="107.66666666666667" width="358" height="20.333333333333329"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="s4U-C0-sVF"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="s4U-C0-sVF" firstAttribute="bottom" secondItem="e3T-df-SvQ" secondAttribute="bottom" constant="71" id="BkP-NY-QbB"/>
+                            <constraint firstItem="e3T-df-SvQ" firstAttribute="top" secondItem="hQz-Pj-7Ue" secondAttribute="bottom" constant="8" symbolic="YES" id="EcZ-qa-CgU"/>
+                            <constraint firstItem="s4U-C0-sVF" firstAttribute="trailing" secondItem="hQz-Pj-7Ue" secondAttribute="trailing" constant="10" id="KQX-Qo-Z3D"/>
                             <constraint firstItem="N3b-w4-rlL" firstAttribute="top" secondItem="s4U-C0-sVF" secondAttribute="top" constant="10" id="Q1x-3N-S40"/>
+                            <constraint firstItem="s4U-C0-sVF" firstAttribute="trailing" secondItem="e3T-df-SvQ" secondAttribute="trailing" constant="10" id="Roz-fn-7m6"/>
+                            <constraint firstItem="hQz-Pj-7Ue" firstAttribute="leading" secondItem="s4U-C0-sVF" secondAttribute="leading" constant="10" id="Sfl-0c-e3f"/>
+                            <constraint firstItem="HjH-wY-yci" firstAttribute="top" secondItem="N3b-w4-rlL" secondAttribute="bottom" constant="10" id="VFP-Bo-Dfp"/>
                             <constraint firstItem="N3b-w4-rlL" firstAttribute="leading" secondItem="s4U-C0-sVF" secondAttribute="leading" constant="10" id="XAP-uK-bd4"/>
                             <constraint firstItem="s4U-C0-sVF" firstAttribute="trailing" secondItem="N3b-w4-rlL" secondAttribute="trailing" constant="10" id="Zev-Bc-7kn"/>
+                            <constraint firstItem="s4U-C0-sVF" firstAttribute="trailing" secondItem="HjH-wY-yci" secondAttribute="trailing" constant="16" id="mWs-Vx-qKi"/>
+                            <constraint firstItem="hQz-Pj-7Ue" firstAttribute="top" secondItem="HjH-wY-yci" secondAttribute="bottom" constant="10" id="p9i-g3-brD"/>
+                            <constraint firstItem="e3T-df-SvQ" firstAttribute="leading" secondItem="s4U-C0-sVF" secondAttribute="leading" constant="10" id="ubj-C9-Q5p"/>
+                            <constraint firstItem="HjH-wY-yci" firstAttribute="leading" secondItem="s4U-C0-sVF" secondAttribute="leading" constant="16" id="up6-VF-fOq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="gdZ-dp-wRV"/>
+                    <connections>
+                        <outlet property="messagesFields" destination="HjH-wY-yci" id="6XQ-jx-tSu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOg-qj-Ddh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-846" y="1492"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="B2W-ww-Ioc">
             <objects>
-                <viewController id="eye-Hu-C5O" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Settings" id="eye-Hu-C5O" customClass="SettingsViewController" customModule="CodeAcademyChat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HQ1-Qi-Psi">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

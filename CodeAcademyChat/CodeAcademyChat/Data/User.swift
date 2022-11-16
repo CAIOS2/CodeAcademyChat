@@ -76,7 +76,7 @@ struct UserData: Decodable, Encodable {
         if storage.update(key: "user", data: self) {
             return self
         }
-        return nil
+        throw NSError(domain: "Failed to update user.", code: 500)
     }
     
     /// Creates the room in UD and returns its encryption key

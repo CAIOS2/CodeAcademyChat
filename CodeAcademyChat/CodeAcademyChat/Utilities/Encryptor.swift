@@ -50,11 +50,19 @@ class Encryptor {
     static func createKey() -> String {
         let symKey: SymmetricKey = SymmetricKey(size: .bits256)
         return symKey.serialize()
+        
     }
     
     static func createKey(password: String) -> String {
-        return Hashing.hash(password)
+//        let h = Hashing.hash(password, .SHA256)
+        let h = Hashing.MD5(string: password)
+        let s = SymmetricKey(data: h.data(using: .utf8)!)
+        return s.serialize()
+
+        
     }
+    
+        
 }
 
 extension SymmetricKey {
@@ -72,3 +80,4 @@ extension SymmetricKey {
         }
     }
 }
+

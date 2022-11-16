@@ -8,7 +8,7 @@
 import UIKit
 
 class RoomViewController: UIViewController {
-
+    
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var messagesTextView: UITextView!
@@ -27,21 +27,35 @@ class RoomViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         welcomeLabel.text = "Welcome to \(room.name)"
     }
-
-
-  @IBAction func sendButtonTapped(_ sender: Any) {
-    room.writeMessage(messageContent: messageTextField.text!, sender: currentUser)
-
-      }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    //MARK: - Private
+    
+    private func updateMessagesTextField() {
+        var joinedString = ""
+        
+        for message in room.messages {
+            joinedString = joinedString + "\n" + message.content
+        }
+        
+        messagesTextView.text = joinedString
     }
-    */
-
+    
+    //MARK: - Actions
+    
+    @IBAction private func sendButtonTapped(_ sender: Any) {
+        room.writeMessage(messageContent: messageTextField.text!, sender: currentUser)
+        updateMessagesTextField()
+    }
+    
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

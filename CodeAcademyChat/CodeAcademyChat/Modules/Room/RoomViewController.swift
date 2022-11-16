@@ -30,8 +30,24 @@ class RoomViewController: UIViewController {
         //welcomeLabel.text = "Welcome to \(room.name)"
     }
 
-    @IBAction func sendButton(_ sender: Any) {
+    //MARK: - Actions
+    
+    private func updateMessagesTextFiels() {
+        var joinedString = ""
+        
+        for message in room.messages {
+            joinedString = joinedString + "\n" + message.content
+        }
+        
+        messagesTextView.text = joinedString
+    }
+    
+    
+    @IBAction private func sendButton(_ sender: Any) {
         room.writeMessage(messageContent: messageTextField.text!, sender: currentUser)
+        updateMessagesTextFiels()
+        
+       // welcomeLabel.text = "\(room.messages)"
     }
     /*
     // MARK: - Navigation

@@ -224,6 +224,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="yMg-b8-MXd"/>
                     <connections>
+                        <outlet property="roomIDTextField" destination="urS-bQ-Z37" id="khY-kV-Wnh"/>
                         <outlet property="welcomeLabel" destination="rkK-1p-Oan" id="0om-tW-kRd"/>
                     </connections>
                 </viewController>

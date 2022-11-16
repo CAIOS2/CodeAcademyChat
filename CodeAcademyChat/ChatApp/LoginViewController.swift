@@ -8,8 +8,10 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    
+    @IBOutlet weak var roomIDTextField: UITextField!
     @IBOutlet weak var welcomeLabel: UILabel!
+    
+    let roomManage = RoomManager()
     var user: User!
     
     override func loadView() {
@@ -33,9 +35,18 @@ class LoginViewController: UIViewController {
     }
     
     
-    @IBAction func createNewRoomTapped(_ sender: UIButton) {
+    @IBAction func createNewRoomTapped(_ sender: Any) {
         let roomViewController = RoomViewController()
-        navigationController?.present(roomViewController, animated: true)
+        //Sukuriu objekta, iskvieciu RoomManager funkcija
+        let roomResult = roomManage.createRoom(parameter_roomName: roomIDTextField.text!)
+        if let room = roomResult.room {
+            roomViewController.property_room = room
+            show(roomViewController, sender: nil)
+        } else {
+            print(roomResult.errorMessage!)
+            return
+        }
+        
     }
     
     @IBAction func showOnlineUsersTapped(_ sender: UIButton) {

@@ -14,11 +14,19 @@ class RoomViewController: UIViewController {
     @IBOutlet weak var sendButton: UIButton!
     
     
+    var property_currentUser: User!
+    var property_room: Room!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //Sutvarkyti
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        welcomeLabel.text = "Welcome to \(property_room.name)"
     }
 
     @IBAction func sendButtonTapped(_ sender: UIButton) {

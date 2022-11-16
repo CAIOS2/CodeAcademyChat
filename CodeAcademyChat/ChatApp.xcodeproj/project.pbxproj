@@ -59,6 +59,71 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B0BA48FD2924D06300D1CDA5 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B0BA49022924D15900D1CDA5 /* Home */,
+				B0BA48FE2924D07300D1CDA5 /* Login */,
+				B0BA48FF2924D0BD00D1CDA5 /* Room */,
+				B0BA49032924D1B300D1CDA5 /* Settings */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		B0BA48FE2924D07300D1CDA5 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B0DA5038291BF38600819D04 /* UserManager.swift */,
+				B0DA5026291BEB8F00819D04 /* ViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		B0BA48FF2924D0BD00D1CDA5 /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				B0DA503E291BF4B200819D04 /* Room.swift */,
+				B0A7FD5C2922F39900E363B9 /* RoomViewController.xib */,
+				B0A7FD5B2922F39900E363B9 /* RoomViewController.swift */,
+			);
+			name = Room;
+			sourceTree = "<group>";
+		};
+		B0BA49002924D0E200D1CDA5 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B0DA502D291BEB9000819D04 /* LaunchScreen.storyboard */,
+				B0DA5028291BEB8F00819D04 /* Main.storyboard */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		B0BA49012924D0FF00D1CDA5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B0DA5040291BF4CA00819D04 /* Message.swift */,
+				B0DA5036291BF36500819D04 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B0BA49022924D15900D1CDA5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B0DA503C291BF48D00819D04 /* RoomManager.swift */,
+				B0DA5044291BF9A300819D04 /* LoginViewController.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		B0BA49032924D1B300D1CDA5 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B0DA5046291C27AB00819D04 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		B0DA5016291BEB8F00819D04 = {
 			isa = PBXGroup;
 			children = (
@@ -78,23 +143,14 @@
 		B0DA5021291BEB8F00819D04 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				B0BA49002924D0E200D1CDA5 /* UI */,
+				B0BA49012924D0FF00D1CDA5 /* Models */,
+				B0BA48FD2924D06300D1CDA5 /* Modules */,
 				B0DA5022291BEB8F00819D04 /* AppDelegate.swift */,
-				B0A7FD5B2922F39900E363B9 /* RoomViewController.swift */,
-				B0A7FD5C2922F39900E363B9 /* RoomViewController.xib */,
 				B0DA5024291BEB8F00819D04 /* SceneDelegate.swift */,
-				B0DA5026291BEB8F00819D04 /* ViewController.swift */,
-				B0DA5044291BF9A300819D04 /* LoginViewController.swift */,
-				B0DA5046291C27AB00819D04 /* SettingsViewController.swift */,
-				B0DA5036291BF36500819D04 /* User.swift */,
 				B0DA503A291BF3B700819D04 /* UserResult.swift */,
-				B0DA5038291BF38600819D04 /* UserManager.swift */,
-				B0DA503E291BF4B200819D04 /* Room.swift */,
 				B0DA5042291BF85900819D04 /* RoomResult.swift */,
-				B0DA503C291BF48D00819D04 /* RoomManager.swift */,
-				B0DA5040291BF4CA00819D04 /* Message.swift */,
-				B0DA5028291BEB8F00819D04 /* Main.storyboard */,
 				B0DA502B291BEB9000819D04 /* Assets.xcassets */,
-				B0DA502D291BEB9000819D04 /* LaunchScreen.storyboard */,
 				B0DA5030291BEB9000819D04 /* Info.plist */,
 			);
 			path = ChatApp;

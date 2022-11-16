@@ -324,7 +324,7 @@
                                     <constraint firstAttribute="height" constant="100" id="V2i-UN-3jb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="42"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" systemColor="systemBlueColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0G-SY-3OL">
@@ -333,7 +333,11 @@
                                     <constraint firstAttribute="height" constant="50" id="2f3-fP-8Vy"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Message history" cornerStyle="capsule">
+                                <buttonConfiguration key="configuration" style="filled" title="Message history">
+                                    <backgroundConfiguration key="background" cornerRadius="10">
+                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                    </backgroundConfiguration>
+                                    <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
                                     <color key="baseBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                             </button>

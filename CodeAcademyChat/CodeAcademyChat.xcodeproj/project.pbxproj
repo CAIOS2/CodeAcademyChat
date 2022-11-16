@@ -111,13 +111,13 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		C14F5CBB2923FD3400A1BEDA /* Navigation Contro;ers */ = {
+		C14F5CBB2923FD3400A1BEDA /* Screens */ = {
 			isa = PBXGroup;
 			children = (
 				C1734B552919690A0058AFD5 /* LaunchScreen.storyboard */,
 				C1734B50291969080058AFD5 /* Main.storyboard */,
 			);
-			name = "Navigation Contro;ers";
+			name = Screens;
 			sourceTree = "<group>";
 		};
 		C1734B3E291969080058AFD5 = {
@@ -141,7 +141,7 @@
 			children = (
 				C14F5CB92923F4E800A1BEDA /* Models */,
 				C14F5CB52923F47200A1BEDA /* Modules */,
-				C14F5CBB2923FD3400A1BEDA /* Navigation Contro;ers */,
+				C14F5CBB2923FD3400A1BEDA /* Screens */,
 				C1734B4A291969080058AFD5 /* AppDelegate.swift */,
 				C1734B532919690A0058AFD5 /* Assets.xcassets */,
 				C1734B582919690A0058AFD5 /* Info.plist */,

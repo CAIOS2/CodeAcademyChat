@@ -31,19 +31,14 @@ class RoomViewController: UIViewController {
     //MARK: - Private
     
     private func updateMessagesTextField() {
-        var messageContents = [String]()
-        
-        for message in room.messages {
-            let content =
-                """
-                Date: \(message.date)
-                
-                User: \(message.username)
-                
-                Message: \(message.content)
-                """
-            
-            messageContents.append(content)
+        let messageContents = room.messages.map {
+                            """
+                            Date: \($0.date)
+                            
+                            User: \($0.username)
+                            
+                            Message: \($0.content)
+                            """
         }
         
         messagesTextView.text = messageContents.joined(separator: "\n------------------- \n\n")

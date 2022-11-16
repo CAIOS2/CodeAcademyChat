@@ -38,332 +38,240 @@ class Storage {
         Storage.defaults.removeObject(forKey: "password")
     }
     
+    
+    
+    
     init() {
         // check if required lists are already created in UD
-        // create required list in UD
-        let keys = ["user", "room", "message"]
-        for key in keys {
-            let res = get(by: key)
-            if res.error != nil {
-                precondition(false, (res.error as! ErrorCodes).getString())
-            }
-            switch key {
-                case "user":
-                    if let data = res.data as? [UserData] {
-                        self.users = data
-                    } else {
-                        let error = ErrorCodes(ErrorCode.InternalServerError,
-                                               message: "User data list from UD doesn't match required type")
-                        precondition(false, error.getString())
-                    }
-                case "room":
-                    if let data = res.data as? [RoomData] {
-                        self.rooms = data
-                    } else {
-                        let error = ErrorCodes(ErrorCode.InternalServerError,
-                                               message: "Room data list from UD doesn't match required type")
-                        precondition(false, error.getString())
-                    }
-                case "message":
-                    if let data = res.data as? [MessageData] {
-                        self.messages = data
-                    } else {
-                        let error = ErrorCodes(ErrorCode.InternalServerError,
-                                               message: "Message data list from UD doesn't match required type")
-                        precondition(false, error.getString())
-                    }
-                default:
-                    let error = ErrorCodes(ErrorCode.NotImplemented,
-                                           message: "UD for specified key is not implemented. Key: \(key)")
-                    precondition(false, error.getString())
-            }
-        }
+        updateListsFromUD()
     }
     
-    /// Get required list and creates empty if not found in UD
-    /// - try to get from Storage by key
-    ///     -> key not found -> NotImplemented
-    /// - check if list is empty
-    ///     - not empty -> return data
-    ///     - empty
-    ///         - is data in UD
-    ///             - update list in Storage
-    ///             - return list in correct type
-    /// ## Returns
-    /// Typisation'ed list as data or error(InternalServerError / NotImplemented)
-    /// ## Other notes
-    /// - Checks during UD search include NotImplemented in case key is wrong
-    /// - For undefined behaviour in case,
-    /// when list obtained from UD is nil -> InternalServerError
-    func get(by key: String) -> Result {
-        // get Storage list format
-        let res = getList(key: key)
+    
+    /// Get desired list from Storage
+    /// Each time auto-updates existing variables in
+    /// Storage class from UD
+    func get(by key: String) -> [Any]? {
+        updateListsFromUD()
         
-        if res.error != nil {
-            // NotImplemented
-            return res
-        } else {
-            if !isListEmpty(key: key, list: res.data) {
-                return res
-            } else {
-                // get Storage list format
-                return getReloadedData(key: key)
-            }
+        switch key {
+        case "user":
+            return self.users
+        case "room":
+            return self.rooms
+        case "message":
+            return self.messages
+        default:
+            return nil
         }
     }
     
     /// Adds new data to list of key in Storage and UD
-    func add(to key: String, data: Any) -> Result {
-        let res = get(by: key)
-        if res.error != nil {
-            return res
-        }
-        
+    func add(to key: String, data: Any) -> Bool {
         switch key {
-            case "user":
-            if var l = res.data as? [UserData] {
-                l.append(data as! UserData)
-                self.users = l
-                let res = update(key: key, jData: self.users.toJSONString())
-                return res
-            } else {
-                return Result(error: ErrorCodes(ErrorCode.InternalServerError,
-                                                message: "Json to list didn't succeed. Data is not added."))
-            }
+        case "user":
+            addUser(user: data as! UserData)
+            return true
         case "room":
-            if var l = res.data as? [RoomData] {
-                l.append(data as! RoomData)
-                self.rooms = l
-                let res = update(key: key, jData: self.rooms.toJSONString())
-                return res
-            } else {
-                return Result(error: ErrorCodes(ErrorCode.InternalServerError,
-                                                message: "Json to list didn't succeed. Data is not added."))
-            }
+            addRoom(room: data as! RoomData)
+            return true
         case "message":
-            if var l = res.data as? [MessageData] {
-                l.append(data as! MessageData)
-                self.messages = l
-                let res = update(key: key, jData: self.messages.toJSONString())
-                return res
-            } else {
-                return Result(error: ErrorCodes(ErrorCode.InternalServerError,
-                                                message: "Json to list didn't succeed. Data is not added."))
-            }
+            addMessage(message: data as! MessageData)
+            return true
         default:
-            return Result(error: ErrorCodes(ErrorCode.NotImplemented,
-                                            message: "No specified key found in UD. Key: \(key)"))
+            return false
         }
     }
     
-    func set(key: String, data: [Any]) -> Result {
-        let res = get(by: key)
-        if res.error != nil {
-            return res
-        } else {
-            switch key {
-                case "user":
-                if var _ = res.data as? [UserData] {
-                    if let u = data as? [UserData] {
-                        self.users = u
-                        let res = update(key: key, jData: u.toJSONString())
-                        return res
-                    }
-                }
-                return Result(error: ErrorCodes(ErrorCode.InternalServerError,
-                                                message: "Can't parse type. Data is not setted."))
-            case "room":
-                if var _ = res.data as? [RoomData] {
-                    if let r = data as? [RoomData] {
-                        self.rooms = r
-                        let res = update(key: key, jData: r.toJSONString())
-                        return res
-                    }
-                }
-                return Result(error: ErrorCodes(ErrorCode.InternalServerError,
-                                                message: "Can't parse type. Data is not setted."))
-            case "message":
-                if var _ = res.data as? [MessageData] {
-                    if let m = data as? [MessageData] {
-                        self.messages = m
-                        let res = update(key: key, jData: m.toJSONString())
-                        return res
-                    }
-                }
-                return Result(error: ErrorCodes(ErrorCode.InternalServerError,
-                                                message: "Can't parse type. Data is not setted."))
-            default:
-                return Result(error: ErrorCodes(ErrorCode.NotImplemented,
-                                                message: "No specified key found in UD. Key: \(key)"))
+    func set(key: String, data: [Any]) -> Bool {
+        switch key {
+        case "user":
+            setUsers(list: data as! [UserData])
+            return true
+        case "room":
+            setRooms(list: data as! [RoomData])
+            return true
+        case "message":
+            setMessages(list: data as! [MessageData])
+            return true
+        default:
+            return false
+        }
+    }
+    
+    func update(key: String, data: Any) -> Bool {
+        switch key {
+        case "user":
+            updateUser(user: data as! UserData)
+            return true
+        case "room":
+            updateRoom(room: data as! RoomData)
+            return true
+        case "message":
+            updateMessage(message: data as! MessageData)
+            return true
+        default:
+            return false
+        }
+    }
+    
+    // obtains lists from UD
+    private func getListUD(key: String) -> [Any]? {
+        switch key {
+        case "user":
+            if let list = getUsersUD() {
+                return list
             }
+            return nil
+        case "room":
+            if let list = getRoomsUD() {
+                return list
+            }
+            return nil
+        
+        case "message":
+            if let list = getMessagesUD() {
+                return list
+            }
+            return nil
+        default: return nil
         }
-        
-        
     }
     
-//    /// Delete all (Debug)
-//    func removeDebug(from key: String) {
-//        Storage.defaults.removeObject(forKey: key)
-//    }
     
-    /// Updates desired UD and Storage
-    ///
-    /// Caution: use at your own risk, jData replaces data currently saved
-    private func update(key: String, jData: String) -> Result {
-        let res = updateListJson(key: key, jData: jData)
-        
-        if res.error != nil {
-            return res
-        } else {
-            Storage.defaults.set(jData, forKey: key)
-        }
+    
+    private func updateListsFromUD() {
+        let _ = getUsersUD()
+        let _ = getRoomsUD()
+        let _ = getMessagesUD()
+    }
 
-        return Result(data: true)
     
-    }
-    
-    /// Check if given list is empty
-    private func isListEmpty(key: String, list: Any?) -> Bool {
-        switch key {
-        case "user":
-            if let l = list as? [UserData] {
-                return l.isEmpty
+    private func getUsersUD() -> [UserData]? {
+        if let jUsers = Storage.defaults.string(forKey: "user") {
+            if jUsers == "" {
+                return nil
             }
-        case "room":
-            if let l = list as? [RoomData] {
-                return l.isEmpty
-            }
-        case "message":
-            if let l = list as? [MessageData] {
-                return l.isEmpty
-            }
-        default:
-            assertionFailure("No specified key in storage list")
+            let users: [UserData]? = instantiate(jsonString: jUsers)
+            self.users = users!
+            return self.users
         }
-        return false
+        return nil
+    }
+
+    private func getRoomsUD() -> [RoomData]? {
+        if let jRooms = Storage.defaults.string(forKey: "room") {
+            if jRooms == "" {
+                return nil
+            }
+            let rooms: [RoomData]? = instantiate(jsonString: jRooms)
+            self.rooms = rooms!
+            return self.rooms
+        }
+        return nil
+    }
+
+    private func getMessagesUD() -> [MessageData]? {
+        if let jMessages = Storage.defaults.string(forKey: "messages") {
+            if jMessages == "" {
+                return nil
+            }
+            let messages: [MessageData]? = instantiate(jsonString: jMessages)
+            self.messages = messages!
+            return self.messages
+        }
+        return nil
     }
     
-    /// Create new UD with or without data, adds data to Storage
-    private func createNewStorage(key: String, jData: String? = nil) -> Result {
-        if let _ = Storage.defaults.string(forKey: key) {
-            return Result(error: ErrorCodes(ErrorCode.Conflict))
-        } else {
-            if jData != nil {
-                let res = updateListJson(key: key, jData: jData!)
-                if res.error != nil {
-                    return res
+    private func setUsers(list: [UserData]) {
+        if !list.isEmpty {
+            Storage.defaults.set(list.toJSONString(), forKey: "user")
+            self.users = list
+        }
+    }
+    
+    private func addUser(user: UserData) {
+        if var newList = self.users {
+            newList.append(user)
+            setUsers(list: newList)
+        }
+        setUsers(list: [user])
+    }
+    
+    private func setRooms(list: [RoomData]) {
+        if !list.isEmpty {
+            Storage.defaults.set(list.toJSONString(), forKey: "room")
+            self.rooms = list
+        }
+    }
+    
+    private func addRoom(room: RoomData) {
+        if var newList = self.rooms {
+            newList.append(room)
+            setRooms(list: newList)
+        }
+        setRooms(list: [room])
+    }
+    
+    
+    
+    private func setMessages(list: [MessageData]) {
+        if !list.isEmpty {
+            Storage.defaults.set(list.toJSONString(), forKey: "message")
+            self.messages = list
+        }
+    }
+    
+    private func addMessage(message: MessageData) {
+        if var newList = self.messages {
+            newList.append(message)
+            setMessages(list: newList)
+        }
+        setMessages(list: [message])
+    }
+    
+    private func updateUser(user: UserData) {
+        let res = getUsersUD()
+        var newList: [UserData] = []
+        if let users = res {
+            for each in users {
+                if each.username == user.username {
+                    newList.append(user)
+                } else {
+                    newList.append(each)
                 }
-                Storage.defaults.set(jData!, forKey: key)
-                
-            } else {
-                Storage.defaults.set("", forKey: key)
             }
-            return Result(data: true)
         }
+        setUsers(list: newList)
     }
     
-    /// Get list from UD by key
-    ///
-    /// ## Returns
-    /// Data: true
-    /// Errors: Conflict (storage already created) or BadRequest (key not matching)
-    private func getStorage(key: String) -> Result {
-        if let storage = Storage.defaults.string(forKey: key) {
-            
-            return Result(data: storage)
-        } else {
-            if key == "user" || key == "room" || key == "message" {
-                let res = createNewStorage(key: key)
-                if res.error != nil {
-                    
-                    // Conflict
-                    return res
+    private func updateRoom(room: RoomData) {
+        let res = getRoomsUD()
+        var newList: [RoomData] = []
+        if let rooms = res {
+            for each in rooms {
+                if each.uuid == room.uuid {
+                    newList.append(room)
+                } else {
+                    newList.append(each)
                 }
-                return Result(data: true)
-            } else {
-                return Result(error: ErrorCodes(ErrorCode.NotImplemented,
-                                                message: "No specified key has been set. Key: \(key)"))
             }
         }
+        setRooms(list: newList)
     }
     
-    
-    
-    /// Get desired list from Storage
-    private func getList(key: String) -> Result {
-        switch key {
-            case "user": if let list = self.users {
-                return Result(data: list)
-            } else {
-                self.users = []
-                return Result(data: [])
+    private func updateMessage(message: MessageData) {
+        let res = getMessagesUD()
+        var newList: [MessageData] = []
+        if let messages = res {
+            for each in messages {
+                if each.uuid == message.uuid {
+                    newList.append(message)
+                } else {
+                    newList.append(each)
+                }
             }
-            case "room": if let list = self.rooms {
-                return Result(data: list)
-            } else {
-                self.rooms = []
-                return Result(data: [])
-            }
-            case "message": if let list = self.messages {
-                return Result(data: list)
-            } else {
-                self.messages = []
-                return Result(data: [])
-            }
-        default: return Result(error: ErrorCodes(ErrorCode.NotImplemented,
-                                                 message: "No specified key has been set. Key: \(key)"))
         }
+        setMessages(list: newList)
     }
     
-    /// Update list in Storage using JSON data
-    private func updateListJson(key: String, jData: String) -> Result {
-        switch key {
-        case "user":
-            let data: [UserData]? = instantiate(jsonString: jData)
-            if let u = data {
-                self.users = u
-                return Result(data: u)
-            } else {
-                return Result(error: ErrorCodes(ErrorCode.InternalServerError,
-                                                message: "Json to list didn't succeed"))
-            }
-        case "room":
-            let data: [RoomData]? = instantiate(jsonString: jData)
-            if let r = data {
-                self.rooms = r
-                return Result(data: r)
-            } else {
-                return Result(error: ErrorCodes(ErrorCode.InternalServerError,
-                                                message: "Json to list didn't succeed"))
-            }
-        case "message":
-            let data: [MessageData]? = instantiate(jsonString: jData)
-            if let m = data {
-                self.messages = m
-                return Result(data: m)
-            } else {
-                return Result(error: ErrorCodes(ErrorCode.InternalServerError,
-                                                message: "Json to list didn't succeed"))
-            }
-        default:
-            return Result(error: ErrorCodes(ErrorCode.NotImplemented,
-                                            message: "No specified key has been set. Key: \(key)"))
-        }
-    }
-    
-    /// Get prepared data from Storage
-    /// - get data from UD
-    ///     - !data is not in UD and key allowed
-    ///         - create new
-    ///     - data is in UD
-    ///         - update Storage
-    ///         - return list required (empty or full)
-    private func getReloadedData(key: String) -> Result {
-        let res = getStorage(key: key)
-        if res.error != nil {
-            return res
-        } else {
-            return updateListJson(key: key, jData: res.data as! String)
-        }
-    }
 }

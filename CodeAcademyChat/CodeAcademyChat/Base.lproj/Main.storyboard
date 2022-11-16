@@ -219,7 +219,10 @@
                                     <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="eye-Hu-C5O" kind="show" id="B7i-BS-dO8"/>
+                                    <segue destination="eye-Hu-C5O" kind="push" splitViewControllerTargetIndex="0" id="B7i-BS-dO8">
+                                        <segue key="commit" inheritsFrom="parent" id="Vsr-Dt-IIN"/>
+                                        <segue key="preview" inheritsFrom="commit" id="zOa-97-qB5"/>
+                                    </segue>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lS0-mj-ZLh">
@@ -227,6 +230,9 @@
                                 <color key="tintColor" systemColor="systemRedColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutButton:" destination="uah-V4-pSb" eventType="touchUpInside" id="VSn-e7-KU9"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="doP-6d-SUQ"/>
@@ -421,9 +427,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3Z-qG-VNA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1465" y="682"/>
+            <point key="canvasLocation" x="-1482" y="682"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="B7i-BS-dO8"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="message.badge.circle" catalog="system" width="128" height="123"/>
         <image name="message.badge.circle.fill" catalog="system" width="128" height="123"/>

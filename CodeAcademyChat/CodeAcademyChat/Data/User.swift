@@ -28,28 +28,28 @@ struct UserData: Decodable, Encodable {
     
     // create user
     init(username: String, password: String, storage: Storage) throws {
-        // Checking if data is duplicating
-        var res = storage.get(by: "user")
-        if res.error != nil {
-            throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
-        }
-        let users = res.data as! [UserData]
-        for user in users {
-            if user.username == username {
-                throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
+        // check if user already exist
+        let res = storage.get(by: "user")
+        
+        if let users = res as? [UserData] {
+            for each in users {
+                if each.username == username {
+                    throw NSError(domain: "User already exist", code: 409)
+                }
             }
         }
-        // Proving data is not duplicating
+        
+        // Creating new user
         self.uuid = UUID().uuidString
         self.online = true
         self.username = username
         self.passwordHash = Hashing.hash(password)
         self.roomsKeys = []
-//        self.messagesKeys = []
         
-        res = storage.add(to: "user", data: self)
-        if res.error != nil {
-            throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
+        let creationSuccess = storage.add(to: "user", data: self)
+        
+        if !creationSuccess {
+            throw NSError(domain: "Failed to add user", code: 409)
         }
         
     }
@@ -58,142 +58,114 @@ struct UserData: Decodable, Encodable {
     // wib?
     init(by username: String, from storage: Storage) throws {
         let res = storage.get(by: "user")
-        if res.error != nil {
-            throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
-        }
-        let users = res.data as! [UserData]
-        for user in users {
-            if user.username == username {
-                self.uuid = user.uuid
-                self.online = user.online
-                self.username = user.username
-                self.passwordHash = user.passwordHash
-                self.roomsKeys = user.roomsKeys
-//                self.messagesKeys = user.messagesKeys
-                return
+        
+        if let users = res as? [UserData] {
+            for each in users {
+                if each.username == username {
+                    self = each
+                    return
+                }
             }
         }
-        
-        // debug
-        let error = ErrorCodes(ErrorCode.NotFound, message: "User is not found")
-        throw NSError(domain: error.getString(), code: error.getCode())
+        throw NSError(domain: "No user was found", code: 404)
     }
     
     // update user in UD and Storage
     func update(in storage: Storage) throws -> UserData? {
-        var res = storage.get(by: "user")
-        if res.error != nil {
-            throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
-        }
-        let users = res.data as! [UserData]
-        var newUserList: [UserData] = []
-        for each in users {
-            if each.username == self.username {
-                newUserList.append(self)
-            } else {
-                newUserList.append(each)
-            }
-        }
-        res = storage.set(key: "user", data: newUserList)
-        if res.error != nil {
-            throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
-        } else {
+        
+        if storage.update(key: "user", data: self) {
             return self
         }
+        return nil
     }
     
     /// Creates the room in UD and returns its encryption key
     /// 0 - room, 1 - symmetric key
     func createRoom(roomName: String, in storage: Storage, password: String) throws -> (RoomData, SymmetricKey) {
-        var res = storage.get(by: "room")
-        if res.error != nil {
-            throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
-        }
-        let list = res.data as! [RoomData]
-        for each in list {
-            if each.roomName == roomName {
-                throw NSError(domain: "Room with specified name: \(roomName), already exist", code: 409)
+        let res = storage.get(by: "room")
+        
+        if let rooms = res as? [RoomData] {
+            for each in rooms {
+                if each.roomName == roomName {
+                    throw NSError(domain: "Room with such name already exists", code: 409)
+                }
             }
         }
         
         let room = RoomData(roomName: roomName, userUUID: self.uuid, password: password)
         let roomUserKey: SymmetricKey = try room.getUserEncryptionKey(userUUID: self.uuid, password: password)
         
-        res = storage.add(to: "room", data: room)
-        if res.error != nil {
-            throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
-        } else {
+        let roomAdded = storage.add(to: "room", data: room)
+        if roomAdded {
             return (room, roomUserKey)
+        } else {
+            throw NSError(domain: "Room was not added", code: 409)
         }
     }
     
-    func getAllRooms(from storage: Storage, password: String) throws -> [(RoomData, SymmetricKey)] {
+    func getAllRoomsJoined(from storage: Storage, password: String) throws -> [(RoomData, SymmetricKey)]? {
         let res = storage.get(by: "room")
-        if res.error != nil {
-            throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
-        }
         
         var userRooms: [(RoomData, SymmetricKey)] = []
-        let list = res.data as! [RoomData]
-        for each in list {
-            var userIsInTheRoom = false
-            var room: RoomData? = nil
-            innerloop: for every in each.usersUUIDs {
-                if every == self.uuid {
-                    room = each
-                    userIsInTheRoom = true
-                    break innerloop
+        
+        if let list = res as? [RoomData] {
+            for each in list {
+                var userIsInTheRoom = false
+                var room: RoomData? = nil
+                innerloop: for every in each.usersUUIDs {
+                    if every == self.uuid {
+                        room = each
+                        userIsInTheRoom = true
+                        break innerloop
+                    }
+                }
+                if userIsInTheRoom {
+                    userRooms.append((room!, try each.getUserEncryptionKey(userUUID: self.uuid, password: password)))
                 }
             }
-            if userIsInTheRoom {
-                userRooms.append((room!, try each.getUserEncryptionKey(userUUID: self.uuid, password: password)))
-            }
+            return userRooms
         }
-        return userRooms
-        
+        return nil
     }
     
     func joinRoom(roomName: String, in storage: Storage, password: String) throws -> (RoomData, SymmetricKey) {
-        let res = try getAllRooms(from: storage, password: password)
-        for each in res {
-            if each.0.roomName == roomName {
-                let passwordSymKey = Encryptor.prepareKey(key: Encryptor.createKey(password: password))
-                let newEncryptionKey = Encryptor.encrypt(symKey: passwordSymKey, data: Encryptor.createKey())
-                
-                var newUsersUUIDs = each.0.usersUUIDs
-                newUsersUUIDs.append(self.uuid)
-                
-                var newUserEncryptionKeys = each.0.userEncryptionKeys
-                newUserEncryptionKeys.append("\(self.uuid):\(newEncryptionKey)")
-                
-                var res = storage.get(by: "room")
-                if res.error != nil {
-                    throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
-                }
-                let updatedRoom: RoomData = RoomData(
-                    uuid: each.0.uuid,
-                    roomName: each.0.roomName,
-                    usersUUIDs: newUsersUUIDs,
-                    messagesUUIDs: each.0.messagesUUIDs,
-                    userEncryptionKeys: newUserEncryptionKeys
-                )
-                
-                var newList: [RoomData] = []
-                for every in res.data as! [RoomData] {
-                    if every.roomName == each.0.roomName {
-                        newList.append(updatedRoom)
-                    } else {
-                        newList.append(every)
+        
+        let res = storage.get(by: "room")
+        if let list = res as? [RoomData] {
+            for each in list {
+                if each.roomName == roomName {
+                    // create key of user
+                    let passwordSymKey = Encryptor.prepareKey(key: Encryptor.createKey(password: password))
+                    let newEncryptionKey = Encryptor.createKey()
+                    let newEncryptionKeyEncrypted = Encryptor.encrypt(symKey: passwordSymKey, data: Encryptor.createKey())
+                    
+                    var newUsersUUIDs = each.usersUUIDs
+                    newUsersUUIDs.append(self.uuid)
+                    
+                    var newUserEncryptionKeys = each.userEncryptionKeys
+                    newUserEncryptionKeys.append("\(self.uuid):\(newEncryptionKeyEncrypted)")
+                    
+                    let updateRoom: RoomData = RoomData(
+                        uuid: each.uuid,
+                        roomName: each.roomName,
+                        usersUUIDs: newUsersUUIDs,
+                        messagesUUIDs: each.messagesUUIDs,
+                        userEncryptionKeys: newUserEncryptionKeys
+                    )
+                    
+                    
+                    let updated = storage.update(key: "room", data: updateRoom)
+                    if updated {
+                        return (updateRoom, Encryptor.prepareKey(key: newEncryptionKey))
+                    }
+                        
+                     break
                     }
                 }
-                res = storage.set(key: "room", data: newList)
-                if res.error != nil {
-                    throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
-                }
-                return (updatedRoom, each.1)
             }
-        }
-        throw NSError(domain: "Room with provided name was not found", code: 404)
+        throw NSError(domain: "Room was not joined", code: 409)
     }
+        
+    
 }
 

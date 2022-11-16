@@ -39,7 +39,12 @@ struct ShortUserAccount {
     // wib?
 }
 
+let sharedDataManager = DataManager()
+
 class DataManager {
+    
+    static let shared = DataManager()
+    
     var storage: Storage
     // created on user login and be updated while use
     var currentUsername: String? = nil
@@ -66,29 +71,27 @@ class DataManager {
     
     /// Obtain user data from UD
     /// 0 - username, 1 - password
-    func getLoginFromSavedData() throws {
+    func getLoginFromSavedData() throws -> Bool {
         if let loggedInUser = self.storage.getUserLoginData() {
-            try login(username: loggedInUser.0, password: loggedInUser.1)
+            return try login(username: loggedInUser.0, password: loggedInUser.1)
         }
+        return false
     }
     
     /// Load shorted user data in list to shortUserAccounts
     /// Contains username and password hash
     func loadShortUsers() throws {
         let res = self.storage.get(by: "user")
-        if res.error != nil {
-            throw NSError(domain: (res.error as! ErrorCodes).getString(), code: (res.error as! ErrorCodes).getCode())
-        }
         
-        let users = res.data as! [UserData]
-
-        var list: [ShortUserAccount] = []
-        for user in users {
-            list.append(
-                ShortUserAccount(uuid: user.uuid, username: user.username, online: user.online, passwordHash: user.passwordHash)
-            )
+        if let users = res as? [UserData] {
+            var list: [ShortUserAccount] = []
+            for user in users {
+                list.append(
+                    ShortUserAccount(uuid: user.uuid, username: user.username, online: user.online, passwordHash: user.passwordHash)
+                )
+            }
+            self.shortUserAccounts = list
         }
-        self.shortUserAccounts = list
     }
     
     func getOnlineOfflineUsers() {
@@ -126,24 +129,48 @@ class DataManager {
         // set to self
         self.onlineUsers = onlineUsers
         self.offlineUsers = offlineUsers
+        
+        if self.onlineUsers!.isEmpty {
+            self.onlineUsers = [(
+                RoomUser(username: self.currentUsername!, online: true)
+            )]
+        }
     }
     
-    func login(username: String, password: String) throws {
-        let user = try UserData(by: username, from: self.storage)
-        if Hashing.verify(hash: user.passwordHash, password: password) {
-            self.currentPassword = password
-            self.currentUsername = username
-            self.user = user
-            let roomDataAndKeys: [(RoomData, SymmetricKey)] = try self.user!.getAllRooms(from: storage, password: password)
+    func createUser(username: String, password: String) throws -> Bool {
+        // in case user already created with such name it will throw an error
+        let user = try UserData(username: username, password: password, storage: self.storage)
+        try userLoadToSelf(user: user, password: password)
+        return true
+        // TODO: remove such Bool returns and use "do catch"
+    }
+    
+    func userLoadToSelf(user: UserData, password: String) throws {
+        self.currentPassword = password
+        self.currentUsername = user.username
+        self.user = user
+        let roomDataAndKeys: [(RoomData, SymmetricKey)]? = try self.user!.getAllRoomsJoined(from: storage, password: password) ?? nil
+        if roomDataAndKeys != nil {
             var roomsAndKeys: [(Room, SymmetricKey)] = []
-            for each in roomDataAndKeys {
+            for each in roomDataAndKeys! {
                 let room = Room(each.0.self)
                 try room.load(in: storage, decrypting: each.1)
                 roomsAndKeys.append((room, each.1))
             }
             self.roomsAndKeys = roomsAndKeys
-            getOnlineOfflineUsers()
-            self.storage.setUserLoginData(username: username, password: password)
+        }
+        
+        getOnlineOfflineUsers()
+        self.storage.setUserLoginData(username: user.username, password: password)
+    }
+    
+    func login(username: String, password: String) throws -> Bool {
+        let user = try UserData(by: username, from: self.storage)
+        if Hashing.verify(hash: user.passwordHash, password: password) {
+            try userLoadToSelf(user: user, password: password)
+            return true
+        } else {
+            return false
         }
     }
     

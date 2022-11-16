@@ -12,13 +12,17 @@ struct Result {
     let error: Any?
     
     init(data: Any? = nil, error: Any? = nil) {
+        var d: Any? = nil
+        var e: Any? = nil
+        
         if let dt = data {
-            self.data = dt
+            d = dt
         } else {
             if let er = error {
-                self.error = er
+                e = er
             }
         }
-        preconditionFailure("No data or error")
+        self.data = d
+        self.error = e
     }
 }

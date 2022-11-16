@@ -14,9 +14,12 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        helloUsername.text = "Hello, \(sharedDataManager.currentUsername!)"
     }
 
+    @IBAction func logoutButton(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
     func setUserData(username: String) {
         
 //        if let text = helloUsername.text {

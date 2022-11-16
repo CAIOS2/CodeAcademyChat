@@ -19,7 +19,7 @@ class RoomManager {
         return RoomResult(errorMessage: "Room is exist", room: nil)
       }
     }
-    let resultRoom = Room(name: parameter_roomName, messages: [])
+    let resultRoom = Room(name: parameter_roomName, messages: [], writeMessage: "")
     property_rooms.append(resultRoom)
     return RoomResult(errorMessage: nil, room: resultRoom)
   }

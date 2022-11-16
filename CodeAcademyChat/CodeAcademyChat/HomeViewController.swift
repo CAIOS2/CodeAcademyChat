@@ -16,10 +16,15 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         helloUsername.text = "Hello, \(sharedDataManager.currentUsername!)"
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?
+            .setNavigationBarHidden(true, animated: true)
+    }
 
     @IBAction func logoutButton(_ sender: Any) {
         sharedDataManager.logout()
-        self.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     func setUserData(username: String) {
         

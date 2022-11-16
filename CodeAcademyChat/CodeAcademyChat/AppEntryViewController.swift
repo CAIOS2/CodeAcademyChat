@@ -26,16 +26,20 @@ class AppEntryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         if sharedDataManager.getLoginFromSavedData() {
             switchToHomeView()
         }
-
     }
     
     func switchToHomeView() {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "homeViewController") as! HomeViewController
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "homeViewController") as! HomeViewController
+//        vc.modalPresentationStyle = .fullScreen
+//        self.present(vc, animated: true, completion: nil)
+        performSegue(withIdentifier: "home", sender: nil)
     }
     
     @IBAction func submitButtonAction(_ sender: Any) {

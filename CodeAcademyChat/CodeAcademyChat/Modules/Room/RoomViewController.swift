@@ -34,12 +34,23 @@ class RoomViewController: UIViewController {
         var joinedString = ""
         
         for message in room.messages {
+            
             joinedString +=
                 """
                 Date: \(message.date)
+                
                 User: \(message.username)
+                
                 Message: \(message.content)
                 """
+            
+            if room.messages.last?.date != message.date {
+                joinedString += "\n" + "-------------------" + "\n\n"
+            } else {
+                joinedString += "\n"
+            }
+            
+//            joinedString += "\n\n"
         }
         
         messagesTextView.text = joinedString

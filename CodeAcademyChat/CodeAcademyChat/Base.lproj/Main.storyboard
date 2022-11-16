@@ -43,7 +43,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Wju-ee-5Nk">
                                 <rect key="frame" x="20" y="313.33333333333331" width="350" height="259.99999999999994"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sergej" borderStyle="roundedRect" placeholder="Enter your username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AnR-Vl-eXQ">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="tadas" borderStyle="roundedRect" placeholder="Enter your username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AnR-Vl-eXQ">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Ns5-vp-urB"/>
@@ -51,7 +51,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartQuotesType="no"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sergej" borderStyle="roundedRect" placeholder="Enter your password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k7q-ry-B51">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="tadas" borderStyle="roundedRect" placeholder="Enter your password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k7q-ry-B51">
                                         <rect key="frame" x="0.0" y="70" width="350" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="aDJ-2C-Zhk"/>
@@ -59,7 +59,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sergej" borderStyle="roundedRect" placeholder="Enter your password confirmation" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MqX-Ya-2OS">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="tadas" borderStyle="roundedRect" placeholder="Enter your password confirmation" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MqX-Ya-2OS">
                                         <rect key="frame" x="0.0" y="140" width="350" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="6FG-Hr-1DT"/>
@@ -113,7 +113,6 @@
                     <connections>
                         <outlet property="actionButton" destination="79v-VC-jmf" id="vAT-4b-eXT"/>
                         <outlet property="confirmPasswordTextField" destination="MqX-Ya-2OS" id="KwA-3l-vDZ"/>
-                        <outlet property="errorMessageLabel" destination="vvq-KS-3oA" id="ieV-Z3-PGg"/>
                         <outlet property="passwordTextField" destination="k7q-ry-B51" id="ugt-gr-0sT"/>
                         <outlet property="segmentedControl" destination="l3c-xT-cev" id="O7e-P5-d7g"/>
                         <outlet property="usernameTextField" destination="AnR-Vl-eXQ" id="eiB-b8-5xC"/>
@@ -186,7 +185,7 @@
                                     <color key="baseBackgroundColor" systemColor="systemBlueColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="createNewRoomTapped:" destination="Ve9-W9-BIB" eventType="touchUpInside" id="mu8-Zr-tMo"/>
+                                    <action selector="createNewRoomTapped:" destination="Ve9-W9-BIB" eventType="touchUpInside" id="hwW-4b-lZq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UtI-hB-Uys">
@@ -201,7 +200,7 @@
                                     <color key="baseBackgroundColor" systemColor="systemYellowColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="showOnlineUserTapped:" destination="Ve9-W9-BIB" eventType="touchUpInside" id="RyD-Y4-2ov"/>
+                                    <action selector="showOnlineUserTapped:" destination="Ve9-W9-BIB" eventType="touchUpInside" id="oUP-Is-FFh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GKi-8A-I4f">
@@ -216,7 +215,8 @@
                                     <color key="baseBackgroundColor" systemColor="systemCyanColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="showOflineUserTapped:" destination="Ve9-W9-BIB" eventType="touchUpInside" id="q9k-ib-oVo"/>
+                                    <action selector="showOfflineUserTapped:" destination="Ve9-W9-BIB" eventType="touchUpInside" id="g6y-NJ-h65"/>
+                                    <action selector="showOnlineUserTapped:" destination="Ve9-W9-BIB" eventType="touchUpInside" id="5q5-ib-pIl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fq9-h5-TRq">
@@ -241,6 +241,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Logout">
                                     <color key="baseForegroundColor" systemColor="systemRedColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="logoutTapped:" destination="Ve9-W9-BIB" eventType="touchUpInside" id="jeA-Za-Td2"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7UH-bb-yOP"/>
@@ -281,6 +284,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bfe-jV-cuf"/>
                     <connections>
+                        <outlet property="roomIdTextField" destination="pOD-8V-cCQ" id="zXL-3s-8jF"/>
                         <outlet property="welcomeLabel" destination="BQm-OD-T7b" id="Qku-fZ-mth"/>
                     </connections>
                 </viewController>
@@ -330,7 +334,7 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Message history" cornerStyle="capsule">
-                                    <color key="baseBackgroundColor" systemColor="tintColor"/>
+                                    <color key="baseBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTM-ba-oH6">
@@ -356,7 +360,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Edit"/>
                                 <connections>
-                                    <action selector="userEditTapped:" destination="uvA-sC-9vK" eventType="touchUpInside" id="Zvn-qx-XUp"/>
+                                    <action selector="usernameEditTapped:" destination="uvA-sC-9vK" eventType="touchUpInside" id="3Nx-fx-QKo"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARY-YO-UBk">
@@ -364,7 +368,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Edit"/>
                                 <connections>
-                                    <action selector="passwordEditTapped:" destination="uvA-sC-9vK" eventType="touchUpInside" id="YVw-O7-ZTB"/>
+                                    <action selector="passwordEditTapped:" destination="uvA-sC-9vK" eventType="touchUpInside" id="Omb-rk-Q9n"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -396,7 +400,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tea-Up-DmU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2760" y="4"/>
+            <point key="canvasLocation" x="2926" y="4"/>
         </scene>
     </scenes>
     <resources>
@@ -426,9 +430,6 @@
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

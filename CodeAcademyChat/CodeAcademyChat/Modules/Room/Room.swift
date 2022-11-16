@@ -10,7 +10,7 @@ import Foundation
 class Room {
     var name: String
     var messages: [Message]
-    
+ 
 //    init(name: String, onlineUsers: [User], offlineUsers: [User], messageHistory: [Message], messages: [Message]) {
 //        self.name = name
 //        self.onlineUsers = onlineUsers

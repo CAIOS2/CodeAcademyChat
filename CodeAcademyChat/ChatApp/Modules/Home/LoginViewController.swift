@@ -35,6 +35,7 @@ class LoginViewController: UIViewController {
     let joinRoom = roomManage.getRoom(parameter_roomName: roomIDTextField.text!)
     if let room = joinRoom.room {
       roomViewController.property_room = room
+      roomViewController.property_currentUser = user
 //      navigationController?.present(roomViewController, animated: true)
       show(roomViewController, sender: nil)
     } else {
@@ -48,6 +49,7 @@ class LoginViewController: UIViewController {
     let roomResult = roomManage.createRoom(parameter_roomName: roomIDTextField.text!)
     if let room = roomResult.room {
       roomViewController.property_room = room
+      roomViewController.property_currentUser = user
       show(roomViewController, sender: nil)
     } else {
       showAlert(title: "Error creating room", message: roomResult.errorMessage ?? "")

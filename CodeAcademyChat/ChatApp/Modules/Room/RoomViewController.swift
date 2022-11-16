@@ -17,6 +17,7 @@ class RoomViewController: UIViewController {
   var property_currentUser: User!
   var property_room: Room!
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
   }
@@ -28,8 +29,11 @@ class RoomViewController: UIViewController {
     welcomeLabel.text = "Welcome to \(property_room.name)"
   }
   
+  
+  
   @IBAction func sendButtonTapped(_ sender: UIButton) {
-    
+    property_room.writeMessage(message: messageTextField.text!, username: property_currentUser)
+//    messageTextView.text = Message(content: messageTextField.text!, date: .now, userName: property_currentUser)
   }
   
   

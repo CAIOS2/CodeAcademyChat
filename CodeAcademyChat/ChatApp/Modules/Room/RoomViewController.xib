@@ -29,14 +29,22 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kaT-8x-SuM">
-                    <rect key="frame" x="20" y="149" width="353" height="524"/>
+                    <rect key="frame" x="20" y="149" width="353" height="519"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <color key="textColor" systemColor="labelColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SV2-yM-7ZV">
+                    <rect key="frame" x="20" y="708" width="353" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="MjD-8C-6tV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMa-sU-XcR">
-                    <rect key="frame" x="20" y="768" width="353" height="50"/>
+                    <rect key="frame" x="20" y="775" width="353" height="50"/>
                     <color key="backgroundColor" red="0.2470588235" green="0.4008026421" blue="0.52512568240000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="9Ml-Ry-ioo"/>
@@ -48,31 +56,23 @@
                         <action selector="sendButtonTapped:" destination="-1" eventType="touchUpInside" id="A2L-3p-vXc"/>
                     </connections>
                 </button>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SV2-yM-7ZV">
-                    <rect key="frame" x="20" y="693" width="353" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="MjD-8C-6tV"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="VpG-Hq-iXc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="6Hx-fS-QZA"/>
                 <constraint firstItem="kaT-8x-SuM" firstAttribute="top" secondItem="VpG-Hq-iXc" secondAttribute="bottom" constant="20" id="6uC-tJ-9RY"/>
-                <constraint firstItem="SV2-yM-7ZV" firstAttribute="top" secondItem="kaT-8x-SuM" secondAttribute="bottom" constant="20" id="7Pp-Cj-tFV"/>
+                <constraint firstItem="SV2-yM-7ZV" firstAttribute="top" secondItem="kaT-8x-SuM" secondAttribute="bottom" constant="40" id="7Pp-Cj-tFV"/>
                 <constraint firstItem="kaT-8x-SuM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="BNR-5a-XWc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SV2-yM-7ZV" secondAttribute="trailing" constant="20" id="GBj-o4-n25"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kaT-8x-SuM" secondAttribute="trailing" constant="20" id="RlM-Vi-uZ8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MMa-sU-XcR" secondAttribute="trailing" constant="20" id="Syw-k2-XPH"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VpG-Hq-iXc" secondAttribute="trailing" constant="50" id="aam-qE-0qT"/>
-                <constraint firstItem="MMa-sU-XcR" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="dFw-fq-vVk"/>
                 <constraint firstItem="kaT-8x-SuM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="eIb-T1-UeY"/>
-                <constraint firstItem="MMa-sU-XcR" firstAttribute="top" secondItem="SV2-yM-7ZV" secondAttribute="bottom" constant="25" id="fR2-2e-Tk0"/>
+                <constraint firstItem="MMa-sU-XcR" firstAttribute="top" secondItem="SV2-yM-7ZV" secondAttribute="bottom" constant="17" id="fR2-2e-Tk0"/>
                 <constraint firstItem="MMa-sU-XcR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="h5d-Iy-Zgv"/>
                 <constraint firstItem="SV2-yM-7ZV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="k9S-6e-xAJ"/>
+                <constraint firstItem="MMa-sU-XcR" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" constant="-27" id="lQd-mH-zGJ"/>
                 <constraint firstItem="VpG-Hq-iXc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="z1T-6z-EOb"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-12.67605633802817"/>

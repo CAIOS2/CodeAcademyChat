@@ -31,11 +31,10 @@ class RoomViewController: UIViewController {
     //MARK: - Private
     
     private func updateMessagesTextField() {
-        var joinedString = ""
+        var messageContents = [String]()
         
         for message in room.messages {
-            
-            joinedString +=
+            let content =
                 """
                 Date: \(message.date)
                 
@@ -44,16 +43,10 @@ class RoomViewController: UIViewController {
                 Message: \(message.content)
                 """
             
-            if room.messages.last?.date != message.date {
-                joinedString += "\n" + "-------------------" + "\n\n"
-            } else {
-                joinedString += "\n"
-            }
-            
-//            joinedString += "\n\n"
+            messageContents.append(content)
         }
         
-        messagesTextView.text = joinedString
+        messagesTextView.text = messageContents.joined(separator: "\n------------------- \n\n")
     }
     
     //MARK: - Actions

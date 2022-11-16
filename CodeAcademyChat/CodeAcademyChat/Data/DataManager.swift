@@ -71,9 +71,17 @@ class DataManager {
     
     /// Obtain user data from UD
     /// 0 - username, 1 - password
-    func getLoginFromSavedData() throws -> Bool {
+    func getLoginFromSavedData() -> Bool {
         if let loggedInUser = self.storage.getUserLoginData() {
-            return try login(username: loggedInUser.0, password: loggedInUser.1)
+            do {
+                try login(username: loggedInUser.0, password: loggedInUser.1)
+                return true
+            } catch let e as NSError {
+                if e.domain == "Wrong password" {
+                    return false
+                }
+                return false
+            }
         }
         return false
     }
@@ -97,23 +105,26 @@ class DataManager {
     func getOnlineOfflineUsers() {
         var savedUsers: [RoomUser] = []
         
-        // check every room
-        for each in self.roomsAndKeys! {
-            // check for every user in room
-            for every in each.0.users! {
-                var toAdd = true
-                // check if user is in savedUsers
-            savedUsers: for one in savedUsers {
-                    if one.username == every.username {
-                        toAdd = false
-                        break savedUsers
+        if self.roomsAndKeys != nil {
+            // check every room
+            for each in self.roomsAndKeys! {
+                // check for every user in room
+                for every in each.0.users! {
+                    var toAdd = true
+                    // check if user is in savedUsers
+                savedUsers: for one in savedUsers {
+                        if one.username == every.username {
+                            toAdd = false
+                            break savedUsers
+                        }
                     }
-                }
-                if toAdd {
-                    savedUsers.append(every)
+                    if toAdd {
+                        savedUsers.append(every)
+                    }
                 }
             }
         }
+        
         
         // collect online/offline users
         var onlineUsers: [RoomUser] = []
@@ -137,12 +148,10 @@ class DataManager {
         }
     }
     
-    func createUser(username: String, password: String) throws -> Bool {
+    func createUser(username: String, password: String) throws {
         // in case user already created with such name it will throw an error
         let user = try UserData(username: username, password: password, storage: self.storage)
         try userLoadToSelf(user: user, password: password)
-        return true
-        // TODO: remove such Bool returns and use "do catch"
     }
     
     func userLoadToSelf(user: UserData, password: String) throws {
@@ -164,13 +173,12 @@ class DataManager {
         self.storage.setUserLoginData(username: user.username, password: password)
     }
     
-    func login(username: String, password: String) throws -> Bool {
+    func login(username: String, password: String) throws {
         let user = try UserData(by: username, from: self.storage)
         if Hashing.verify(hash: user.passwordHash, password: password) {
             try userLoadToSelf(user: user, password: password)
-            return true
         } else {
-            return false
+            throw NSError(domain: "Wrong password", code: 401)
         }
     }
     

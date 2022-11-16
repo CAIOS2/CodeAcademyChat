@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     }
 
     @IBAction func logoutButton(_ sender: Any) {
+        sharedDataManager.logout()
         self.dismiss(animated: true)
     }
     func setUserData(username: String) {

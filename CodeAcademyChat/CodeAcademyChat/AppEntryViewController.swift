@@ -26,7 +26,9 @@ class AppEntryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if sharedDataManager.getLoginFromSavedData() {
+            switchToHomeView()
+        }
 
     }
     
@@ -38,13 +40,11 @@ class AppEntryViewController: UIViewController {
     
     @IBAction func submitButtonAction(_ sender: Any) {
         if (usernameTextField.text?.isEmpty ?? false) {
-            errorMessage.text = "No username"
-            errorMessage.isHidden = false
+            showError("No username")
             return
         }
         if (passwordTextField.text?.isEmpty ?? false) {
-            errorMessage.text = "No password"
-            errorMessage.isHidden = false
+            showError("No password")
             return
         }
         
@@ -52,40 +52,27 @@ class AppEntryViewController: UIViewController {
             if !(passwordConfirmationTextField.text?.isEmpty ?? false) {
                 if passwordTextField.text == passwordConfirmationTextField.text {
                     do {
-                        let userCreated = try sharedDataManager.createUser(username: usernameTextField.text!, password: passwordTextField.text!)
-                        
-                        if userCreated == true {
+                        try sharedDataManager.createUser(username: usernameTextField.text!, password: passwordTextField.text!)
                             switchToHomeView()
-                            errorMessage.isHidden = true
-                        } else {
-                            errorMessage.text = "Username already exists"
-                            errorMessage.isHidden = false
-                        }
                     } catch let e as NSError {
-                        print(e)
+                        showError(e.domain)
                     }
-                    
                 } else {
-                    errorMessage.text = "Passwords don't match"
-                    errorMessage.isHidden = false
+                    showError("Passwords don't much")
                 }
             } else {
-                errorMessage.text = "No password confirmation"
-                errorMessage.isHidden = false
+                showError("No confirmation of password")
             }
         } else {
-            if let userCanLogin = try? sharedDataManager.login(username: usernameTextField.text!, password: passwordTextField.text!) {
-                if userCanLogin {
-                    switchToHomeView()
-                    errorMessage.isHidden = true
-                } else {
-                    errorMessage.text = "Wrong password or some supressed error"
-                    errorMessage.isHidden = false
-                }
-            } else {
-                errorMessage.text = "Wrong password"
-                errorMessage.isHidden = false
+            do {
+                // will only obtain true if success
+                try sharedDataManager.login(username: usernameTextField.text!, password: passwordTextField.text!)
+                switchToHomeView()
+                
+            } catch let e as NSError {
+                showError(e.domain)
             }
+            
         }
     }
     
@@ -99,5 +86,13 @@ class AppEntryViewController: UIViewController {
             submitButton.setTitle("Registration", for: .normal)
             segmentTitleIsRegistration = true
         }
+    }
+    
+    func showError(_ message: String) {
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true)
     }
 }

@@ -35,7 +35,6 @@ class DataManager {
     var storage: Storage
     // created on user login and be updated while use
     var currentUsername: String? = nil
-    var currentPassword: String? = nil
     var currentPasswordKey: [UInt8]? = nil
     var currentRoom: (Room, [UInt8])? = nil
     
@@ -144,7 +143,8 @@ class DataManager {
     }
     
     func userLoadToSelf(user: UserData, password: String) throws {
-        self.currentPassword = password
+        // get key from password
+        self.currentPasswordKey = try aes.createKey(password: password, username: user.username) as [UInt8]
         self.currentUsername = user.username
         self.user = user
         let roomDataAndKeys: [(RoomData, [UInt8])]? = try self.user!.getAllRoomsJoined(from: storage, password: password) ?? nil
@@ -157,8 +157,7 @@ class DataManager {
             }
             self.roomsAndKeys = roomsAndKeys
         }
-        // get key from password
-        self.currentPasswordKey = try aes.createKey(password: password, username: user.username) as [UInt8]
+        
         
         getOnlineOfflineUsers()
         self.storage.setUserLoginData(username: user.username, password: password)
@@ -182,7 +181,7 @@ class DataManager {
     
     private func emptyIt() {
         self.currentUsername = nil
-        self.currentPassword = nil
+        self.currentPasswordKey = nil
         self.currentRoom = nil
         self.user = nil
         self.roomsAndKeys = nil

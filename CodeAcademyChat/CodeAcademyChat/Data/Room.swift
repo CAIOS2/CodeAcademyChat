@@ -43,15 +43,17 @@ struct RoomData: Decodable, Encodable {
         self.usersUUIDs = [sharedDataManager.user!.uuid]
         self.messagesUUIDs = []
         
-        let key = try aes.createKey(
-            password: sharedDataManager.currentPassword!,
-            username: sharedDataManager.currentUsername!
-        ) as String
+//        let key = try aes.createKey(
+//            password: sharedDataManager.currentPassword!,
+//            username: sharedDataManager.currentUsername!
+//        ) as String
+        let key = try aes.createKey() as String
+        let encryptedKey = try aes.encrypt(data: key, key: sharedDataManager.currentPasswordKey!)
         
-        self.userEncryptionKeys = ["\(self.usersUUIDs[0]):\(key)"]
+        self.userEncryptionKeys = ["\(self.usersUUIDs[0]):\(encryptedKey)"]
     }
     
-    func getUserEncryptionKey(userUUID: String, password: String) throws -> [UInt8] {
+    func getUserEncryptionKey(userUUID: String) throws -> [UInt8] {
         // userEncryptionKeys are passed in following format:
         // userUUID:Key
         for each in self.userEncryptionKeys {

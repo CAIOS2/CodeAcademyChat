@@ -52,7 +52,8 @@ class HomeViewController: UIViewController {
         if roomNameTextField.text! != "" {
             do {
                 // (RoomData, SymmetricKey)
-                let _ = try sharedDataManager.user!.createRoom(roomName: roomNameTextField.text!, in: sharedDataManager.storage, password: sharedDataManager.currentPassword!)
+                let _ = try sharedDataManager.user!.createRoom(roomName: roomNameTextField.text!, in: sharedDataManager.storage)
+                print(sharedDataManager.roomsAndKeys![0].0.data.roomName)
             } catch let e as NSError {
                 showError(e.domain)
             }

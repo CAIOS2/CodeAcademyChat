@@ -9,7 +9,7 @@
 import Foundation
 import CryptoSwift
 
-let iv = Array("secivvec".utf8)
+let iv = Array("secivvecsecivvec".utf8)
 let aes = AESCipher()
 
 class AESCipher {
@@ -17,7 +17,7 @@ class AESCipher {
     
     /// Encrypts data as text to UTF8
     /// Data is in UTF8
-    /// Key is in hexString
+    /// Key is hexString
     func encrypt(data: String, key: String) throws -> String {
         
         do {
@@ -102,15 +102,16 @@ class AESCipher {
     }
     
     func createKey(password: String, username: String) throws -> String {
-        let passArray: [UInt8] = Array(password.utf8)
+        let passArray: [UInt8] = Array(Hashing.MD5(string: password).utf8)
         let salt: [UInt8] = Array(username.utf8)
         
         return try createKey(password: passArray, salt: salt)
             .toHexString()
+        
     }
     
     func createKey(password: String, username: String) throws -> [UInt8] {
-        let passArray: [UInt8] = Array(password.utf8)
+        let passArray: [UInt8] = Array(Hashing.MD5(string: password).utf8)
         let salt: [UInt8] = Array(username.utf8)
         
         return try createKey(password: passArray, salt: salt)
@@ -151,7 +152,7 @@ let decrypted: [UInt8] = [0x48, 0x65, 0x6c, 0x6c, 0x6f]
 extension [UInt8] {
     func toUTF8() -> String {
         let data = Data(self)
-        let string = String(data: data, encoding: .utf8)!
+        let string = String(decoding: data, as: UTF8.self)
         return string
     }
 }

@@ -70,7 +70,7 @@ struct UserData: Decodable, Encodable {
     
     /// Creates the room in UD and returns its encryption key
     /// 0 - room, 1 - symmetric key
-    func createRoom(roomName: String, in storage: Storage, password: String) throws -> (RoomData, [UInt8]) {
+    func createRoom(roomName: String, in storage: Storage) throws -> (RoomData, [UInt8]) {
         let res = storage.get(by: "room")
         
         if let rooms = res as? [RoomData] {
@@ -83,7 +83,7 @@ struct UserData: Decodable, Encodable {
         
         let room = try RoomData(roomName: roomName)
         
-        let roomUserKey: [UInt8] = try room.getUserEncryptionKey(userUUID: self.uuid, password: password)
+        let roomUserKey: [UInt8] = try room.getUserEncryptionKey(userUUID: self.uuid)
         
         let roomAdded = storage.add(to: "room", data: room)
         if roomAdded {
@@ -111,7 +111,7 @@ struct UserData: Decodable, Encodable {
                     }
                 }
                 if userIsInTheRoom {
-                    userRooms.append((room!, try each.getUserEncryptionKey(userUUID: self.uuid, password: password)))
+                    userRooms.append((room!, try each.getUserEncryptionKey(userUUID: self.uuid)))
                 }
             }
             return userRooms

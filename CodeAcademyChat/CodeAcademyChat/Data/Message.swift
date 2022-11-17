@@ -22,16 +22,16 @@ struct MessageData: Decodable, Encodable {
     
     init(message: String, username: String, key: [UInt8]) throws {
         self.uuid = UUID().uuidString
-        self.encryptedMessage = try aes.encrypt(data: message, key: key)
-        self.encryptedUsername = try aes.encrypt(data: message, key: key)
+        self.encryptedMessage = try rabbit.encrypt(data: message, key: key)
+        self.encryptedUsername = try rabbit.encrypt(data: message, key: key)
         self.date = Date.now
     }
     
     func show(using key: [UInt8]) throws -> MessageOpenData {
         return MessageOpenData(
             uuid: self.uuid,
-            message: try aes.decrypt(data: self.encryptedMessage, key: key),
-            username: try aes.decrypt(data: self.encryptedUsername, key: key),
+            message: try rabbit.decrypt(data: self.encryptedMessage, key: key),
+            username: try rabbit.decrypt(data: self.encryptedUsername, key: key),
             date: self.date
         )
     }

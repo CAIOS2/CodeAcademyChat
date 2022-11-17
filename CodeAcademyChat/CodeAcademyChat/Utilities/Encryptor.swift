@@ -10,106 +10,49 @@ import Foundation
 import CryptoSwift
 
 let iv = Array("secivvec".utf8)
-let aes = AESCipher()
+let rabbit = RabbitCipher()
 
-class AESCipher {
+class RabbitCipher {
 
     
     /// Encrypts data as text to UTF8
     /// Data is in UTF8
     /// Key is hexString
     func encrypt(data: String, key: String) throws -> String {
+        let cipher = try Rabbit(key: Array<UInt8>(hex: key), iv: iv)
+        let input: Data = data.data(using: .utf8)!
+        let encBytes: [UInt8] = try cipher.encrypt(input.bytes)
+        return encBytes.toUTF8()
         
-        do {
-//            let aesCipher = try AES(key: Array<UInt8>(hex: key), blockMode: CBC(iv: iv), padding: .pkcs7)
-            let aesCipher = try Rabbit(key: Array<UInt8>(hex: key), iv: iv)
-            let input: Data = data.data(using: .utf8)!
-            let encBytes: [UInt8] = try aesCipher.encrypt(input.bytes)
-            return encBytes.toUTF8()
-        } catch let e as NSError {
-            print("encrypt")
-            print(e.self)
-            throw e
-        }
-        
-//        let aes = try AES(key: Array<UInt8>(hex: key), blockMode: CBC(iv: iv), padding: .pkcs7)
-//        let input: Data = data.data(using: .utf8)!
-//        let encBytes: [UInt8] = try aes.encrypt(input.bytes)
-//        return encBytes.toUTF8()
     }
     
     /// Encrypts data as text to UTF8
     /// Data is in UTF8
     func encrypt(data: String, key: [UInt8]) throws -> String {
-        
-        do {
-//            let aesCipher = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
-            print(key.toHexString())
-            let aesCipher = try Rabbit(key: key, iv: iv)
-            let input: Data = data.data(using: .utf8)!
-            let encBytes: [UInt8] = try aesCipher.encrypt(input.bytes)
-            return encBytes.toUTF8()
-        } catch let e as NSError {
-            print("encrypt")
-            print(e.self)
-            throw e
-        }
-        
-//        let aes = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
-//        let input: Data = data.data(using: .utf8)!
-//        let encBytes: [UInt8] = try aes.encrypt(input.bytes)
-//        return encBytes.toUTF8()
+        let cipher = try Rabbit(key: key, iv: iv)
+        let input: Data = data.data(using: .utf8)!
+        let encBytes: [UInt8] = try cipher.encrypt(input.bytes)
+        return encBytes.toUTF8()
     }
     
     /// Decrypts data as UTF8 string to text output
     /// Key is in hexString
     /// Data is in UTF8
     func decrypt(data: String, key: String) throws -> String {
-        
-        do {
-            let aesCipher = try Rabbit(key: Array<UInt8>(hex: key), iv: iv)
-            
-            let input: Data = data.data(using: .utf8)!
-            
-            let decBytes: [UInt8] = try aesCipher.decrypt(input.bytes)
-            
-            return decBytes.toUTF8()
-        } catch let e as NSError {
-            print("decrypt")
-            print(e.self)
-            throw e
-        }
-        
-//        let aes = try AES(key: Array<UInt8>(hex: key), blockMode: CBC(iv: iv), padding: .pkcs7)
-//        let input: Data = data.data(using: .utf8)!
-//        let decBytes: [UInt8] = try aes.decrypt(input.bytes)
-//        return decBytes.toUTF8()
+        let cipher = try Rabbit(key: Array<UInt8>(hex: key), iv: iv)
+        let input: Data = data.data(using: .utf8)!
+        let decBytes: [UInt8] = try cipher.decrypt(input.bytes)
+        return decBytes.toUTF8()
     }
     
     /// Encrypts data as text to UTF8
     /// Data is in UTF8
     func decrypt(data: String, key: [UInt8]) throws -> String {
+        let cipher = try Rabbit(key: key, iv: iv)
+        let input: Data = data.data(using: .utf8)!
+        let decBytes: [UInt8] = try cipher.decrypt(input.bytes)
+        return decBytes.toUTF8()
         
-        do {
-            print("decrypt with key UInt8")
-            print("Data: \(data.data(using: .utf8)!.bytes.toHexString())")
-            print("Key: \(key.toHexString())")
-//            let aesCipher = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
-            let aesCipher = try Rabbit(key: key, iv: iv)
-            let input: Data = data.data(using: .utf8)!
-            let decBytes: [UInt8] = try aesCipher.decrypt(input.bytes)
-            print(decBytes.toHexString())
-            return decBytes.toUTF8()
-        } catch let e as NSError {
-            print("decrypt")
-            print(e.self)
-            throw e
-        }
-        
-//        let aes = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
-//        let input: Data = data.data(using: .utf8)!
-//        let decBytes: [UInt8] = try aes.decrypt(input.bytes)
-//        return decBytes.toUTF8()
     }
     
     func createKey(password: String, username: String) throws -> String {
@@ -158,7 +101,7 @@ class AESCipher {
 }
 
 
-let decrypted: [UInt8] = [0x48, 0x65, 0x6c, 0x6c, 0x6f]
+//let decrypted: [UInt8] = [0x48, 0x65, 0x6c, 0x6c, 0x6f]
 
 
 extension [UInt8] {

@@ -84,7 +84,6 @@ struct UserData: Decodable, Encodable {
         let room = try RoomData(roomName: roomName)
         
         let roomUserKey: [UInt8] = try room.getUserEncryptionKey(userUUID: self.uuid)
-        print(roomUserKey.toHexString())
         let roomAdded = storage.add(to: "room", data: room)
         if roomAdded {
             sharedDataManager.updateRoomsAndKeys(data: (room, roomUserKey))
@@ -126,8 +125,8 @@ struct UserData: Decodable, Encodable {
             for each in list {
                 if each.roomName == roomName {
                     // create key of user
-                    let newEncryptionKey = try aes.createKey() as [UInt8]
-                    let newEncryptionKeyEncrypted = try aes.encrypt(
+                    let newEncryptionKey = try rabbit.createKey() as [UInt8]
+                    let newEncryptionKeyEncrypted = try rabbit.encrypt(
                         data: newEncryptionKey.toUTF8(),
                         key: sharedDataManager.currentPasswordKey!
                     )

@@ -47,8 +47,8 @@ struct RoomData: Decodable, Encodable {
 //            password: sharedDataManager.currentPassword!,
 //            username: sharedDataManager.currentUsername!
 //        ) as String
-        let key = try aes.createKey() as String
-        let encryptedKey = try aes.encrypt(data: key, key: sharedDataManager.currentPasswordKey!)
+        let key = try rabbit.createKey() as String
+        let encryptedKey = try rabbit.encrypt(data: key, key: sharedDataManager.currentPasswordKey!)
         
         self.userEncryptionKeys = ["\(self.usersUUIDs[0]):\(encryptedKey)"]
     }
@@ -60,7 +60,7 @@ struct RoomData: Decodable, Encodable {
             let pair = each.split(separator: ":")
             if String(pair[0]) == userUUID {
                 // encrypt new key with key made from password
-                let key: String = try aes.decrypt(data: String(pair[1]), key: sharedDataManager.currentPasswordKey!)
+                let key: String = try rabbit.decrypt(data: String(pair[1]), key: sharedDataManager.currentPasswordKey!)
                 return key.bytes
             }
         }

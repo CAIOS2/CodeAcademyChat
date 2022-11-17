@@ -152,7 +152,7 @@ class DataManager {
     
     func userLoadToSelf(user: UserData, password: String) throws {
         // get key from password
-        self.currentPasswordKey = try aes.createKey(password: password, username: user.username) as [UInt8]
+        self.currentPasswordKey = try rabbit.createKey(password: password, username: user.username) as [UInt8]
         self.currentUsername = user.username
         self.user = user
         let roomDataAndKeys: [(RoomData, [UInt8])]? = try self.user!.getAllRoomsJoined(from: storage, password: password) ?? nil

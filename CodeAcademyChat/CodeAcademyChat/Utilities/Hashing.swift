@@ -8,10 +8,6 @@
 import Foundation
 import CryptoKit
 
-enum SHA {
-    case SHA512, SHA256
-}
-
 class Hashing {
     static func hash(_ password: String) -> String {
         let data = password.data(using: .utf8)!

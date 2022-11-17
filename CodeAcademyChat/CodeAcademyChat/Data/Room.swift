@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import CryptoKit
-
 
 struct RoomUser {
     var username: String
@@ -38,26 +36,30 @@ struct RoomData: Decodable, Encodable {
         self.userEncryptionKeys = userEncryptionKeys
     }
     
-    init(roomName: String, userUUID: String, password: String) {
+    init(roomName: String) throws {
         self.uuid = UUID().uuidString
         self.roomName = roomName
         
-        self.usersUUIDs = [userUUID]
+        self.usersUUIDs = [sharedDataManager.user!.uuid]
         self.messagesUUIDs = []
         
-        let key = Encryptor.createKey(password: password)
+        let key = try aes.createKey(
+            password: sharedDataManager.currentPassword!,
+            username: sharedDataManager.currentUsername!
+        ) as String
+        
         self.userEncryptionKeys = ["\(self.usersUUIDs[0]):\(key)"]
     }
     
-    func getUserEncryptionKey(userUUID: String, password: String) throws -> SymmetricKey {
+    func getUserEncryptionKey(userUUID: String, password: String) throws -> [UInt8] {
         // userEncryptionKeys are passed in following format:
         // userUUID:Key
         for each in self.userEncryptionKeys {
             let pair = each.split(separator: ":")
             if String(pair[0]) == userUUID {
-                let passKey: SymmetricKey = Encryptor.prepareKey(key: Encryptor.createKey(password: password))
-                let encKey: String = Encryptor.decrypt(symKey: passKey, data: String(pair[1]))
-                return Encryptor.prepareKey(key: encKey)
+                // encrypt new key with key made from password
+                let key: String = try aes.decrypt(data: String(pair[1]), key: sharedDataManager.currentPasswordKey!)
+                return key.bytes
             }
         }
         let error = ErrorCodes(ErrorCode.Unauthorized, message: "Requested key is not found by user UUID: \(userUUID)")
@@ -65,12 +67,12 @@ struct RoomData: Decodable, Encodable {
     }
     
     
-    func load(from storage: Storage, symKey: SymmetricKey) throws -> ([ShortUserAccount], [RoomMessage]?) {
+    func load(from storage: Storage, key: [UInt8]) throws -> ([ShortUserAccount], [RoomMessage]?) {
         // get messages by uuid using messagesUUIDs
         // show them using key
         
         // get room from storage
-        var resR = storage.get(by: "room")
+        let resR = storage.get(by: "room")
         if let rooms = resR as? [RoomData] {
             // collecting messagesUUID of room
             var messagesUUIDs: [String] = []
@@ -110,7 +112,7 @@ struct RoomData: Decodable, Encodable {
                         inner: for uuid in messagesUUIDs {
                             if uuid == message.uuid {
                                 
-                                messagesOpen.append(message.show(using: symKey))
+                                messagesOpen.append(try message.show(using: key))
                                 break inner
                             }
                         }
@@ -148,14 +150,14 @@ struct RoomData: Decodable, Encodable {
             
     }
     
-    func addMessage(to storage: Storage, message: String, username: String, symKey: SymmetricKey) throws -> ([ShortUserAccount], [RoomMessage]?) {
-        let message = MessageData(message: message, username: username, symKey: symKey)
+    func addMessage(to storage: Storage, message: String, username: String, key: [UInt8]) throws -> ([ShortUserAccount], [RoomMessage]?) {
+        let message = try MessageData(message: message, username: username, key: key)
         let isMessageAdded = storage.add(to: "message", data: message)
         if !isMessageAdded {
             throw NSError(domain: "Message was not sent", code: 409)
         }
         
-        return try self.load(from: storage, symKey: symKey)
+        return try self.load(from: storage, key: key)
     }
 }
 
@@ -173,14 +175,14 @@ class Room {
         self.data = roomData
     }
     
-    func load(in storage: Storage, decrypting symKey: SymmetricKey) throws {
-        let room = try self.data.load(from: storage, symKey: symKey)
+    func load(in storage: Storage, decrypting key: [UInt8]) throws {
+        let room = try self.data.load(from: storage, key: key)
         loadToSelf(messages: room.1, users: room.0)
         
     }
     
-    func addMessage(in storage: Storage, message: String, username: String, symKey: SymmetricKey) throws {
-        let room = try self.data.addMessage(to: storage, message: message, username: username, symKey: symKey)
+    func addMessage(in storage: Storage, message: String, username: String, key: [UInt8]) throws {
+        let room = try self.data.addMessage(to: storage, message: message, username: username, key: key)
         loadToSelf(messages: room.1, users: room.0)
     }
     

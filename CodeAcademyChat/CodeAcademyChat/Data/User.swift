@@ -6,16 +6,6 @@
 //
 
 import Foundation
-import CryptoKit
-
-// Room
-// uuid
-// messages unencrypted
-// users (short online) list
-    // username
-    // online
-// symmetric key
-
 
 // held in UD
 struct UserData: Decodable, Encodable {
@@ -24,7 +14,6 @@ struct UserData: Decodable, Encodable {
     var username: String
     var passwordHash: String
     var roomsKeys: [String] // from UD joined/created by user
-//    var messagesKeys: [String] // from UD written by user
     
     // create user
     init(username: String, password: String, storage: Storage) throws {
@@ -81,7 +70,7 @@ struct UserData: Decodable, Encodable {
     
     /// Creates the room in UD and returns its encryption key
     /// 0 - room, 1 - symmetric key
-    func createRoom(roomName: String, in storage: Storage, password: String) throws -> (RoomData, SymmetricKey) {
+    func createRoom(roomName: String, in storage: Storage, password: String) throws -> (RoomData, [UInt8]) {
         let res = storage.get(by: "room")
         
         if let rooms = res as? [RoomData] {
@@ -92,8 +81,9 @@ struct UserData: Decodable, Encodable {
             }
         }
         
-        let room = RoomData(roomName: roomName, userUUID: self.uuid, password: password)
-        let roomUserKey: SymmetricKey = try room.getUserEncryptionKey(userUUID: self.uuid, password: password)
+        let room = try RoomData(roomName: roomName)
+        
+        let roomUserKey: [UInt8] = try room.getUserEncryptionKey(userUUID: self.uuid, password: password)
         
         let roomAdded = storage.add(to: "room", data: room)
         if roomAdded {
@@ -101,12 +91,13 @@ struct UserData: Decodable, Encodable {
         } else {
             throw NSError(domain: "Room was not added", code: 409)
         }
+        
     }
     
-    func getAllRoomsJoined(from storage: Storage, password: String) throws -> [(RoomData, SymmetricKey)]? {
+    func getAllRoomsJoined(from storage: Storage, password: String) throws -> [(RoomData, [UInt8])]? {
         let res = storage.get(by: "room")
         
-        var userRooms: [(RoomData, SymmetricKey)] = []
+        var userRooms: [(RoomData, [UInt8])] = []
         
         if let list = res as? [RoomData] {
             for each in list {
@@ -128,16 +119,18 @@ struct UserData: Decodable, Encodable {
         return nil
     }
     
-    func joinRoom(roomName: String, in storage: Storage, password: String) throws -> (RoomData, SymmetricKey) {
+    func joinRoom(roomName: String, in storage: Storage, password: String) throws -> (RoomData, [UInt8]) {
         
         let res = storage.get(by: "room")
         if let list = res as? [RoomData] {
             for each in list {
                 if each.roomName == roomName {
                     // create key of user
-                    let passwordSymKey = Encryptor.prepareKey(key: Encryptor.createKey(password: password))
-                    let newEncryptionKey = Encryptor.createKey()
-                    let newEncryptionKeyEncrypted = Encryptor.encrypt(symKey: passwordSymKey, data: Encryptor.createKey())
+                    let newEncryptionKey = try aes.createKey() as [UInt8]
+                    let newEncryptionKeyEncrypted = try aes.encrypt(
+                        data: newEncryptionKey.toUTF8(),
+                        key: sharedDataManager.currentPasswordKey!
+                    )
                     
                     var newUsersUUIDs = each.usersUUIDs
                     newUsersUUIDs.append(self.uuid)
@@ -156,7 +149,7 @@ struct UserData: Decodable, Encodable {
                     
                     let updated = storage.update(key: "room", data: updateRoom)
                     if updated {
-                        return (updateRoom, Encryptor.prepareKey(key: newEncryptionKey))
+                        return (updateRoom, newEncryptionKey)
                     }
                         
                      break

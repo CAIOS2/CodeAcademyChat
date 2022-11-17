@@ -53,7 +53,7 @@ class RoomViewController: UIViewController {
         \(message.message)
         \(message.date)
         
-        """+"\(n)"
+        """+"\n"
     }
     
 

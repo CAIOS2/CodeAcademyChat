@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CryptoKit
 
 struct MessageOpenData {
     let uuid: String
@@ -21,18 +20,18 @@ struct MessageData: Decodable, Encodable {
     let encryptedUsername: String
     let date: Date
     
-    init(message: String, username: String, symKey: SymmetricKey) {
+    init(message: String, username: String, key: [UInt8]) throws {
         self.uuid = UUID().uuidString
-        self.encryptedMessage = Encryptor.encrypt(symKey: symKey, data: message)
-        self.encryptedUsername = Encryptor.encrypt(symKey: symKey, data: username)
+        self.encryptedMessage = try aes.encrypt(data: message, key: key)
+        self.encryptedUsername = try aes.encrypt(data: message, key: key)
         self.date = Date.now
     }
     
-    func show(using symKey: SymmetricKey) -> MessageOpenData {
+    func show(using key: [UInt8]) throws -> MessageOpenData {
         return MessageOpenData(
             uuid: self.uuid,
-            message: Encryptor.decrypt(symKey: symKey, data: self.encryptedMessage),
-            username: Encryptor.decrypt(symKey: symKey, data: self.encryptedUsername),
+            message: try aes.decrypt(data: self.encryptedMessage, key: key),
+            username: try aes.decrypt(data: self.encryptedUsername, key: key),
             date: self.date
         )
     }
@@ -44,20 +43,3 @@ struct MessageData: Decodable, Encodable {
     // to add a message -> Storage.add(to: key, data: MessageData)
     
 }
-
-//class Message {
-//    let data: MessageData
-//
-//    init(message: String, username: String) {
-//        self.data = MessageData(
-//            uuid: UUID().uuidString,
-//            message: message,
-//            username: username,
-//            date: Date.now
-//        )
-//    }
-//
-//    func
-//
-//
-//}

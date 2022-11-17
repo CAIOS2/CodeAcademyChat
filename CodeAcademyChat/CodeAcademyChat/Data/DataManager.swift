@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CryptoKit
 
 // User logs in
 // Join room - search for room name (ID)
@@ -19,18 +18,6 @@ import CryptoKit
     // password can change
     // get all messages of that user
 
-
-/*
- One data manager would be able to store user data like:
-    username
-    password
-    rooms
-        messages
-        minimal data on users
-        key
-    keys to rooms
-    
- */
 struct ShortUserAccount {
     let uuid: String
     let username: String
@@ -49,10 +36,11 @@ class DataManager {
     // created on user login and be updated while use
     var currentUsername: String? = nil
     var currentPassword: String? = nil
-    var currentRoom: (Room, SymmetricKey)? = nil
+    var currentPasswordKey: [UInt8]? = nil
+    var currentRoom: (Room, [UInt8])? = nil
     
     var user: UserData? = nil
-    var roomsAndKeys: [(Room, SymmetricKey)]? = nil
+    var roomsAndKeys: [(Room, [UInt8])]? = nil
     
     var onlineUsers: [RoomUser]? = nil
     var offlineUsers: [RoomUser]? = nil
@@ -159,9 +147,9 @@ class DataManager {
         self.currentPassword = password
         self.currentUsername = user.username
         self.user = user
-        let roomDataAndKeys: [(RoomData, SymmetricKey)]? = try self.user!.getAllRoomsJoined(from: storage, password: password) ?? nil
+        let roomDataAndKeys: [(RoomData, [UInt8])]? = try self.user!.getAllRoomsJoined(from: storage, password: password) ?? nil
         if roomDataAndKeys != nil {
-            var roomsAndKeys: [(Room, SymmetricKey)] = []
+            var roomsAndKeys: [(Room, [UInt8])] = []
             for each in roomDataAndKeys! {
                 let room = Room(each.0.self)
                 try room.load(in: storage, decrypting: each.1)
@@ -169,6 +157,8 @@ class DataManager {
             }
             self.roomsAndKeys = roomsAndKeys
         }
+        // get key from password
+        self.currentPasswordKey = try aes.createKey(password: password, username: user.username) as [UInt8]
         
         getOnlineOfflineUsers()
         self.storage.setUserLoginData(username: user.username, password: password)
@@ -185,7 +175,7 @@ class DataManager {
     
     func logout() throws {
         self.user!.online = false
-        try self.user!.update(in: self.storage)
+        let _ = try self.user!.update(in: self.storage)
         self.storage.removeUserLoginData()
         emptyIt()
     }

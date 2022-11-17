@@ -1,0 +1,67 @@
+{
+  "Mac" : [
+    {
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)",
+      "hash" : "fa2ff8523fd07626ff851affc800d250edb1dbd553c463264cc107d28927c1b6",
+      "name" : "CryptoSwift",
+      "container" : "CryptoSwift.xcframework",
+      "identifier" : "macos-arm64_x86_64"
+    }
+  ],
+  "watchOS" : [
+    {
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)",
+      "hash" : "917c56097921099fc253885aeb3bdb6123708b8673d9885616c1941c6cd97476",
+      "name" : "CryptoSwift",
+      "container" : "CryptoSwift.xcframework",
+      "identifier" : "watchos-arm64_i386_x86_64-simulator"
+    },
+    {
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)",
+      "hash" : "a76e874a42601e212606e81aa6994545eec64b1497e8adc052f2d8ffbf3a06ae",
+      "name" : "CryptoSwift",
+      "container" : "CryptoSwift.xcframework",
+      "identifier" : "watchos-arm64_arm64_32_armv7k"
+    }
+  ],
+  "tvOS" : [
+    {
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)",
+      "hash" : "d004434a96209eef60da968be8f1dec7246697c3dc5241891362cd87103b6b9f",
+      "name" : "CryptoSwift",
+      "container" : "CryptoSwift.xcframework",
+      "identifier" : "tvos-arm64_x86_64-simulator"
+    },
+    {
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)",
+      "hash" : "fffc6b9dad0d378be68f5faecbadc5df53854d67cb31b4498ead200e5db98e43",
+      "name" : "CryptoSwift",
+      "container" : "CryptoSwift.xcframework",
+      "identifier" : "tvos-arm64"
+    }
+  ],
+  "commitish" : "1.6.0",
+  "iOS" : [
+    {
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)",
+      "hash" : "e2f556c5dd6350ef78f5454c79d2cce9a5f4b15d458e85a3b86dd8b27e48f3f6",
+      "name" : "CryptoSwift",
+      "container" : "CryptoSwift.xcframework",
+      "identifier" : "ios-arm64_x86_64-simulator"
+    },
+    {
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)",
+      "hash" : "8b2230b34c1e1bc5ca5ae6e8679e7fee3dae39be937f9e843d6e67790f03c2f2",
+      "name" : "CryptoSwift",
+      "container" : "CryptoSwift.xcframework",
+      "identifier" : "ios-arm64_x86_64-maccatalyst"
+    },
+    {
+      "swiftToolchainVersion" : "5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)",
+      "hash" : "423028cfee78095636df63f59c2ede7b83fed3fac8278df49aaa95c59c0f7808",
+      "name" : "CryptoSwift",
+      "container" : "CryptoSwift.xcframework",
+      "identifier" : "ios-arm64"
+    }
+  ]
+}

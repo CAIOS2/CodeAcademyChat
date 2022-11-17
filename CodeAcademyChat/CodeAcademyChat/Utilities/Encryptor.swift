@@ -4,80 +4,154 @@
 //
 //  Created by nonamekk on 2022-11-12.
 //
+//  Check https://github.com/krzyzanowskim/CryptoSwift#basics
 
 import Foundation
-import CryptoKit
+import CryptoSwift
 
-class Encryptor {
+let iv = Array("secivvec".utf8)
+let aes = AESCipher()
+
+class AESCipher {
+
     
-    static func encrypt(key: String, data: String) -> String {
-        return Encryptor.encrypt(symKey: prepareKey(key: key), data: data)
-    }
-    
-    static func encrypt(symKey: SymmetricKey, data: String) -> String {
-        let preparedData: Data? = data.data(using: .utf8)
+    /// Encrypts data as text to UTF8
+    /// Data is in UTF8
+    /// Key is in hexString
+    func encrypt(data: String, key: String) throws -> String {
         
-        let sealedBoxData = try! ChaChaPoly.seal(preparedData!, using: symKey).combined
-        let encryptedString = sealedBoxData.base64EncodedString()
-        
-        return encryptedString
-    }
-    
-    static func decrypt(key: String, data: String) -> String {
-        return Encryptor.encrypt(symKey: prepareKey(key: key), data: data)
-    }
-    
-    static func decrypt(symKey: SymmetricKey, data: String) -> String {
-        let cipherData = Data(base64Encoded: data, options: .ignoreUnknownCharacters)
-        
-        let box = try! ChaChaPoly.SealedBox(combined: cipherData!)
-        
-        box.tag.withUnsafeBytes {
-            return Data(Array($0)).base64EncodedString()
+        do {
+            let aes = try AES(key: Array<UInt8>(hex: key), blockMode: CBC(iv: iv), padding: .pkcs7)
+            let input: Data = data.data(using: .utf8)!
+            let encBytes: [UInt8] = try aes.encrypt(input.bytes)
+            return encBytes.toUTF8()
+        } catch let e as NSError {
+            print("encrypt")
+            print(e.self)
+            throw e
         }
         
-        let res = try! ChaChaPoly.open(box, using: symKey)
-        return String(data: res, encoding: .utf8)!
+//        let aes = try AES(key: Array<UInt8>(hex: key), blockMode: CBC(iv: iv), padding: .pkcs7)
+//        let input: Data = data.data(using: .utf8)!
+//        let encBytes: [UInt8] = try aes.encrypt(input.bytes)
+//        return encBytes.toUTF8()
     }
     
-    static func prepareKey(key: String) -> SymmetricKey {
-        guard let symKey = SymmetricKey(base64EncodedString: key) else {
-            precondition(false, "Deserialization of symmetric key failed. res = nil")
+    /// Encrypts data as text to UTF8
+    /// Data is in UTF8
+    func encrypt(data: String, key: [UInt8]) throws -> String {
+        
+        do {
+            let aes = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
+            let input: Data = data.data(using: .utf8)!
+            let encBytes: [UInt8] = try aes.encrypt(input.bytes)
+            return encBytes.toUTF8()
+        } catch let e as NSError {
+            print("encrypt")
+            print(e.self)
+            throw e
         }
-        return symKey
+        
+//        let aes = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
+//        let input: Data = data.data(using: .utf8)!
+//        let encBytes: [UInt8] = try aes.encrypt(input.bytes)
+//        return encBytes.toUTF8()
     }
     
-    static func createKey() -> String {
-        let symKey: SymmetricKey = SymmetricKey(size: .bits256)
-        return symKey.serialize()
+    /// Decrypts data as UTF8 string to text output
+    /// Key is in hexString
+    /// Data is in UTF8
+    func decrypt(data: String, key: String) throws -> String {
         
+        do {
+            let aes = try AES(key: Array<UInt8>(hex: key), blockMode: CBC(iv: iv), padding: .pkcs7)
+            let input: Data = data.data(using: .utf8)!
+            let decBytes: [UInt8] = try aes.decrypt(input.bytes)
+            return decBytes.toUTF8()
+        } catch let e as NSError {
+            print("decrypt")
+            print(e.self)
+            throw e
+        }
+        
+//        let aes = try AES(key: Array<UInt8>(hex: key), blockMode: CBC(iv: iv), padding: .pkcs7)
+//        let input: Data = data.data(using: .utf8)!
+//        let decBytes: [UInt8] = try aes.decrypt(input.bytes)
+//        return decBytes.toUTF8()
     }
     
-    static func createKey(password: String) -> String {
-//        let h = Hashing.hash(password, .SHA256)
-        let h = Hashing.MD5(string: password)
-        let s = SymmetricKey(data: h.data(using: .utf8)!)
-        return s.serialize()
-
+    /// Encrypts data as text to UTF8
+    /// Data is in UTF8
+    func decrypt(data: String, key: [UInt8]) throws -> String {
         
+        do {
+            let aes = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
+            let input: Data = data.data(using: .utf8)!
+            let decBytes: [UInt8] = try aes.decrypt(input.bytes)
+            return decBytes.toUTF8()
+        } catch let e as NSError {
+            print("decrypt")
+            print(e.self)
+            throw e
+        }
+        
+//        let aes = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
+//        let input: Data = data.data(using: .utf8)!
+//        let decBytes: [UInt8] = try aes.decrypt(input.bytes)
+//        return decBytes.toUTF8()
     }
     
+    func createKey(password: String, username: String) throws -> String {
+        let passArray: [UInt8] = Array(password.utf8)
+        let salt: [UInt8] = Array(username.utf8)
         
+        return try createKey(password: passArray, salt: salt)
+            .toHexString()
+    }
+    
+    func createKey(password: String, username: String) throws -> [UInt8] {
+        let passArray: [UInt8] = Array(password.utf8)
+        let salt: [UInt8] = Array(username.utf8)
+        
+        return try createKey(password: passArray, salt: salt)
+    }
+    
+    func createKey(password: [UInt8], salt: [UInt8]) throws -> [UInt8] {
+        let key = try PKCS5.PBKDF2(
+            password: password,
+            salt: salt,
+            iterations: 4096,
+            keyLength: 32, /* AES-256 */
+            variant: .sha2(.sha256)
+        ).calculate()
+        
+        return key
+    }
+    
+    func createKey() throws -> String {
+        let passArray: [UInt8] = Array(Random.string(length: 8).utf8)
+        let salt: [UInt8] = Array(Random.string(length: 8).utf8)
+        
+        return try createKey(password: passArray, salt: salt)
+            .toHexString()
+    }
+    
+    func createKey() throws -> [UInt8] {
+        let passArray: [UInt8] = Array(Random.string(length: 8).utf8)
+        let salt: [UInt8] = Array(Random.string(length: 8).utf8)
+        
+        return try createKey(password: passArray, salt: salt)
+    }
 }
 
-extension SymmetricKey {
-    init?(base64EncodedString: String) {
-        guard let data = Data(base64Encoded: base64EncodedString) else {
-            return nil
-        }
-        
-        self.init(data: data)
-    }
-    
-    func serialize() -> String {
-        return self.withUnsafeBytes {
-            return Data(Array($0)).base64EncodedString()
-        }
+
+let decrypted: [UInt8] = [0x48, 0x65, 0x6c, 0x6c, 0x6f]
+
+
+extension [UInt8] {
+    func toUTF8() -> String {
+        let data = Data(self)
+        let string = String(data: data, encoding: .utf8)!
+        return string
     }
 }
-

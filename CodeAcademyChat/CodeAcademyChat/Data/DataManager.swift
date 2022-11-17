@@ -90,6 +90,14 @@ class DataManager {
         }
     }
     
+    func updateRoomsAndKeys(data: (RoomData, [UInt8])) {
+        if self.roomsAndKeys == nil {
+            self.roomsAndKeys = [(Room(data.0), data.1)]
+        } else {
+            self.roomsAndKeys!.append((Room(data.0), data.1))
+        }
+    }
+    
     func getOnlineOfflineUsers() {
         var savedUsers: [RoomUser] = []
         

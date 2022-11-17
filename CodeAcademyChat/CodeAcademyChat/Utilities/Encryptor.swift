@@ -9,7 +9,7 @@
 import Foundation
 import CryptoSwift
 
-let iv = Array("secivvecsecivvec".utf8)
+let iv = Array("secivvec".utf8)
 let aes = AESCipher()
 
 class AESCipher {
@@ -21,9 +21,10 @@ class AESCipher {
     func encrypt(data: String, key: String) throws -> String {
         
         do {
-            let aes = try AES(key: Array<UInt8>(hex: key), blockMode: CBC(iv: iv), padding: .pkcs7)
+//            let aesCipher = try AES(key: Array<UInt8>(hex: key), blockMode: CBC(iv: iv), padding: .pkcs7)
+            let aesCipher = try Rabbit(key: Array<UInt8>(hex: key), iv: iv)
             let input: Data = data.data(using: .utf8)!
-            let encBytes: [UInt8] = try aes.encrypt(input.bytes)
+            let encBytes: [UInt8] = try aesCipher.encrypt(input.bytes)
             return encBytes.toUTF8()
         } catch let e as NSError {
             print("encrypt")
@@ -42,9 +43,11 @@ class AESCipher {
     func encrypt(data: String, key: [UInt8]) throws -> String {
         
         do {
-            let aes = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
+//            let aesCipher = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
+            print(key.toHexString())
+            let aesCipher = try Rabbit(key: key, iv: iv)
             let input: Data = data.data(using: .utf8)!
-            let encBytes: [UInt8] = try aes.encrypt(input.bytes)
+            let encBytes: [UInt8] = try aesCipher.encrypt(input.bytes)
             return encBytes.toUTF8()
         } catch let e as NSError {
             print("encrypt")
@@ -64,9 +67,12 @@ class AESCipher {
     func decrypt(data: String, key: String) throws -> String {
         
         do {
-            let aes = try AES(key: Array<UInt8>(hex: key), blockMode: CBC(iv: iv), padding: .pkcs7)
+            let aesCipher = try Rabbit(key: Array<UInt8>(hex: key), iv: iv)
+            
             let input: Data = data.data(using: .utf8)!
-            let decBytes: [UInt8] = try aes.decrypt(input.bytes)
+            
+            let decBytes: [UInt8] = try aesCipher.decrypt(input.bytes)
+            
             return decBytes.toUTF8()
         } catch let e as NSError {
             print("decrypt")
@@ -85,9 +91,14 @@ class AESCipher {
     func decrypt(data: String, key: [UInt8]) throws -> String {
         
         do {
-            let aes = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
+            print("decrypt with key UInt8")
+            print("Data: \(data.data(using: .utf8)!.bytes.toHexString())")
+            print("Key: \(key.toHexString())")
+//            let aesCipher = try AES(key: key, blockMode: CBC(iv: iv), padding: .pkcs7)
+            let aesCipher = try Rabbit(key: key, iv: iv)
             let input: Data = data.data(using: .utf8)!
-            let decBytes: [UInt8] = try aes.decrypt(input.bytes)
+            let decBytes: [UInt8] = try aesCipher.decrypt(input.bytes)
+            print(decBytes.toHexString())
             return decBytes.toUTF8()
         } catch let e as NSError {
             print("decrypt")
@@ -114,6 +125,7 @@ class AESCipher {
         let passArray: [UInt8] = Array(Hashing.MD5(string: password).utf8)
         let salt: [UInt8] = Array(username.utf8)
         
+        
         return try createKey(password: passArray, salt: salt)
     }
     
@@ -122,7 +134,7 @@ class AESCipher {
             password: password,
             salt: salt,
             iterations: 4096,
-            keyLength: 32, /* AES-256 */
+            keyLength: 16,
             variant: .sha2(.sha256)
         ).calculate()
         

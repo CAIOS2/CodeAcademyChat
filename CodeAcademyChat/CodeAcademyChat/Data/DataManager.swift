@@ -155,7 +155,7 @@ class DataManager {
         self.currentPasswordKey = try rabbit.createKey(password: password, username: user.username) as [UInt8]
         self.currentUsername = user.username
         self.user = user
-        let roomDataAndKeys: [(RoomData, [UInt8])]? = try self.user!.getAllRoomsJoined(from: storage, password: password) ?? nil
+        let roomDataAndKeys: [(RoomData, [UInt8])]? = try self.user!.getAllRoomsJoined(password: password) ?? nil
         if roomDataAndKeys != nil {
             var roomsAndKeys: [(Room, [UInt8])] = []
             for each in roomDataAndKeys! {
@@ -172,7 +172,7 @@ class DataManager {
     }
     
     func login(username: String, password: String) throws {
-        let user = try UserData(by: username, from: self.storage)
+        let user = try UserData(by: username)
         if Hashing.verify(hash: user.passwordHash, password: password) {
             try userLoadToSelf(user: user, password: password)
         } else {
@@ -182,7 +182,7 @@ class DataManager {
     
     func logout() throws {
         self.user!.online = false
-        let _ = try self.user!.update(in: self.storage)
+        let _ = try self.user!.update()
         self.storage.removeUserLoginData()
         emptyIt()
     }

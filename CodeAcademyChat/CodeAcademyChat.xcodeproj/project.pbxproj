@@ -19,6 +19,12 @@
 		84B4E55E29266BA2002B9627 /* CryptoSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B4E55D29266BA1002B9627 /* CryptoSwift.xcframework */; };
 		84B4E55F29266BA2002B9627 /* CryptoSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84B4E55D29266BA1002B9627 /* CryptoSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		84B4E5622926715A002B9627 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4E5612926715A002B9627 /* Random.swift */; };
+		84B4E5692927A7F8002B9627 /* ViewMessageRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B4E5682927A7F8002B9627 /* ViewMessageRight.xib */; };
+		84B4E56B2927B3ED002B9627 /* ViewMessageLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B4E56A2927B3ED002B9627 /* ViewMessageLeft.xib */; };
+		84B4E5712927BBD4002B9627 /* RightMessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4E5702927BBD4002B9627 /* RightMessageViewCell.swift */; };
+		84B4E5732927BC47002B9627 /* LeftMessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4E5722927BC47002B9627 /* LeftMessageViewCell.swift */; };
+		84B4E5742927F380002B9627 /* CryptoSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B4E55D29266BA1002B9627 /* CryptoSwift.xcframework */; };
+		84B4E5752927F79D002B9627 /* CryptoSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B4E55D29266BA1002B9627 /* CryptoSwift.xcframework */; };
 		84C7317D2916DD4700B4F19A /* AppEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7317C2916DD4700B4F19A /* AppEntryViewController.swift */; };
 		84C7318129170ED400B4F19A /* Hashing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7318029170ED400B4F19A /* Hashing.swift */; };
 		84C73188291AD10A00B4F19A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C73187291AD10A00B4F19A /* HomeViewController.swift */; };
@@ -58,6 +64,10 @@
 		8473CAD4291C5AF800FEAF5D /* ErrorCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCodes.swift; sourceTree = "<group>"; };
 		84B4E55D29266BA1002B9627 /* CryptoSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CryptoSwift.xcframework; path = Carthage/Build/CryptoSwift.xcframework; sourceTree = "<group>"; };
 		84B4E5612926715A002B9627 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
+		84B4E5682927A7F8002B9627 /* ViewMessageRight.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewMessageRight.xib; sourceTree = "<group>"; };
+		84B4E56A2927B3ED002B9627 /* ViewMessageLeft.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewMessageLeft.xib; sourceTree = "<group>"; };
+		84B4E5702927BBD4002B9627 /* RightMessageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightMessageViewCell.swift; sourceTree = "<group>"; };
+		84B4E5722927BC47002B9627 /* LeftMessageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMessageViewCell.swift; sourceTree = "<group>"; };
 		84C7317C2916DD4700B4F19A /* AppEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEntryViewController.swift; sourceTree = "<group>"; };
 		84C7318029170ED400B4F19A /* Hashing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hashing.swift; sourceTree = "<group>"; };
 		84C731862917DCAB00B4F19A /* CodeAcademyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeAcademyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,7 +88,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84B4E5742927F380002B9627 /* CryptoSwift.xcframework in Frameworks */,
 				84B4E55E29266BA2002B9627 /* CryptoSwift.xcframework in Frameworks */,
+				84B4E5752927F79D002B9627 /* CryptoSwift.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +130,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		84B4E56529279500002B9627 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				84B4E5682927A7F8002B9627 /* ViewMessageRight.xib */,
+				84B4E56A2927B3ED002B9627 /* ViewMessageLeft.xib */,
+				84B4E5702927BBD4002B9627 /* RightMessageViewCell.swift */,
+				84B4E5722927BC47002B9627 /* LeftMessageViewCell.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		A0C2A68E29144FA9009A006C = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +153,7 @@
 		A0C2A69929144FA9009A006C /* CodeAcademyChat */ = {
 			isa = PBXGroup;
 			children = (
+				84B4E56529279500002B9627 /* UI */,
 				8473CAD3291C5A7E00FEAF5D /* Utilities */,
 				8473CAC6291C011D00FEAF5D /* Data */,
 				A0C2A69A29144FA9009A006C /* AppDelegate.swift */,
@@ -212,6 +236,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0C2A6A729144FAB009A006C /* LaunchScreen.storyboard in Resources */,
+				84B4E5692927A7F8002B9627 /* ViewMessageRight.xib in Resources */,
+				84B4E56B2927B3ED002B9627 /* ViewMessageLeft.xib in Resources */,
 				A0C2A6A429144FAB009A006C /* Assets.xcassets in Resources */,
 				A0C2A6A229144FA9009A006C /* Main.storyboard in Resources */,
 			);
@@ -227,6 +253,7 @@
 				8473CAD2291C0BA300FEAF5D /* Result.swift in Sources */,
 				8473CACC291C014600FEAF5D /* User.swift in Sources */,
 				A0C2A69F29144FA9009A006C /* ViewController.swift in Sources */,
+				84B4E5712927BBD4002B9627 /* RightMessageViewCell.swift in Sources */,
 				84C7317D2916DD4700B4F19A /* AppEntryViewController.swift in Sources */,
 				8473CACE291C022900FEAF5D /* DataManager.swift in Sources */,
 				846E5348292016F200539A1E /* Extendables.swift in Sources */,
@@ -242,6 +269,7 @@
 				84C7318129170ED400B4F19A /* Hashing.swift in Sources */,
 				8473CAD0291C081500FEAF5D /* Storage.swift in Sources */,
 				8473CAC8291C012D00FEAF5D /* Room.swift in Sources */,
+				84B4E5732927BC47002B9627 /* LeftMessageViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

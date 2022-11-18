@@ -17,6 +17,27 @@ struct RoomMessage {
     var roomUser: RoomUser
     var message: String //unencrypted
     var date: Date
+    
+    func prepareDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY.MM.dd HH:mm"
+        return dateFormatter.string(from: self.date)
+    }
+    
+    func prepareUsername() -> String {
+        var state = "🟢"
+        if !self.roomUser.online {
+            state = "🔴"
+        }
+        return "\(self.roomUser.username)\(state)"
+    }
+    
+    func isMessageSentByUser() -> Bool {
+        if self.roomUser.username != sharedDataManager.currentUsername {
+            return false
+        }
+        return true
+    }
 }
 
 struct RoomData: Decodable, Encodable {
@@ -69,12 +90,12 @@ struct RoomData: Decodable, Encodable {
     }
     
     
-    func load(from storage: Storage, key: [UInt8]) throws -> ([ShortUserAccount], [RoomMessage]?) {
+    func load(using key: [UInt8]) throws -> ([ShortUserAccount], [RoomMessage]?) {
         // get messages by uuid using messagesUUIDs
         // show them using key
         
         // get room from storage
-        let resR = storage.get(by: "room")
+        let resR = sharedDataManager.storage.get(by: "room")
         if let rooms = resR as? [RoomData] {
             // collecting messagesUUID of room
             var messagesUUIDs: [String] = []
@@ -88,7 +109,7 @@ struct RoomData: Decodable, Encodable {
             }
             
             // collect user list that is participating in the room
-            let resU = storage.get(by: "user")
+            let resU = sharedDataManager.storage.get(by: "user")
             if let users = resU as? [UserData] {
                 
                 var roomUsers: [ShortUserAccount] = []
@@ -107,7 +128,7 @@ struct RoomData: Decodable, Encodable {
                 var messagesOpen: [MessageOpenData] = []
                 if !messagesUUIDs.isEmpty {
                     // open messages
-                    let resM = storage.get(by: "message")
+                    let resM = sharedDataManager.storage.get(by: "message")
                     
                     if let messages = resM as? [MessageData] {
                         for message in messages {
@@ -141,7 +162,7 @@ struct RoomData: Decodable, Encodable {
                         return (roomUsers, nil)
                     }
                 } else {
-                    throw NSError(domain: "Cannot collect messages, when they are", code: 500)
+                    return (roomUsers, nil)
                 }
             } else {
                 throw NSError(domain: "No users in the room were found", code: 404)
@@ -152,14 +173,14 @@ struct RoomData: Decodable, Encodable {
             
     }
     
-    func addMessage(to storage: Storage, message: String, username: String, key: [UInt8]) throws -> ([ShortUserAccount], [RoomMessage]?) {
+    func addMessage(message: String, username: String, key: [UInt8]) throws -> ([ShortUserAccount], [RoomMessage]?) {
         let message = try MessageData(message: message, username: username, key: key)
-        let isMessageAdded = storage.add(to: "message", data: message)
+        let isMessageAdded = sharedDataManager.storage.add(to: "message", data: message)
         if !isMessageAdded {
             throw NSError(domain: "Message was not sent", code: 409)
         }
         
-        return try self.load(from: storage, key: key)
+        return try self.load(using: key)
     }
 }
 
@@ -178,13 +199,14 @@ class Room {
     }
     
     func load(in storage: Storage, decrypting key: [UInt8]) throws {
-        let room = try self.data.load(from: storage, key: key)
+        let room = try self.data.load(using: key)
         loadToSelf(messages: room.1, users: room.0)
         
     }
     
-    func addMessage(in storage: Storage, message: String, username: String, key: [UInt8]) throws {
-        let room = try self.data.addMessage(to: storage, message: message, username: username, key: key)
+    func addMessage(message: String, username: String, key: [UInt8]) throws {
+        
+        let room = try self.data.addMessage(message: message, username: username, key: key)
         loadToSelf(messages: room.1, users: room.0)
     }
     

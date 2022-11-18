@@ -52,7 +52,7 @@ class HomeViewController: UIViewController {
         if roomNameTextField.text! != "" {
             do {
                 // (RoomData, [UInt8])
-                try sharedDataManager.user!.createRoom(roomName: roomNameTextField.text!, in: sharedDataManager.storage)
+                try sharedDataManager.user!.createRoom(roomName: roomNameTextField.text!)
             } catch let e as NSError {
                 showError(e.domain)
             }

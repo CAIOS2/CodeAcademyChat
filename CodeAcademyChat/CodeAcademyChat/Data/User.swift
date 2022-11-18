@@ -45,8 +45,8 @@ struct UserData: Decodable, Encodable {
     
     // get user by username
     // wib?
-    init(by username: String, from storage: Storage) throws {
-        let res = storage.get(by: "user")
+    init(by username: String) throws {
+        let res = sharedDataManager.storage.get(by: "user")
         
         if let users = res as? [UserData] {
             for each in users {
@@ -60,9 +60,9 @@ struct UserData: Decodable, Encodable {
     }
     
     // update user in UD and Storage
-    func update(in storage: Storage) throws -> UserData? {
+    func update() throws -> UserData? {
         
-        if storage.update(key: "user", data: self) {
+        if sharedDataManager.storage.update(key: "user", data: self) {
             return self
         }
         throw NSError(domain: "Failed to update user.", code: 500)
@@ -70,8 +70,8 @@ struct UserData: Decodable, Encodable {
     
     /// Creates the room in UD and returns its encryption key
     /// 0 - room, 1 - symmetric key
-    func createRoom(roomName: String, in storage: Storage) throws {
-        let res = storage.get(by: "room")
+    func createRoom(roomName: String) throws {
+        let res = sharedDataManager.storage.get(by: "room")
         
         if let rooms = res as? [RoomData] {
             for each in rooms {
@@ -84,7 +84,7 @@ struct UserData: Decodable, Encodable {
         let room = try RoomData(roomName: roomName)
         
         let roomUserKey: [UInt8] = try room.getUserEncryptionKey(userUUID: self.uuid)
-        let roomAdded = storage.add(to: "room", data: room)
+        let roomAdded = sharedDataManager.storage.add(to: "room", data: room)
         if roomAdded {
             sharedDataManager.updateRoomsAndKeys(data: (room, roomUserKey))
         } else {
@@ -93,8 +93,8 @@ struct UserData: Decodable, Encodable {
         
     }
     
-    func getAllRoomsJoined(from storage: Storage, password: String) throws -> [(RoomData, [UInt8])]? {
-        let res = storage.get(by: "room")
+    func getAllRoomsJoined(password: String) throws -> [(RoomData, [UInt8])]? {
+        let res = sharedDataManager.storage.get(by: "room")
         
         var userRooms: [(RoomData, [UInt8])] = []
         
@@ -118,9 +118,9 @@ struct UserData: Decodable, Encodable {
         return nil
     }
     
-    func joinRoom(roomName: String, in storage: Storage, password: String) throws -> (RoomData, [UInt8]) {
+    func joinRoom(roomName: String, password: String) throws -> (RoomData, [UInt8]) {
         
-        let res = storage.get(by: "room")
+        let res = sharedDataManager.storage.get(by: "room")
         if let list = res as? [RoomData] {
             for each in list {
                 if each.roomName == roomName {
@@ -146,7 +146,7 @@ struct UserData: Decodable, Encodable {
                     )
                     
                     
-                    let updated = storage.update(key: "room", data: updateRoom)
+                    let updated = sharedDataManager.storage.update(key: "room", data: updateRoom)
                     if updated {
                         return (updateRoom, newEncryptionKey)
                     }

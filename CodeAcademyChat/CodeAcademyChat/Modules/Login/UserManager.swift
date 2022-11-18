@@ -16,7 +16,10 @@ struct UserResult {
 
 class UserManager {
     
-    var userList: [User] = [User(username: "Nikita", password: "12345", isOnline: false)]
+    var userList: [User] = [
+        User(username: "Nikita", password: "12345", isOnline: false),
+        User(username: "Paula", password: "11111", isOnline: false)
+    ]
     
     func register(username: String, password: String, confirmPassword: String) -> UserResult {
         guard !username.isEmpty, !password.isEmpty

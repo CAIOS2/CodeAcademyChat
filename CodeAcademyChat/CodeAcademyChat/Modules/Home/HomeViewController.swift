@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainMenuVC: UIViewController {
+class HomeViewController: UIViewController {
     
     
     @IBOutlet weak var joinRoomButton: UIButton!
@@ -15,8 +15,13 @@ class MainMenuVC: UIViewController {
     @IBOutlet weak var showOnlineButton: UIButton!
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var showOfflineButton: UIButton!
+    @IBOutlet weak var roomNameTextField: UITextField!
     
     var user: User!
+    var room: Room!
+    var roomManager = RoomManager()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,16 +53,37 @@ class MainMenuVC: UIViewController {
     
     
     @IBAction func joinRoomButton(_ sender: Any) {
-        let alert = UIAlertController(title: "Error joining room", message: "Room no found", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        present(alert, animated: true)
+        let roomResult = roomManager.getRoom(roomName: roomNameTextField.text!)
+
+        if roomResult.room != nil {
+            let roomViewController = RoomViewController()
+            roomViewController.room = roomResult.room
+            roomViewController.currentUser = user
+
+            navigationController?.present(roomViewController, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Error joining room", message: roomResult.errorMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            present(alert, animated: true)
+        }
     }
     
     
     @IBAction func createRoomButton(_ sender: Any) {
-        let alert = UIAlertController(title: "Error creating room", message: "Room name can't be empty", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default))
-        present(alert, animated: true)
+//
+        let roomViewController = RoomViewController()
+        let roomResult = roomManager.createRoom(roomName: roomNameTextField.text!)
+        roomViewController.room = roomResult.room
+        roomViewController.currentUser = user
+        
+        if let errorMessage = roomResult.errorMessage {
+            let alert = UIAlertController(title: "Error creating room", message: errorMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            present(alert, animated: true)
+        }
+        
+        navigationController?.present(roomViewController, animated: true)
+        
     }
     
     
@@ -67,11 +93,22 @@ class MainMenuVC: UIViewController {
         present(alert, animated: true)
     }
     
+    private func usersOffline(){
+        
+        
+            
+            
+        }
+    }
     
     @IBAction func offlineUsersButton(_ sender: Any) {
         let alert = UIAlertController(title: "Offline users:", message: "#users", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default))
         present(alert, animated: true)
+    }
+    
+    @IBAction private func logoutButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

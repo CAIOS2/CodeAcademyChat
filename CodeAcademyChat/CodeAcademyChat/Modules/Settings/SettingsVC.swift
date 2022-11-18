@@ -17,40 +17,59 @@ class SettingsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
+        updateUI()
+    }
+    
+    private func updateUI(){
         usernameTextLabel.text = user.username
-
-
-        // Do any additional setup after loading the view.
     }
     
     
     @IBAction func editUsername(_ sender: Any) {
         let alert = UIAlertController(title: "Enter your new username", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { UIAlertAction in
-//            self.user.username = "naujas vardas"
+        alert.addTextField { textField in
+            textField.placeholder = "Username"
+        }
+        
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { confirm in
+            guard let newName = alert.textFields?[0].text else {
+                print("Enter username")
+                return
+            }
+            self.user.username = newName
+            self.updateUI()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
-        alert.addTextField { textField in
-            textField.placeholder = "new username"
-        }
+        
         present(alert, animated: true)
     }
     
     
     @IBAction func editPassword(_ sender: Any) {
         let alert = UIAlertController(title: "Enter your new password", message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         alert.addTextField { textField in
             textField.placeholder = "new password"
+            //            textField.isSecureTextEntry = true
         }
         alert.addTextField { textField in
             textField.placeholder = "confirm new password"
+            //            textField.isSecureTextEntry = true
+            
         }
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { _ in
+            
+            guard alert.textFields![0].text == alert.textFields![1].text else {
+                print("password has not match")
+                return
+            }
+            guard let newPassword = alert.textFields?[0].text else {
+                return
+            }
+            self.user.password = newPassword
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
     }
-    
-
 }

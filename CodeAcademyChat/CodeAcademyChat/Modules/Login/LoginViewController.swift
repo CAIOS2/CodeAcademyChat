@@ -7,7 +7,8 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class LoginViewController: UIViewController {
+
     
     enum State {
         case register
@@ -23,6 +24,7 @@ class HomeViewController: UIViewController {
     
     
     var currentState: State = .register
+    
     let users: UserManager = UserManager()
     var userForSegue: User!
     
@@ -33,7 +35,7 @@ class HomeViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toMainMenu" {
-            if let viewController = segue.destination as? MainMenuVC {
+            if let viewController = segue.destination as? HomeViewController {
                 viewController.user = userForSegue
                 userForSegue = nil
                 
@@ -67,8 +69,13 @@ class HomeViewController: UIViewController {
                 password: passwordTextField.text!,
                 confirmPassword: confirmPasswordTextField.text!)
             if let errorMessage = result.errorMessage {
-                errorMessageLabel.text = errorMessage
-                errorMessageLabel.isHidden = false
+                let alert = UIAlertController(title: "Error creating user", message: errorMessage, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                present(alert, animated: true, completion: {
+                    return
+                })
+//                errorMessageLabel.text = errorMessage
+//                errorMessageLabel.isHidden = false
             } else {
                 errorMessageLabel.isHidden = true
             }
@@ -83,13 +90,13 @@ class HomeViewController: UIViewController {
 //            }
             let result = users.login(username: usernameTextField.text!, password: passwordTextField.text!)
             if let errorMessage = result.errorMessage {
-                let alert = UIAlertController(title: "Attention", message: errorMessage, preferredStyle: .alert)
+                let alert = UIAlertController(title: "Error logging in", message: errorMessage, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 present(alert, animated: true, completion: {
                     return
                 })
-                errorMessageLabel.text = errorMessage
-                errorMessageLabel.isHidden = false
+//                errorMessageLabel.text = errorMessage
+//                errorMessageLabel.isHidden = false
             } else {
                 errorMessageLabel.isHidden = true
                 if let user = result.user{

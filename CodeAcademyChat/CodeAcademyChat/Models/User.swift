@@ -9,7 +9,7 @@ import Foundation
 
 class User {
     var username: String
-    let password: String
+    var password: String
     let isOnline: Bool
     
     init(username: String, password: String, isOnline: Bool) {

@@ -1,2 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-CodeAcademyChat/Pods-CodeAcademyChat-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework
+${BUILT_PRODUCTS_DIR}/SwiftyRSA/SwiftyRSA.framework

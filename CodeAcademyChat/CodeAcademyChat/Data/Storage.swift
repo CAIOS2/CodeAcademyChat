@@ -18,6 +18,8 @@ class Storage {
     var users: [UserData]?
     var rooms: [RoomData]?
     var messages: [MessageData]?
+    // Master key
+    
     
     func getUserLoginData() -> (String, String)? {
         if let username = Storage.defaults.string(forKey: "username") {

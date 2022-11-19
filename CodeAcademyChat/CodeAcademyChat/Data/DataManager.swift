@@ -30,8 +30,6 @@ let sharedDataManager = DataManager()
 
 class DataManager {
     
-    static let shared = DataManager()
-    
     var storage: Storage
     // created on user login and be updated while use
     var currentUsername: String? = nil
@@ -44,7 +42,7 @@ class DataManager {
     var onlineUsers: [RoomUser]? = nil
     var offlineUsers: [RoomUser]? = nil
     
-    var shortUserAccounts: [ShortUserAccount]? = nil
+//    var shortUserAccounts: [ShortUserAccount]? = nil
     
     // user enters application
     init() {
@@ -74,21 +72,21 @@ class DataManager {
         return false
     }
     
-    /// Load shorted user data in list to shortUserAccounts
-    /// Contains username and password hash
-    func loadShortUsers() throws {
-        let res = self.storage.get(by: "user")
-        
-        if let users = res as? [UserData] {
-            var list: [ShortUserAccount] = []
-            for user in users {
-                list.append(
-                    ShortUserAccount(uuid: user.uuid, username: user.username, online: user.online, passwordHash: user.passwordHash)
-                )
-            }
-            self.shortUserAccounts = list
-        }
-    }
+//    /// Load shorted user data in list to shortUserAccounts
+//    /// Contains username and password hash
+//    func loadShortUsers() throws {
+//        let res = self.storage.get(by: "user")
+//
+//        if let users = res as? [UserData] {
+//            var list: [ShortUserAccount] = []
+//            for user in users {
+//                list.append(
+//                    ShortUserAccount(uuid: user.uuid, username: user.username, online: user.online, passwordHash: user.passwordHash)
+//                )
+//            }
+//            self.shortUserAccounts = list
+//        }
+//    }
     
     func updateRoomsAndKeys(data: (RoomData, [UInt8])) {
         if self.roomsAndKeys == nil {
@@ -195,7 +193,7 @@ class DataManager {
         self.roomsAndKeys = nil
         self.onlineUsers = nil
         self.offlineUsers = nil
-        self.shortUserAccounts = nil
+//        self.shortUserAccounts = nil
     }
     
     // User must be able to be found to login

@@ -7,4 +7,5 @@ target 'CodeAcademyChat' do
 
   # Pods for CodeAcademyChat
   pod 'CryptoSwift'
+  pod 'SwiftyRSA'
 end

@@ -13,7 +13,7 @@ struct UserData: Decodable, Encodable {
     var online: Bool
     var username: String
     var passwordHash: String
-    var roomsKeys: [String] // from UD joined/created by user
+//    var roomsKeys: [String] // from UD joined/created by user
     
     // create user
     init(username: String, password: String, storage: Storage) throws {
@@ -33,7 +33,7 @@ struct UserData: Decodable, Encodable {
         self.online = true
         self.username = username
         self.passwordHash = Hashing.hash(password)
-        self.roomsKeys = []
+//        self.roomsKeys = []
         
         let creationSuccess = storage.add(to: "user", data: self)
         

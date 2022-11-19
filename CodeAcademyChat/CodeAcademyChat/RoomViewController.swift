@@ -15,9 +15,9 @@ class RoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if sharedDataManager.currentRoom!.0.messages != nil {
+        if sharedDataManager.currentRoom!.messages != nil {
             // Do any additional setup after loading the view.
-            if !sharedDataManager.currentRoom!.0.messages!.isEmpty {
+            if !sharedDataManager.currentRoom!.messages!.isEmpty {
                 messagesListView.dataSource = self
                 messagesListView.register(UINib(nibName: "ViewMessageRight", bundle: nil), forCellReuseIdentifier: "messageRight")
                 messagesListView.register(UINib(nibName: "ViewMessageLeft", bundle: nil), forCellReuseIdentifier: "messageLeft")
@@ -28,9 +28,9 @@ class RoomViewController: UIViewController {
     }
     
     func updateTableView() {
-        if sharedDataManager.currentRoom!.0.messages != nil {
+        if sharedDataManager.currentRoom!.messages != nil {
             // Do any additional setup after loading the view.
-            if !sharedDataManager.currentRoom!.0.messages!.isEmpty {
+            if !sharedDataManager.currentRoom!.messages!.isEmpty {
                 messagesListView.dataSource = self
                 messagesListView.register(UINib(nibName: "ViewMessageRight", bundle: nil), forCellReuseIdentifier: "messageRight")
                 messagesListView.register(UINib(nibName: "ViewMessageLeft", bundle: nil), forCellReuseIdentifier: "messageLeft")
@@ -46,10 +46,10 @@ class RoomViewController: UIViewController {
     func writeMessage() {
         if messageTextField.hasText {
             do {
-                try sharedDataManager.currentRoom!.0.addMessage(
+                try sharedDataManager.currentRoom!.addMessage(
                     message: messageTextField.text!,
                     username: sharedDataManager.currentUsername!,
-                    key: sharedDataManager.currentRoom!.1
+                    key: sharedDataManager.currentRoom!.key
                 )
                 updateTableView()
             } catch let e as NSError {
@@ -68,27 +68,6 @@ class RoomViewController: UIViewController {
         alertController.addAction(alertAction)
         self.present(alertController, animated: true)
     }
-    
-//    func prepareMessage(message: RoomMessage) -> String {
-//        var status = "🟢"
-//        if !message.roomUser.online {
-//            status = "🔴"
-//        }
-//
-//        var messageSide = "<"
-//        if message.roomUser.username != sharedDataManager.currentUsername {
-//            messageSide = ">"
-//        }
-//
-//        return """
-//        \(messageSide)
-//        \(message.roomUser.username) -> \(status)
-//        \(message.message)
-//        \(message.date)
-//
-//        """+"\n"
-//    }
-
 }
 
 var rowsPassed = 0
@@ -96,9 +75,9 @@ var rowsPassed = 0
 extension RoomViewController: UITableViewDataSource {
     /// Returns ammount of table rows required for table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sharedDataManager.currentRoom!.0.messages != nil {
-            if !sharedDataManager.currentRoom!.0.messages!.isEmpty {
-                return sharedDataManager.currentRoom!.0.messages!.count
+        if sharedDataManager.currentRoom!.messages != nil {
+            if !sharedDataManager.currentRoom!.messages!.isEmpty {
+                return sharedDataManager.currentRoom!.messages!.count
             }
         }
         return 0
@@ -106,7 +85,7 @@ extension RoomViewController: UITableViewDataSource {
     
     /// Creates cells for rows
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var ms = sharedDataManager.currentRoom!.0.messages!
+        var ms = sharedDataManager.currentRoom!.messages!
         ms.reverse()
         if ms[indexPath.row].isMessageSentByUser() {
             let cell = tableView.dequeueReusableCell(withIdentifier: "messageRight", for: indexPath) as! RightMessageViewCell

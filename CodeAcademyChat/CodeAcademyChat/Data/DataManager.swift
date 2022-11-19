@@ -34,10 +34,10 @@ class DataManager {
     // created on user login and be updated while use
     var currentUsername: String? = nil
     var currentPasswordKey: [UInt8]? = nil
-    var currentRoom: (Room, [UInt8])? = nil
+    var currentRoom: Room? = nil
     
     var user: UserData? = nil
-    var roomsAndKeys: [(Room, [UInt8])]? = nil
+    var userJoinedRooms: [Room]? = nil
     
     var onlineUsers: [RoomUser]? = nil
     var offlineUsers: [RoomUser]? = nil
@@ -89,21 +89,21 @@ class DataManager {
 //    }
     
     func updateRoomsAndKeys(data: (RoomData, [UInt8])) {
-        if self.roomsAndKeys == nil {
-            self.roomsAndKeys = [(Room(data.0), data.1)]
+        if self.userJoinedRooms == nil {
+            self.userJoinedRooms = [Room(data.0, key: data.1)]
         } else {
-            self.roomsAndKeys!.append((Room(data.0), data.1))
+            self.userJoinedRooms!.append(Room(data.0, key: data.1))
         }
     }
     
     func getOnlineOfflineUsers() {
         var savedUsers: [RoomUser] = []
         
-        if self.roomsAndKeys != nil {
+        if self.userJoinedRooms != nil {
             // check every room
-            for each in self.roomsAndKeys! {
+            for each in self.userJoinedRooms! {
                 // check for every user in room
-                for every in each.0.users! {
+                for every in each.users! {
                     var toAdd = true
                     // check if user is in savedUsers
                 savedUsers: for one in savedUsers {
@@ -155,13 +155,13 @@ class DataManager {
         self.user = user
         let roomDataAndKeys: [(RoomData, [UInt8])]? = try self.user!.getAllRoomsJoined(password: password) ?? nil
         if roomDataAndKeys != nil {
-            var roomsAndKeys: [(Room, [UInt8])] = []
+            var roomsAndKeys: [Room] = []
             for each in roomDataAndKeys! {
-                let room = Room(each.0.self)
-                try room.load(in: storage, decrypting: each.1)
-                roomsAndKeys.append((room, each.1))
+                let room = Room(each.0, key: each.1)
+                try room.load(in: storage, decrypting: room.key)
+                roomsAndKeys.append(room)
             }
-            self.roomsAndKeys = roomsAndKeys
+            self.userJoinedRooms = roomsAndKeys
         }
         
         
@@ -190,7 +190,7 @@ class DataManager {
         self.currentPasswordKey = nil
         self.currentRoom = nil
         self.user = nil
-        self.roomsAndKeys = nil
+        self.userJoinedRooms = nil
         self.onlineUsers = nil
         self.offlineUsers = nil
 //        self.shortUserAccounts = nil

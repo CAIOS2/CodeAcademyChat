@@ -189,13 +189,15 @@ class Room {
     var data: RoomData
     var users: [RoomUser]? = nil
     var messages: [RoomMessage]? = nil
+    var key: [UInt8]
     
     // uuid of user and encrypted key
     // key is the same for every user, encrypted with every user's password
     
     // obtain
-    init(_ roomData: RoomData) {
+    init(_ roomData: RoomData, key: [UInt8]) {
         self.data = roomData
+        self.key = key
     }
     
     func load(in storage: Storage, decrypting key: [UInt8]) throws {

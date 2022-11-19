@@ -30,11 +30,11 @@ class HomeViewController: UIViewController {
     }
     @IBAction func joinRoom(_ sender: Any) {
         if roomNameTextField.text! != "" {
-            let res = sharedDataManager.roomsAndKeys
+            let res = sharedDataManager.userJoinedRooms
             if let roomsAndKeys = res {
                 // there're rooms
                 for each in roomsAndKeys {
-                    if each.0.data.roomName == roomNameTextField.text! {
+                    if each.data.roomName == roomNameTextField.text! {
                         sharedDataManager.currentRoom = each
                         performSegue(withIdentifier: "room", sender: nil)
                     }

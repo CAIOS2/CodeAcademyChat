@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyRSA
 
 enum DataType {
     case User, Room, Message
@@ -14,6 +15,7 @@ enum DataType {
 class Storage {
     // UD - UserDefaults
     static let defaults = UserDefaults.standard
+    var keyPair: (privateKey: PrivateKey, publicKey: PublicKey)? = nil
     // Storage
     var users: [UserData]?
     var rooms: [RoomData]?
@@ -40,12 +42,37 @@ class Storage {
         Storage.defaults.removeObject(forKey: "password")
     }
     
+    func getMasterKeyPair() -> (privateKey: PrivateKey, publicKey: PublicKey)? {
+        if let privateKey = Storage.defaults.string(forKey: "private_key") {
+            if let publicKey = Storage.defaults.string(forKey: "public_key") {
+                return RSA.prepareKey(privateKey: privateKey, publicKey: publicKey)
+            }
+        }
+        return nil
+    }
     
+    func setMasterKeyPair() throws {
+        let keyPair = try RSA.createKeyPair() as (privateKey: PrivateKey, publicKey: PublicKey)
+        
+        Storage.defaults.set(keyPair.privateKey, forKey: "private_key")
+        Storage.defaults.set(keyPair.publicKey, forKey: "public_key")
+    }
     
     
     init() {
         // check if required lists are already created in UD
         updateListsFromUD()
+        if let pair = getMasterKeyPair() {
+            self.keyPair = pair
+        } else {
+            do {
+                try setMasterKeyPair()
+            } catch let e as NSError {
+                fatalError(e.domain)
+            }
+            self.keyPair = getMasterKeyPair()!
+        }
+        
     }
     
     

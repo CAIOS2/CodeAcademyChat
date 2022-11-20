@@ -92,7 +92,7 @@ struct UserData: Decodable, Encodable {
         
     }
     
-    func getAllRoomsJoined(password: String) throws -> [RoomData]? {
+    func getAllRoomsJoined() throws -> [RoomData]? {
         let res = sharedDataManager.storage.get(by: "room")
         
         var userRooms: [RoomData] = []
@@ -117,12 +117,14 @@ struct UserData: Decodable, Encodable {
         return nil
     }
     
-    func joinRoom(roomName: String, password: String) throws -> RoomData {
+    func joinRoom(roomName: String) throws -> RoomData {
         
         let res = sharedDataManager.storage.get(by: "room")
         if let list = res as? [RoomData] {
             for each in list {
                 if each.roomName == roomName {
+                    
+                    
                     
                     var newUsersUUIDs = each.usersUUIDs
                     newUsersUUIDs.append(self.uuid)

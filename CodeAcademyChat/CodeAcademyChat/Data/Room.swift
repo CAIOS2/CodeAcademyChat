@@ -145,7 +145,7 @@ struct RoomData: Decodable, Encodable {
     
     /// Adds encrypted message to UserDefaults
     /// Call from Room
-    func addMessage(message: String, username: String, key: [UInt8]) throws -> (roomUsers: [RoomUser], roomMessages: [RoomMessage]?) {
+    mutating func addMessage(message: String, username: String, key: [UInt8]) throws -> (roomUsers: [RoomUser], roomMessages: [RoomMessage]?) {
         let message = try MessageData(message: message, username: username, key: key)
         let isMessageAdded = sharedDataManager.storage.update(to: "message", data: message)
         if !isMessageAdded {
@@ -159,10 +159,9 @@ struct RoomData: Decodable, Encodable {
         return try self.load(using: key)
     }
     
-    func updateRoomMessagesUUIDs(list: [String]) throws {
-        var room = self
-        room.messagesUUIDs = list
-        if !sharedDataManager.storage.update(to: "room", data: room) {
+    mutating func updateRoomMessagesUUIDs(list: [String]) throws {
+        self.messagesUUIDs = list
+        if !sharedDataManager.storage.update(to: "room", data: self) {
             throw NSError(domain: "UserDefaults didn't receive message update", code: 500)
         }
     }
@@ -183,12 +182,13 @@ class Room {
         self.data = roomData
         do {
             self.key = try rabbit.createKey(password: roomData.roomName, username: roomData.roomName)
+            try load()
         } catch let e as NSError {
             fatalError("Failed to create key of room id: \(data.roomName). Error: \(e.self)")
         }
     }
     
-    func load(in storage: Storage) throws {
+    func load() throws {
         let room = try self.data.load(using: self.key)
         self.messages = room.roomMessages
         self.users = room.roomUsers

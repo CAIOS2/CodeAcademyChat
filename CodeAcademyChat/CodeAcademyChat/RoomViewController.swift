@@ -7,54 +7,30 @@
 
 import UIKit
 
-class RoomViewController: UIViewController {    
-    
-    
+class RoomViewController: UIViewController {
     @IBOutlet weak var roomIdLabel: UILabel!
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var messagesListView: UITableView!
+    
+    var messagesList: [RoomMessage] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if sharedDataManager.currentRoom!.messages != nil {
+            messagesList = sharedDataManager.currentRoom!.messages!
+            print(messagesList.count)
+        }
+        
         
         roomIdLabel.text! = sharedDataManager.currentRoom!.data.roomName
         
-        if sharedDataManager.currentRoom!.messages != nil {
-            // Do any additional setup after loading the view.
-            if !sharedDataManager.currentRoom!.messages!.isEmpty {
-                messagesListView.dataSource = self
-                messagesListView.register(UINib(nibName: "ViewMessageRight", bundle: nil), forCellReuseIdentifier: "messageRight")
-                messagesListView.register(UINib(nibName: "ViewMessageLeft", bundle: nil), forCellReuseIdentifier: "messageLeft")
-            }
-           
-        }
-        
-    }
-    
-    func updateTableView() {
-        if let res = sharedDataManager.storage.get(by: "message") {
-            print((res as! [MessageData]).toJSONString())
-        }
-        
-        if let res = sharedDataManager.storage.get(by: "room") {
-            print((res as! [RoomData]).toJSONString())
-        }
-        if let res = sharedDataManager.storage.get(by: "user") {
-            print((res as! [UserData]).toJSONString())
-        }
-        
-        if sharedDataManager.currentRoom!.messages != nil {
-            // Do any additional setup after loading the view.
-//            if !sharedDataManager.currentRoom!.messages!.isEmpty {
-                messagesListView.dataSource = self
-                messagesListView.register(UINib(nibName: "ViewMessageRight", bundle: nil), forCellReuseIdentifier: "messageRight")
-                messagesListView.register(UINib(nibName: "ViewMessageLeft", bundle: nil), forCellReuseIdentifier: "messageLeft")
-//            } else {
-//                print("its empty")
-//            }
-            
-        } else {
-            print("its nil")
-        }
+        messagesListView.frame = self.view.frame
+        messagesListView.dataSource = self
+        messagesListView.register(UINib(nibName: "ViewMessageRight", bundle: nil), forCellReuseIdentifier: "messageRight")
+        messagesListView.register(UINib(nibName: "ViewMessageLeft", bundle: nil), forCellReuseIdentifier: "messageLeft")
     }
     
     @IBAction func sendMessage(_ sender: Any) {
@@ -64,27 +40,11 @@ class RoomViewController: UIViewController {
     func writeMessage() {
         if messageTextField.hasText {
             do {
-                if let messages = sharedDataManager.storage.get(by: "message") as? [MessageData] {
-                    for each in messages {
-                        do {
-                            var text = try rabbit.encrypt(data: "test", key: sharedDataManager.currentRoom!.key)
-                            print(text)
-                            text = try rabbit.decrypt(hex: text, key: sharedDataManager.currentRoom!.key)
-                            print(text)
-                            let message = try rabbit.decrypt(hex: each.encryptedMessage, key: sharedDataManager.currentRoom!.key)
-                            let username = try rabbit.decrypt(hex: each.encryptedUsername, key: sharedDataManager.currentRoom!.key)
-                            print("Message: \(message)\nUsername: \(username)\n")
-                        } catch let e as NSError {
-                            showError(e.domain)
-                        }
-                    }
-                }
-                
                 try sharedDataManager.currentRoom!.addMessage(
                     message: messageTextField.text!,
                     username: sharedDataManager.currentUsername!
                 )
-                updateTableView()
+                messagesList = sharedDataManager.currentRoom!.messages!
             } catch let e as NSError {
                 print(e.self)
                 showError(e.domain)
@@ -106,17 +66,12 @@ class RoomViewController: UIViewController {
 extension RoomViewController: UITableViewDataSource {
     /// Returns ammount of table rows required for table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sharedDataManager.currentRoom!.messages != nil {
-//            if !sharedDataManager.currentRoom!.messages!.isEmpty {
-                return sharedDataManager.currentRoom!.messages!.count
-//            }
-        }
-        return 0
+        return messagesList.count
     }
     
     /// Creates cells for rows
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var ms = sharedDataManager.currentRoom!.messages!
+        var ms = messagesList
         ms.reverse()
         if ms[indexPath.row].isMessageSentByUser() {
             let cell = tableView.dequeueReusableCell(withIdentifier: "messageRight", for: indexPath) as! RightMessageViewCell

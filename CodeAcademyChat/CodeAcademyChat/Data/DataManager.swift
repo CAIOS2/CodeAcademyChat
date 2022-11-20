@@ -32,7 +32,6 @@ class DataManager {
     var storage: Storage
     // created on user login and be updated while use
     var currentUsername: String? = nil
-    var currentPasswordKey: [UInt8]? = nil
     var currentRoom: Room? = nil
     
     var user: UserData? = nil
@@ -124,15 +123,13 @@ class DataManager {
     
     func userLoadToSelf(userData: UserData, password: String) throws {
         // get key from password
-        self.currentPasswordKey = try rabbit.createKey(password: password, username: userData.username) as [UInt8]
         self.currentUsername = userData.username
         self.user = userData
-        let roomsJoinedByUser: [RoomData]? = try self.user!.getAllRoomsJoined(password: password) ?? nil
+        let roomsJoinedByUser: [RoomData]? = try self.user!.getAllRoomsJoined()
         if roomsJoinedByUser != nil {
             var roomsList: [Room] = []
             for each in roomsJoinedByUser! {
                 let room = Room(each)
-                try room.load(in: storage)
                 roomsList.append(room)
             }
             self.userJoinedRooms = roomsList
@@ -161,7 +158,6 @@ class DataManager {
     
     private func emptyIt() {
         self.currentUsername = nil
-        self.currentPasswordKey = nil
         self.currentRoom = nil
         self.user = nil
         self.userJoinedRooms = nil

@@ -44,7 +44,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="dateTimeLabel" destination="vHd-7b-O2C" id="l04-PE-eE6"/>
-                <outlet property="messageLabel" destination="zY0-GY-ptv" id="Hyv-Wl-9ue"/>
+                <outlet property="messageTextLabel" destination="zY0-GY-ptv" id="N4u-OG-rlo"/>
                 <outlet property="usernameLabel" destination="N4l-qI-lge" id="yyw-xk-2JU"/>
             </connections>
             <point key="canvasLocation" x="646.56488549618314" y="-179.22535211267606"/>

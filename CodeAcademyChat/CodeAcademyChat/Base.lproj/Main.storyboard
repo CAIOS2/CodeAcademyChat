@@ -387,6 +387,9 @@
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Edit"/>
+                                                <connections>
+                                                    <action selector="editUsernameButton:" destination="eye-Hu-C5O" eventType="touchUpInside" id="GiI-pK-jS2"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -405,6 +408,9 @@
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Edit"/>
+                                                <connections>
+                                                    <action selector="editPasswordButton:" destination="eye-Hu-C5O" eventType="touchUpInside" id="vnp-Cb-ZOA"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

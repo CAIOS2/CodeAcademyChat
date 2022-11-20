@@ -233,7 +233,7 @@ class Storage {
         if let prevList = self.users {
             var isUserAdded = false
             for each in prevList {
-                if each.username == user.username {
+                if each.uuid == user.uuid {
                     newList.append(user)
                     isUserAdded = true
                 } else {

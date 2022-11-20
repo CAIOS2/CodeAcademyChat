@@ -150,6 +150,25 @@ struct UserData: Decodable, Encodable {
         throw NSError(domain: "Room was not joined", code: 409)
     }
         
+    mutating func changeUsername(username: String) throws {
+        if let users = sharedDataManager.storage.get(by: "user") as? [UserData] {
+            for each in users {
+                if each.username == username {
+                    throw NSError(domain: "User with such username exist", code: 409)
+                }
+            }
+        }
+        
+        self.username = username
+        let _ = try self.update()
+    }
+    
+    mutating func changePassword(oldPassword: String, newPassword: String) throws {
+        if Hashing.verify(hash: self.passwordHash, password: oldPassword) {
+            self.passwordHash = Hashing.hash(newPassword)
+            let _ = try self.update()
+        }
+    }
     
 }
 

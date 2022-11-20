@@ -15,13 +15,12 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        helloUsername.text = "Hello, \(sharedDataManager.currentUsername!)"
-        navigationController?
-            .setNavigationBarHidden(true, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        helloUsername.text = "Hello, \(sharedDataManager.currentUsername!)"
+        navigationController?
+            .setNavigationBarHidden(true, animated: true)
     }
     
     @IBAction func showOnlineUsersButton(_ sender: Any) {

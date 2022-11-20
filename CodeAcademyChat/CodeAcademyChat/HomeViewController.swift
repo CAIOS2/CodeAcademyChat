@@ -24,6 +24,35 @@ class HomeViewController: UIViewController {
         
     }
     
+    @IBAction func showOnlineUsersButton(_ sender: Any) {
+        showListOfUsers(online: true)
+    }
+    @IBAction func showOfflineUsersButton(_ sender: Any) {
+        showListOfUsers(online: false)
+    }
+    
+    func showListOfUsers(online: Bool) {
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        sharedDataManager.getOnlineOfflineUsers()
+        
+        var title = "Online users"
+        var message = ""
+        if !online {
+            title = "Offline users"
+            for each in sharedDataManager.offlineUsers! {
+                message += "\n\(each.username)"
+            }
+        } else {
+            for each in sharedDataManager.onlineUsers! {
+                message += "\n\(each.username)"
+            }
+        }
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alertController.addAction(alertAction)
+        
+        self.present(alertController, animated: true)
+    }
     
     @IBAction func openSettings(_ sender: Any) {
         performSegue(withIdentifier: "settings", sender: nil)

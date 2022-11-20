@@ -193,6 +193,9 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Show online users"/>
+                                <connections>
+                                    <action selector="showOnlineUsersButton:" destination="uah-V4-pSb" eventType="touchUpInside" id="Gk7-9l-fLi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iS-pe-sab">
                                 <rect key="frame" x="10" y="572.66666666666663" width="370" height="45"/>
@@ -203,6 +206,9 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Show offline users"/>
+                                <connections>
+                                    <action selector="showOfflineUsersButton:" destination="uah-V4-pSb" eventType="touchUpInside" id="YJc-Xg-pLy"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3C-Wq-y9p">
                                 <rect key="frame" x="10" y="627.66666666666663" width="370" height="34.333333333333371"/>

@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message.badge.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dD6-Bl-i1X">
-                                <rect key="frame" x="136.66666666666666" y="142" width="117" height="115.66666666666667"/>
+                                <rect key="frame" x="136.66666666666666" y="142" width="117" height="115.66666666666669"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dD6-Bl-i1X" secondAttribute="height" multiplier="1:1" id="79h-Wt-xMg"/>
                                 </constraints>
@@ -86,12 +86,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lar-Sy-NSc">
-                                <rect key="frame" x="10" y="627.33333333333337" width="370" height="20.333333333333371"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="systemRedColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -101,8 +95,6 @@
                             <constraint firstItem="Wju-ee-5Nk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Eys-mZ-T9n"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="l3c-xT-cev" secondAttribute="trailing" constant="20" id="H87-68-cQX"/>
                             <constraint firstItem="dD6-Bl-i1X" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UyX-E0-aNJ"/>
-                            <constraint firstItem="lar-Sy-NSc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="ZWH-XN-Dyh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lar-Sy-NSc" secondAttribute="trailing" constant="10" id="bLB-wm-SE5"/>
                             <constraint firstItem="dD6-Bl-i1X" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="bMl-yy-XKr"/>
                             <constraint firstItem="dD6-Bl-i1X" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.3" id="hXG-ca-aF3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ke2-x3-As1" secondAttribute="trailing" constant="10" id="iJV-4V-W6N"/>
@@ -110,13 +102,11 @@
                             <constraint firstItem="l3c-xT-cev" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="lgO-IH-ui4"/>
                             <constraint firstItem="l3c-xT-cev" firstAttribute="top" secondItem="ke2-x3-As1" secondAttribute="bottom" constant="10" id="wtS-nD-qbL"/>
                             <constraint firstItem="ke2-x3-As1" firstAttribute="top" secondItem="dD6-Bl-i1X" secondAttribute="bottom" constant="10" id="yc3-T8-9cz"/>
-                            <constraint firstItem="lar-Sy-NSc" firstAttribute="top" secondItem="Wju-ee-5Nk" secondAttribute="bottom" constant="10" id="ycr-fM-OSY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wxS-MG-tcQ"/>
                     <connections>
                         <outlet property="entrySegments" destination="l3c-xT-cev" id="s6t-x0-Qp8"/>
-                        <outlet property="errorMessage" destination="lar-Sy-NSc" id="Ar2-5g-TcP"/>
                         <outlet property="nameTextField" destination="AnR-Vl-eXQ" id="2sW-LR-zuE"/>
                         <outlet property="passwordConfirmationTextField" destination="MqX-Ya-2OS" id="iPv-JC-nY0"/>
                         <outlet property="passwordTextField" destination="k7q-ry-B51" id="ef4-xe-PGN"/>
@@ -139,7 +129,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message.badge.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="LnV-bh-JhP">
-                                <rect key="frame" x="136.66666666666666" y="142" width="117" height="115.66666666666667"/>
+                                <rect key="frame" x="136.66666666666666" y="142" width="117" height="115.66666666666669"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="LnV-bh-JhP" secondAttribute="height" multiplier="1:1" id="DA3-Qb-h4k"/>
                                 </constraints>
@@ -353,6 +343,7 @@
                     <connections>
                         <outlet property="messageTextField" destination="hQz-Pj-7Ue" id="sHn-vv-XsU"/>
                         <outlet property="messagesListView" destination="wcf-FB-WJx" id="U0g-eL-Mwe"/>
+                        <outlet property="roomIdLabel" destination="N3b-w4-rlL" id="STO-bS-TZx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOg-qj-Ddh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

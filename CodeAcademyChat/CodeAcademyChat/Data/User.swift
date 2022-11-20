@@ -16,9 +16,9 @@ struct UserData: Decodable, Encodable {
 //    var roomsKeys: [String] // from UD joined/created by user
     
     // create user
-    init(username: String, password: String, storage: Storage) throws {
+    init(username: String, password: String) throws {
         // check if user already exist
-        let res = storage.get(by: "user")
+        let res = sharedDataManager.storage.get(by: "user")
         
         if let users = res as? [UserData] {
             for each in users {
@@ -35,7 +35,7 @@ struct UserData: Decodable, Encodable {
         self.passwordHash = Hashing.hash(password)
 //        self.roomsKeys = []
         
-        let creationSuccess = storage.add(to: "user", data: self)
+        let creationSuccess = sharedDataManager.storage.update(to: "user", data: self)
         
         if !creationSuccess {
             throw NSError(domain: "Failed to add user", code: 409)
@@ -62,7 +62,7 @@ struct UserData: Decodable, Encodable {
     // update user in UD and Storage
     func update() throws -> UserData? {
         
-        if sharedDataManager.storage.update(key: "user", data: self) {
+        if sharedDataManager.storage.update(to: "user", data: self) {
             return self
         }
         throw NSError(domain: "Failed to update user.", code: 500)
@@ -83,34 +83,33 @@ struct UserData: Decodable, Encodable {
         
         let room = try RoomData(roomName: roomName)
         
-        let roomUserKey: [UInt8] = try room.getUserEncryptionKey(userUUID: self.uuid)
-        let roomAdded = sharedDataManager.storage.add(to: "room", data: room)
+        let roomAdded = sharedDataManager.storage.update(to: "room", data: room)
         if roomAdded {
-            sharedDataManager.updateRoomsAndKeys(data: (room, roomUserKey))
+            sharedDataManager.updateRoomData(data: room)
         } else {
             throw NSError(domain: "Room was not added", code: 409)
         }
         
     }
     
-    func getAllRoomsJoined(password: String) throws -> [(RoomData, [UInt8])]? {
+    func getAllRoomsJoined(password: String) throws -> [RoomData]? {
         let res = sharedDataManager.storage.get(by: "room")
         
-        var userRooms: [(RoomData, [UInt8])] = []
+        var userRooms: [RoomData] = []
         
         if let list = res as? [RoomData] {
-            for each in list {
-                var userIsInTheRoom = false
-                var room: RoomData? = nil
-                innerloop: for every in each.usersUUIDs {
-                    if every == self.uuid {
-                        room = each
-                        userIsInTheRoom = true
-                        break innerloop
+            for room in list {
+                var isUserInTheRoom = false
+                var roomToReturn: RoomData? = nil
+                for id in room.usersUUIDs {
+                    if id == self.uuid {
+                        roomToReturn = room
+                        isUserInTheRoom = true
+                        break
                     }
                 }
-                if userIsInTheRoom {
-                    userRooms.append((room!, try each.getUserEncryptionKey(userUUID: self.uuid)))
+                if isUserInTheRoom {
+                    userRooms.append(roomToReturn!)
                 }
             }
             return userRooms
@@ -118,43 +117,32 @@ struct UserData: Decodable, Encodable {
         return nil
     }
     
-    func joinRoom(roomName: String, password: String) throws -> (RoomData, [UInt8]) {
+    func joinRoom(roomName: String, password: String) throws -> RoomData {
         
         let res = sharedDataManager.storage.get(by: "room")
         if let list = res as? [RoomData] {
             for each in list {
                 if each.roomName == roomName {
-                    // create key of user
-                    let newEncryptionKey = try rabbit.createKey() as [UInt8]
-                    let newEncryptionKeyEncrypted = try rabbit.encrypt(
-                        data: newEncryptionKey.toUTF8(),
-                        key: sharedDataManager.currentPasswordKey!
-                    )
                     
                     var newUsersUUIDs = each.usersUUIDs
                     newUsersUUIDs.append(self.uuid)
-                    
-                    var newUserEncryptionKeys = each.userEncryptionKeys
-                    newUserEncryptionKeys.append("\(self.uuid):\(newEncryptionKeyEncrypted)")
                     
                     let updateRoom: RoomData = RoomData(
                         uuid: each.uuid,
                         roomName: each.roomName,
                         usersUUIDs: newUsersUUIDs,
-                        messagesUUIDs: each.messagesUUIDs,
-                        userEncryptionKeys: newUserEncryptionKeys
+                        messagesUUIDs: each.messagesUUIDs
                     )
                     
                     
-                    let updated = sharedDataManager.storage.update(key: "room", data: updateRoom)
+                    let updated = sharedDataManager.storage.update(to: "room", data: updateRoom)
                     if updated {
-                        return (updateRoom, newEncryptionKey)
+                        return updateRoom
                     }
-                        
-                     break
-                    }
+                    break
                 }
             }
+        }
         throw NSError(domain: "Room was not joined", code: 409)
     }
         

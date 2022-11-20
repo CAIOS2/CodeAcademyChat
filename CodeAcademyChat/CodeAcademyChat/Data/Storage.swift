@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftyRSA
 
 enum DataType {
     case User, Room, Message
@@ -15,14 +14,17 @@ enum DataType {
 class Storage {
     // UD - UserDefaults
     static let defaults = UserDefaults.standard
-    var keyPair: (privateKey: PrivateKey, publicKey: PublicKey)? = nil
     // Storage
     var users: [UserData]?
     var rooms: [RoomData]?
     var messages: [MessageData]?
-    // Master key
     
+    init() {
+        // check if required lists are already created in UD
+        updateListsFromUD()
+    }
     
+    // MARK: User login data
     func getUserLoginData() -> (String, String)? {
         if let username = Storage.defaults.string(forKey: "username") {
             if let password = Storage.defaults.string(forKey: "password") {
@@ -42,46 +44,11 @@ class Storage {
         Storage.defaults.removeObject(forKey: "password")
     }
     
-    func getMasterKeyPair() -> (privateKey: PrivateKey, publicKey: PublicKey)? {
-        if let privateKey = Storage.defaults.string(forKey: "private_key") {
-            if let publicKey = Storage.defaults.string(forKey: "public_key") {
-                return RSA.prepareKey(privateKey: privateKey, publicKey: publicKey)
-            }
-        }
-        return nil
-    }
     
-    func setMasterKeyPair() throws {
-        let keyPair = try RSA.createKeyPair() as (privateKey: PrivateKey, publicKey: PublicKey)
-        
-        Storage.defaults.set(keyPair.privateKey, forKey: "private_key")
-        Storage.defaults.set(keyPair.publicKey, forKey: "public_key")
-    }
-    
-    
-    init() {
-        // check if required lists are already created in UD
-        updateListsFromUD()
-        if let pair = getMasterKeyPair() {
-            self.keyPair = pair
-        } else {
-            do {
-                try setMasterKeyPair()
-            } catch let e as NSError {
-                fatalError(e.domain)
-            }
-            self.keyPair = getMasterKeyPair()!
-        }
-        
-    }
-    
+    // MARK: Public functions - get, add, set, update
     
     /// Get desired list from Storage
-    /// Each time auto-updates existing variables in
-    /// Storage class from UD
     func get(by key: String) -> [Any]? {
-        updateListsFromUD()
-        
         switch key {
         case "user":
             return self.users
@@ -94,24 +61,25 @@ class Storage {
         }
     }
     
-    /// Adds new data to list of key in Storage and UD
-    func add(to key: String, data: Any) -> Bool {
-        switch key {
-        case "user":
-            addUser(user: data as! UserData)
-            return true
-        case "room":
-            addRoom(room: data as! RoomData)
-            return true
-        case "message":
-            addMessage(message: data as! MessageData)
-            return true
-        default:
-            return false
-        }
-    }
+//    /// Adds new data to list of key in Storage and UD
+//    func add(to key: String, data: Any) -> Bool {
+//        switch key {
+//        case "user":
+//            addUser(user: data as! UserData)
+//            return true
+//        case "room":
+//            addRoom(room: data as! RoomData)
+//            return true
+//        case "message":
+//            addMessage(message: data as! MessageData)
+//            return true
+//        default:
+//            return false
+//        }
+//    }
     
-    func set(key: String, data: [Any]) -> Bool {
+    /// Sets data provided to the list of key
+    func set(to key: String, data: [Any]) -> Bool {
         switch key {
         case "user":
             setUsers(list: data as! [UserData])
@@ -127,7 +95,9 @@ class Storage {
         }
     }
     
-    func update(key: String, data: Any) -> Bool {
+    /// Updates existing data by finding it in list of key
+    /// Can add a new element, find existing or add new
+    func update(to key: String, data: Any) -> Bool {
         switch key {
         case "user":
             updateUser(user: data as! UserData)
@@ -143,7 +113,9 @@ class Storage {
         }
     }
     
-    // obtains lists from UD
+    // MARK: - Getting desired list from UserDefaults
+    
+    // obtains lists from UserDefaults
     private func getListUD(key: String) -> [Any]? {
         switch key {
         case "user":
@@ -166,23 +138,19 @@ class Storage {
         }
     }
     
-    
-    
     private func updateListsFromUD() {
-        let _ = getUsersUD()
-        let _ = getRoomsUD()
-        let _ = getMessagesUD()
+        self.users = getUsersUD()
+        self.rooms = getRoomsUD()
+        self.messages = getMessagesUD()
     }
 
-    
     private func getUsersUD() -> [UserData]? {
         if let jUsers = Storage.defaults.string(forKey: "user") {
             if jUsers == "" {
                 return nil
             }
             let users: [UserData]? = instantiate(jsonString: jUsers)
-            self.users = users!
-            return self.users
+            return users!
         }
         return nil
     }
@@ -193,8 +161,7 @@ class Storage {
                 return nil
             }
             let rooms: [RoomData]? = instantiate(jsonString: jRooms)
-            self.rooms = rooms!
-            return self.rooms
+            return rooms!
         }
         return nil
     }
@@ -205,102 +172,123 @@ class Storage {
                 return nil
             }
             let messages: [MessageData]? = instantiate(jsonString: jMessages)
-            self.messages = messages!
-            return self.messages
+            return messages!
         }
         return nil
     }
     
+    // MARK: - Setting to list
+    
     private func setUsers(list: [UserData]) {
-        if !list.isEmpty {
-            Storage.defaults.set(list.toJSONString(), forKey: "user")
-            self.users = list
-        }
+        self.users = list
+        Storage.defaults.set(list.toJSONString(), forKey: "user")
     }
+    
+    private func setRooms(list: [RoomData]) {
+        self.rooms = list
+        Storage.defaults.set(list.toJSONString(), forKey: "room")
+    }
+    
+    private func setMessages(list: [MessageData]) {
+        self.messages = list
+        Storage.defaults.set(list.toJSONString(), forKey: "message")
+    }
+    
+    // MARK: Making new list by adding data and setting
     
     private func addUser(user: UserData) {
         if var newList = self.users {
             newList.append(user)
             setUsers(list: newList)
+        } else {
+            setUsers(list: [user])
         }
-        setUsers(list: [user])
-    }
-    
-    private func setRooms(list: [RoomData]) {
-        if !list.isEmpty {
-            Storage.defaults.set(list.toJSONString(), forKey: "room")
-            self.rooms = list
-        }
+        
     }
     
     private func addRoom(room: RoomData) {
         if var newList = self.rooms {
             newList.append(room)
             setRooms(list: newList)
+        } else {
+            setRooms(list: [room])
         }
-        setRooms(list: [room])
-    }
-    
-    
-    
-    private func setMessages(list: [MessageData]) {
-        if !list.isEmpty {
-            Storage.defaults.set(list.toJSONString(), forKey: "message")
-            self.messages = list
-        }
+        
     }
     
     private func addMessage(message: MessageData) {
         if var newList = self.messages {
             newList.append(message)
             setMessages(list: newList)
+        } else {
+            setMessages(list: [message])
         }
-        setMessages(list: [message])
+        
     }
     
+    // MARK: Making new list by replacing data and setting
+    
     private func updateUser(user: UserData) {
-        let res = getUsersUD()
         var newList: [UserData] = []
-        if let users = res {
-            for each in users {
+        if let prevList = self.users {
+            var isUserAdded = false
+            for each in prevList {
                 if each.username == user.username {
                     newList.append(user)
+                    isUserAdded = true
                 } else {
                     newList.append(each)
                 }
             }
+            if !isUserAdded {
+                newList.append(user)
+            }
+            setUsers(list: newList)
+        } else {
+            setUsers(list: [user])
         }
-        setUsers(list: newList)
     }
     
     private func updateRoom(room: RoomData) {
-        let res = getRoomsUD()
         var newList: [RoomData] = []
-        if let rooms = res {
-            for each in rooms {
+        if let prevList = self.rooms {
+            var isRoomAdded = false
+            for each in prevList {
                 if each.uuid == room.uuid {
                     newList.append(room)
+                    isRoomAdded = true
                 } else {
                     newList.append(each)
                 }
             }
+            if !isRoomAdded {
+                newList.append(room)
+            }
+            setRooms(list: newList)
+        } else {
+            setRooms(list: [room])
         }
-        setRooms(list: newList)
     }
     
     private func updateMessage(message: MessageData) {
-        let res = getMessagesUD()
         var newList: [MessageData] = []
-        if let messages = res {
-            for each in messages {
+        if let prevList = self.messages {
+            var isMessageAdded = false
+            for each in prevList {
                 if each.uuid == message.uuid {
                     newList.append(message)
+                    isMessageAdded = true
                 } else {
                     newList.append(each)
                 }
             }
+            if !isMessageAdded {
+                newList.append(message)
+            }
+            setMessages(list: newList)
+        } else {
+            setMessages(list: [message])
         }
-        setMessages(list: newList)
     }
     
 }

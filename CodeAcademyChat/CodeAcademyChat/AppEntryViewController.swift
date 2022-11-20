@@ -9,15 +9,13 @@ import UIKit
 
 class AppEntryViewController: UIViewController {
     
-    // true is Registration, false is Login
     @IBOutlet weak var entrySegments: UISegmentedControl!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var passwordConfirmationTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
-
-    @IBOutlet weak var errorMessage: UILabel!
+    
     var segmentTitleIsRegistration: Bool = true
     
     @IBAction func segmentedEntryChange(_ sender: Any) {
@@ -26,7 +24,6 @@ class AppEntryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

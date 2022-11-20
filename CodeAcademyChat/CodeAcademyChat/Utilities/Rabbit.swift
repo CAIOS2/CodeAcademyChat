@@ -20,37 +20,34 @@ class RabbitCipher {
     /// Key is hexString
     func encrypt(data: String, key: String) throws -> String {
         let cipher = try Rabbit(key: Array<UInt8>(hex: key), iv: iv)
-        let input: Data = data.data(using: .utf8)!
-        let encBytes: [UInt8] = try cipher.encrypt(input.bytes)
-        return encBytes.toUTF8()
+        let encBytes: [UInt8] = try cipher.encrypt(data.bytes)
+        return encBytes.toHexString()
         
     }
     
     /// Encrypts data as text to UTF8
     /// Data is in UTF8
     func encrypt(data: String, key: [UInt8]) throws -> String {
-                do {
+//                do {
         let cipher = try Rabbit(key: key, iv: iv)
-        let input: Data = data.data(using: .utf8)!
-        let encBytes: [UInt8] = try cipher.encrypt(input.bytes)
-        return encBytes.toUTF8()
-                } catch let e as NSError {
-                    print (e.self)
-                    print(data)
-                    print(key.toHexString())
-                    throw e
-                }
+        let encBytes: [UInt8] = try cipher.encrypt(data.bytes)
+        return encBytes.toHexString()
+//                } catch let e as NSError {
+//                    print (e.self)
+//                    print(data)
+//                    print(key.toHexString())
+//                    throw e
+//                }
     }
     
     /// Decrypts data as UTF8 string to text output
     /// Key is in hexString
     /// Data is in UTF8
-    func decrypt(data: String, key: String) throws -> String {
+    func decrypt(hex: String, key: String) throws -> String {
 //        do {
         let cipher = try Rabbit(key: Array<UInt8>(hex: key), iv: iv)
-        let input: Data = data.data(using: .utf8)!
-        let decBytes: [UInt8] = try cipher.decrypt(input.bytes)
-        return decBytes.toUTF8()
+        let decBytes: [UInt8] = try cipher.decrypt(Array<UInt8>(hex: hex))
+        return decBytes.toHexString()
 //        } catch let e as NSError {
 //            print (e.self)
 //            throw e
@@ -59,12 +56,10 @@ class RabbitCipher {
     }
     
     /// Encrypts data as text to UTF8
-    /// Data is in UTF8
-    func decrypt(data: String, key: [UInt8]) throws -> String {
+    func decrypt(hex: String, key: [UInt8]) throws -> String {
 //        do {
             let cipher = try Rabbit(key: key, iv: iv)
-            let input: Data = data.data(using: .utf8)!
-            let decBytes: [UInt8] = try cipher.decrypt(input.bytes)
+            let decBytes: [UInt8] = try cipher.decrypt(Array<UInt8>(hex: hex))
             return decBytes.toUTF8()
 //        } catch let e as NSError {
 //            print(e.self)

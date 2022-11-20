@@ -45,16 +45,12 @@ struct RoomData: Decodable, Encodable {
     let roomName: String
     var usersUUIDs: [String]
     var messagesUUIDs: [String]
-    // userUUID:EncryptedKey
-    // every key is encrypted with user password
-    var userEncryptionKeys: [String]
     
-    init(uuid: String, roomName: String, usersUUIDs: [String], messagesUUIDs: [String], userEncryptionKeys: [String]) {
+    init(uuid: String, roomName: String, usersUUIDs: [String], messagesUUIDs: [String]) {
         self.uuid = uuid
         self.roomName = roomName
         self.usersUUIDs = usersUUIDs
         self.messagesUUIDs = messagesUUIDs
-        self.userEncryptionKeys = userEncryptionKeys
     }
     
     init(roomName: String) throws {
@@ -63,34 +59,10 @@ struct RoomData: Decodable, Encodable {
         
         self.usersUUIDs = [sharedDataManager.user!.uuid]
         self.messagesUUIDs = []
-        
-//        let key = try aes.createKey(
-//            password: sharedDataManager.currentPassword!,
-//            username: sharedDataManager.currentUsername!
-//        ) as String
-        let key = try rabbit.createKey() as String
-        let encryptedKey = try rabbit.encrypt(data: key, key: sharedDataManager.currentPasswordKey!)
-        
-        self.userEncryptionKeys = ["\(self.usersUUIDs[0]):\(encryptedKey)"]
-    }
-    
-    func getUserEncryptionKey(userUUID: String) throws -> [UInt8] {
-        // userEncryptionKeys are passed in following format:
-        // userUUID:Key
-        for each in self.userEncryptionKeys {
-            let pair = each.split(separator: ":")
-            if String(pair[0]) == userUUID {
-                // encrypt new key with key made from password
-                let key: String = try rabbit.decrypt(data: String(pair[1]), key: sharedDataManager.currentPasswordKey!)
-                return key.bytes
-            }
-        }
-        let error = ErrorCodes(ErrorCode.Unauthorized, message: "Requested key is not found by user UUID: \(userUUID)")
-        throw NSError(domain: error.getString(), code: error.getCode())
     }
     
     
-    func load(using key: [UInt8]) throws -> ([ShortUserAccount], [RoomMessage]?) {
+    func load(using key: [UInt8]) throws -> (roomUsers: [RoomUser], roomMessages: [RoomMessage]?) {
         // get messages by uuid using messagesUUIDs
         // show them using key
         
@@ -112,12 +84,12 @@ struct RoomData: Decodable, Encodable {
             let resU = sharedDataManager.storage.get(by: "user")
             if let users = resU as? [UserData] {
                 
-                var roomUsers: [ShortUserAccount] = []
+                var roomUsers: [RoomUser] = []
                 for user in users {
                 inner: for uuid in self.usersUUIDs {
                     if user.uuid == uuid {
                         roomUsers.append(
-                            ShortUserAccount(uuid: user.uuid, username: user.username, online: user.online, passwordHash: user.passwordHash)
+                            RoomUser(username: user.username, online: user.online)
                         )
                         break inner
                     }
@@ -132,13 +104,11 @@ struct RoomData: Decodable, Encodable {
                     
                     if let messages = resM as? [MessageData] {
                         for message in messages {
-                        inner: for uuid in messagesUUIDs {
-                            if uuid == message.uuid {
-                                
-                                messagesOpen.append(try message.show(using: key))
-                                break inner
+                            for uuid in messagesUUIDs {
+                                if uuid == message.uuid {
+                                    messagesOpen.append(try message.show(using: key))
+                                }
                             }
-                        }
                         }
                         
                         var roomMessages: [RoomMessage] = []
@@ -173,14 +143,28 @@ struct RoomData: Decodable, Encodable {
             
     }
     
-    func addMessage(message: String, username: String, key: [UInt8]) throws -> ([ShortUserAccount], [RoomMessage]?) {
+    /// Adds encrypted message to UserDefaults
+    /// Call from Room
+    func addMessage(message: String, username: String, key: [UInt8]) throws -> (roomUsers: [RoomUser], roomMessages: [RoomMessage]?) {
         let message = try MessageData(message: message, username: username, key: key)
-        let isMessageAdded = sharedDataManager.storage.add(to: "message", data: message)
+        let isMessageAdded = sharedDataManager.storage.update(to: "message", data: message)
         if !isMessageAdded {
             throw NSError(domain: "Message was not sent", code: 409)
         }
+        var newMessagesUUIDs: [String] = self.messagesUUIDs
+        newMessagesUUIDs.append(message.uuid)
+        try updateRoomMessagesUUIDs(list: newMessagesUUIDs)
+        
         
         return try self.load(using: key)
+    }
+    
+    func updateRoomMessagesUUIDs(list: [String]) throws {
+        var room = self
+        room.messagesUUIDs = list
+        if !sharedDataManager.storage.update(to: "room", data: room) {
+            throw NSError(domain: "UserDefaults didn't receive message update", code: 500)
+        }
     }
 }
 
@@ -195,32 +179,24 @@ class Room {
     // key is the same for every user, encrypted with every user's password
     
     // obtain
-    init(_ roomData: RoomData, key: [UInt8]) {
+    init(_ roomData: RoomData) {
         self.data = roomData
-        self.key = key
-    }
-    
-    func load(in storage: Storage, decrypting key: [UInt8]) throws {
-        let room = try self.data.load(using: key)
-        loadToSelf(messages: room.1, users: room.0)
-        
-    }
-    
-    func addMessage(message: String, username: String, key: [UInt8]) throws {
-        
-        let room = try self.data.addMessage(message: message, username: username, key: key)
-        loadToSelf(messages: room.1, users: room.0)
-    }
-    
-    
-    
-    private func loadToSelf(messages: [RoomMessage]?, users: [ShortUserAccount]) {
-        self.messages = messages
-        
-        var roomUsers: [RoomUser] = []
-        for each in users {
-            roomUsers.append(RoomUser(username: each.username, online: each.online))
+        do {
+            self.key = try rabbit.createKey(password: roomData.roomName, username: roomData.roomName)
+        } catch let e as NSError {
+            fatalError("Failed to create key of room id: \(data.roomName). Error: \(e.self)")
         }
-        self.users = roomUsers
+    }
+    
+    func load(in storage: Storage) throws {
+        let room = try self.data.load(using: self.key)
+        self.messages = room.roomMessages
+        self.users = room.roomUsers
+    }
+    
+    func addMessage(message: String, username: String) throws {
+        let room = try self.data.addMessage(message: message, username: username, key: self.key)
+        self.messages = room.roomMessages
+        self.users = room.roomUsers
     }
 }

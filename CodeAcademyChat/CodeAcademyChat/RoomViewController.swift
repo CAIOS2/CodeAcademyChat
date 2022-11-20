@@ -35,6 +35,7 @@ class RoomViewController: UIViewController {
     
     @IBAction func sendMessage(_ sender: Any) {
         writeMessage()
+        self.messagesListView.reloadData()
     }
     
     func writeMessage() {

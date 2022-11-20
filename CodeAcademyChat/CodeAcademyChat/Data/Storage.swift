@@ -61,40 +61,6 @@ class Storage {
         }
     }
     
-//    /// Adds new data to list of key in Storage and UD
-//    func add(to key: String, data: Any) -> Bool {
-//        switch key {
-//        case "user":
-//            addUser(user: data as! UserData)
-//            return true
-//        case "room":
-//            addRoom(room: data as! RoomData)
-//            return true
-//        case "message":
-//            addMessage(message: data as! MessageData)
-//            return true
-//        default:
-//            return false
-//        }
-//    }
-    
-//    /// Sets data provided to the list of key
-//    func set(to key: String, data: [Any]) -> Bool {
-//        switch key {
-//        case "user":
-//            setUsers(list: data as! [UserData])
-//            return true
-//        case "room":
-//            setRooms(list: data as! [RoomData])
-//            return true
-//        case "message":
-//            setMessages(list: data as! [MessageData])
-//            return true
-//        default:
-//            return false
-//        }
-//    }
-    
     /// Updates existing data by finding it in list of key
     /// Can add a new element, find existing or add new
     func update(to key: String, data: Any) -> Bool {

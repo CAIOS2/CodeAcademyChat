@@ -18,3 +18,7 @@ To login user needs to provide:
 
 To join the room user provides:
 - room id
+
+#### Pictures
+<img src="assets/chat.png" height="700">
+<img src="assets/home.png" height="700">

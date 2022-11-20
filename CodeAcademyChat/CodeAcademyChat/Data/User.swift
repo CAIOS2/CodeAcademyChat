@@ -47,11 +47,14 @@ struct UserData: Decodable, Encodable {
     // wib?
     init(by username: String) throws {
         let res = sharedDataManager.storage.get(by: "user")
-        
         if let users = res as? [UserData] {
             for each in users {
                 if each.username == username {
                     self = each
+                    self.online = true
+                    if !sharedDataManager.storage.update(to: "user", data: self) {
+                        throw NSError(domain: "Failed to update user status", code: 409)
+                    }
                     return
                 }
             }
@@ -69,7 +72,6 @@ struct UserData: Decodable, Encodable {
     }
     
     /// Creates the room in UD and returns its encryption key
-    /// 0 - room, 1 - symmetric key
     func createRoom(roomName: String) throws {
         let res = sharedDataManager.storage.get(by: "room")
         

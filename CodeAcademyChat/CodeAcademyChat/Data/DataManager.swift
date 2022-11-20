@@ -135,7 +135,6 @@ class DataManager {
             self.userJoinedRooms = roomsList
         }
         
-        
         getOnlineOfflineUsers()
         self.storage.setUserLoginData(username: userData.username, password: password)
     }

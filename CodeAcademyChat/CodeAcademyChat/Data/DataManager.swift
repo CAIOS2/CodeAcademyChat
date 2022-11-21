@@ -70,48 +70,62 @@ class DataManager {
     }
     
     func getOnlineOfflineUsers() {
-        var savedUsers: [RoomUser] = []
         
-        if self.userJoinedRooms != nil {
-            // check every room
-            for each in self.userJoinedRooms! {
-                // check for every user in room
-                for every in each.users! {
-                    var toAdd = true
-                    // check if user is in savedUsers
-                savedUsers: for one in savedUsers {
-                        if one.username == every.username {
-                            toAdd = false
-                            break savedUsers
+        if let rooms = storage.get(by: "room") as? [RoomData] {
+            if let users = storage.get(by: "user") as? [UserData] {
+                
+                var usersList: [UserData] = []
+                var roomJoinedByUser: [RoomData] = []
+                
+                // in each room
+                for each in rooms {
+                    for uuid in each.usersUUIDs {
+                        // check if current user in in the room
+                        if uuid == sharedDataManager.user!.uuid {
+                            roomJoinedByUser.append(each)
+                            break
                         }
                     }
-                    if toAdd {
-                        savedUsers.append(every)
+                }
+                
+                for each in roomJoinedByUser {
+                    
+                    for uuid in each.usersUUIDs {
+                        var isUserInList = false
+                        for userInList in usersList {
+                            if userInList.uuid == uuid {
+                                isUserInList = true
+                                break
+                            }
+                        }
+                        if !isUserInList {
+                            for user in users {
+                                if user.uuid == uuid {
+                                    usersList.append(user)
+                                    break
+                                }
+                            }
+                        }
                     }
                 }
+                
+                var onlineUsers: [RoomUser] = []
+                var offlineUsers: [RoomUser] = []
+                
+                for each in usersList {
+                    if each.online {
+                        onlineUsers.append(RoomUser(username: each.username, online: each.online))
+                    } else {
+                        offlineUsers.append(RoomUser(username: each.username, online: each.online))
+                    }
+                }
+                
+                self.onlineUsers = onlineUsers
+                self.offlineUsers = offlineUsers
             }
-        }
-        
-        
-        // collect online/offline users
-        var onlineUsers: [RoomUser] = []
-        var offlineUsers: [RoomUser] = []
-        
-        for each in savedUsers {
-            if each.online {
-                onlineUsers.append(each)
-            } else {
-                offlineUsers.append(each)
-            }
-        }
-        // set to self
-        self.onlineUsers = onlineUsers
-        self.offlineUsers = offlineUsers
-        
-        if self.onlineUsers!.isEmpty {
-            self.onlineUsers = [(
-                RoomUser(username: self.currentUsername!, online: true)
-            )]
+        } else {
+            self.onlineUsers = [RoomUser(username: sharedDataManager.currentUsername!, online: true)]
+            self.offlineUsers = []
         }
     }
     

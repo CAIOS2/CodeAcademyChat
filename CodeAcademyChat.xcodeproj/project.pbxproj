@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41E6C2172922B4A9008F59CC /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6C2162922B4A9008F59CC /* RoomManager.swift */; };
+		41E6C2192922B4ED008F59CC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6C2182922B4ED008F59CC /* Message.swift */; };
+		41E6C21B2922B546008F59CC /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E6C21A2922B546008F59CC /* Room.swift */; };
 		A03C81E3291C2EAC00B08DB5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */; };
 		A08A1A4E291D8EFA006CB563 /* RoomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A08A1A4D291D8EFA006CB563 /* RoomView.xib */; };
 		A08A1A50291D8F4E006CB563 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */; };
-		C14F5CB12922B99300A1BEDA /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14F5CAE2922B99300A1BEDA /* Room.swift */; };
-		C14F5CB22922B99300A1BEDA /* RoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14F5CAF2922B99300A1BEDA /* RoomManager.swift */; };
-		C14F5CB32922B99300A1BEDA /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14F5CB02922B99300A1BEDA /* Message.swift */; };
 		C1734B4B291969080058AFD5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4A291969080058AFD5 /* AppDelegate.swift */; };
 		C1734B4D291969080058AFD5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4C291969080058AFD5 /* SceneDelegate.swift */; };
 		C1734B4F291969080058AFD5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1734B4E291969080058AFD5 /* LoginViewController.swift */; };
@@ -25,12 +25,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		41E6C2162922B4A9008F59CC /* RoomManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
+		41E6C2182922B4ED008F59CC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		41E6C21A2922B546008F59CC /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A08A1A4D291D8EFA006CB563 /* RoomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoomView.xib; sourceTree = "<group>"; };
 		A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
-		C14F5CAE2922B99300A1BEDA /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
-		C14F5CAF2922B99300A1BEDA /* RoomManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomManager.swift; sourceTree = "<group>"; };
-		C14F5CB02922B99300A1BEDA /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		C1734B47291969080058AFD5 /* CodeAcademyChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeAcademyChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1734B4A291969080058AFD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1734B4C291969080058AFD5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,37 +55,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C14F5CB52923F47200A1BEDA /* Modules */ = {
+		4146EA6C2923F4B5000A4055 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				C14F5CB62923F47C00A1BEDA /* Home */,
-				C14F5CB82923F4CF00A1BEDA /* Login */,
-				C14F5CB72923F4A500A1BEDA /* Room */,
-				C14F5CBA2923F50700A1BEDA /* Settings */,
+				4146EA6F2923F4F2000A4055 /* Home */,
+				4146EA702923F542000A4055 /* Settings */,
+				4146EA6E2923F4E0000A4055 /* Login */,
+				4146EA6D2923F4CD000A4055 /* Room */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		C14F5CB62923F47C00A1BEDA /* Home */ = {
+		4146EA6D2923F4CD000A4055 /* Room */ = {
 			isa = PBXGroup;
 			children = (
-				C1734B65291AD0300058AFD5 /* HomeViewController.swift */,
-				C14F5CAF2922B99300A1BEDA /* RoomManager.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		C14F5CB72923F4A500A1BEDA /* Room */ = {
-			isa = PBXGroup;
-			children = (
-				C14F5CAE2922B99300A1BEDA /* Room.swift */,
-				A08A1A4D291D8EFA006CB563 /* RoomView.xib */,
 				A08A1A4F291D8F4E006CB563 /* RoomViewController.swift */,
+				41E6C21A2922B546008F59CC /* Room.swift */,
+				A08A1A4D291D8EFA006CB563 /* RoomView.xib */,
 			);
 			path = Room;
 			sourceTree = "<group>";
 		};
-		C14F5CB82923F4CF00A1BEDA /* Login */ = {
+		4146EA6E2923F4E0000A4055 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				C1734B6329198D110058AFD5 /* UserManager.swift */,
@@ -94,16 +85,16 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		C14F5CB92923F4E800A1BEDA /* Models */ = {
+		4146EA6F2923F4F2000A4055 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				C14F5CB02922B99300A1BEDA /* Message.swift */,
-				C1734B6129198C940058AFD5 /* User.swift */,
+				C1734B65291AD0300058AFD5 /* HomeViewController.swift */,
+				41E6C2162922B4A9008F59CC /* RoomManager.swift */,
 			);
-			path = Models;
+			path = Home;
 			sourceTree = "<group>";
 		};
-		C14F5CBA2923F50700A1BEDA /* Settings */ = {
+		4146EA702923F542000A4055 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				A03C81E2291C2EAC00B08DB5 /* SettingsViewController.swift */,
@@ -111,13 +102,22 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		C14F5CBB2923FD3400A1BEDA /* Screens */ = {
+		4146EA712923FF34000A4055 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C1734B552919690A0058AFD5 /* LaunchScreen.storyboard */,
-				C1734B50291969080058AFD5 /* Main.storyboard */,
+				41E6C2182922B4ED008F59CC /* Message.swift */,
+				C1734B6129198C940058AFD5 /* User.swift */,
 			);
-			name = Screens;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		41E6C20F292258DB008F59CC /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				C1734B50291969080058AFD5 /* Main.storyboard */,
+				C1734B552919690A0058AFD5 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		C1734B3E291969080058AFD5 = {
@@ -139,13 +139,13 @@
 		C1734B49291969080058AFD5 /* CodeAcademyChat */ = {
 			isa = PBXGroup;
 			children = (
-				C14F5CB92923F4E800A1BEDA /* Models */,
-				C14F5CB52923F47200A1BEDA /* Modules */,
-				C14F5CBB2923FD3400A1BEDA /* Screens */,
+				4146EA712923FF34000A4055 /* Models */,
+				4146EA6C2923F4B5000A4055 /* Modules */,
+				41E6C20F292258DB008F59CC /* Storyboards */,
 				C1734B4A291969080058AFD5 /* AppDelegate.swift */,
-				C1734B532919690A0058AFD5 /* Assets.xcassets */,
-				C1734B582919690A0058AFD5 /* Info.plist */,
 				C1734B4C291969080058AFD5 /* SceneDelegate.swift */,
+				C1734B582919690A0058AFD5 /* Info.plist */,
+				C1734B532919690A0058AFD5 /* Assets.xcassets */,
 			);
 			path = CodeAcademyChat;
 			sourceTree = "<group>";
@@ -223,16 +223,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1734B6229198C940058AFD5 /* User.swift in Sources */,
+				41E6C2172922B4A9008F59CC /* RoomManager.swift in Sources */,
 				C1734B4F291969080058AFD5 /* LoginViewController.swift in Sources */,
 				A03C81E3291C2EAC00B08DB5 /* SettingsViewController.swift in Sources */,
 				C1734B4B291969080058AFD5 /* AppDelegate.swift in Sources */,
 				C1734B6429198D110058AFD5 /* UserManager.swift in Sources */,
-				C14F5CB12922B99300A1BEDA /* Room.swift in Sources */,
-				C14F5CB32922B99300A1BEDA /* Message.swift in Sources */,
-				C14F5CB22922B99300A1BEDA /* RoomManager.swift in Sources */,
 				C1734B4D291969080058AFD5 /* SceneDelegate.swift in Sources */,
+				41E6C2192922B4ED008F59CC /* Message.swift in Sources */,
 				C1734B66291AD0300058AFD5 /* HomeViewController.swift in Sources */,
 				A08A1A50291D8F4E006CB563 /* RoomViewController.swift in Sources */,
+				41E6C21B2922B546008F59CC /* Room.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

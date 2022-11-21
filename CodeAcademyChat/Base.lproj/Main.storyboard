@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bubble.left.and.bubble.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dD6-Bl-i1X">
-                                <rect key="frame" x="136.66666666666666" y="97" width="117" height="117.66666666666667"/>
+                                <rect key="frame" x="136.66666666666666" y="97" width="117" height="117.66666666666669"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dD6-Bl-i1X" secondAttribute="height" multiplier="1:1" id="79h-Wt-xMg"/>
                                 </constraints>
@@ -131,14 +131,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome, x!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQm-OD-T7b">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQm-OD-T7b">
                                 <rect key="frame" x="12" y="199" width="366" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UKR-AP-SQF">
-                                <rect key="frame" x="136.66666666666666" y="77" width="117" height="117.66666666666667"/>
+                                <rect key="frame" x="136.66666666666666" y="77" width="117" height="117.66666666666669"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="UKR-AP-SQF" secondAttribute="height" multiplier="1:1" id="k6L-IK-dNr"/>
                                 </constraints>
@@ -284,7 +284,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bfe-jV-cuf"/>
                     <connections>
-                        <outlet property="roomIdTextField" destination="pOD-8V-cCQ" id="zXL-3s-8jF"/>
+                        <outlet property="roomIdTextField" destination="pOD-8V-cCQ" id="yhw-So-g4y"/>
                         <outlet property="welcomeLabel" destination="BQm-OD-T7b" id="Qku-fZ-mth"/>
                     </connections>
                 </viewController>
@@ -327,18 +327,20 @@
                                 <color key="textColor" systemColor="systemBlueColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0G-SY-3OL">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E0G-SY-3OL">
                                 <rect key="frame" x="16" y="397" width="358" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2f3-fP-8Vy"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Message history">
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Message history">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <buttonConfiguration key="configuration" style="plain" title="Message history">
                                     <backgroundConfiguration key="background" cornerRadius="10">
                                         <color key="backgroundColor" systemColor="systemBlueColor"/>
                                     </backgroundConfiguration>
-                                    <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
-                                    <color key="baseBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTM-ba-oH6">

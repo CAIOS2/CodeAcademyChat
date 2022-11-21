@@ -32,7 +32,7 @@ class RoomManager {
 //                           onlineUsers: [loggedUserName],
 //                           offlineUsers: [],
 //                           messageHistory: [],
-                           message: [])
+                           messages: [])
         roomList.append(newRoom)
         return RoomResult(room: newRoom, errorMessage: "")
     }

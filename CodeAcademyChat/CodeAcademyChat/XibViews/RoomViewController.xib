@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="helloLabel" destination="ptP-NM-KKx" id="EIt-PV-jdm"/>
                 <outlet property="inputTextField" destination="97f-HP-0nr" id="sYJ-AE-XOh"/>
+                <outlet property="messageTextField" destination="97f-HP-0nr" id="uyj-CO-IIy"/>
                 <outlet property="sendButton" destination="CwR-OO-OO5" id="13t-jS-LAr"/>
                 <outlet property="textArea" destination="b5A-3t-wac" id="zwl-zm-UxZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -31,7 +32,10 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CwR-OO-OO5">
                     <rect key="frame" x="24" y="759" width="345" height="35"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Send message"/>
+                    <connections>
+                        <action selector="saveButtonPressed:" destination="-1" eventType="touchUpInside" id="aTj-kv-FMY"/>
+                    </connections>
                 </button>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="97f-HP-0nr">
                     <rect key="frame" x="24" y="701" width="345" height="34"/>

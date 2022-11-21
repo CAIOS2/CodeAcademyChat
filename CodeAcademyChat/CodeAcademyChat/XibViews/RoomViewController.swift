@@ -33,20 +33,33 @@ class RoomViewController: UIViewController {
     }
     
     func getRoomMesssages() {
-        //        let messageList = currentRoom.getMessages()
-        //  print(messageList)
         
-        var messageList: [String] = []
-        for message in currentRoom.messages {
-            let fullMessage =   """
-                                Date: \(message.datetime) \n
-                                User: \(message.username) \n
-                                Message: \(message.content)\n
-                                
-                                """
-            messageList.append(fullMessage)
-        }
-        textArea.text = messageList.joined(separator: "-- -- -- -- -- -- -- \n \n")
+        // version :: with function getMessages()
+        let messageList = currentRoom.getMessages()
+        let messageContents = messageList.map {
+                                    """
+                                    Date: \($0.datetime)
+                                    
+                                    User: \($0.username)
+                                    
+                                    Message: \($0.content)
+                                    """
+                }
+        textArea.text = messageContents.joined(separator: "\n------------------- \n\n")
+        
+
+        // version:: without getMessages()
+//        var messageList: [String] = []
+//        for message in currentRoom.messages {
+//            let fullMessage =   """
+//                                Date: \(message.datetime) \n
+//                                User: \(message.username) \n
+//                                Message: \(message.content)\n
+//
+//                                """
+//            messageList.append(fullMessage)
+//        }
+//        textArea.text = messageList.joined(separator: "-- -- -- -- -- -- -- \n \n")
     }
     
     

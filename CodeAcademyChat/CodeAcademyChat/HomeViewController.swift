@@ -98,30 +98,6 @@ class HomeViewController: UIViewController {
             } catch let e as NSError {
                 showError(e.domain)
             }
-            
-//            let res = sharedDataManager.userJoinedRooms
-//            if let roomsAndKeys = res {
-//                // there're rooms
-//                var isRoomJoinedPreviously = false
-//                for each in roomsAndKeys {
-//                    if each.data.roomName == roomNameTextField.text! {
-//                        sharedDataManager.currentRoom = each
-//                        isRoomJoinedPreviously = true
-//                        performSegue(withIdentifier: "room", sender: nil)
-//                    }
-//                }
-//                if !isRoomJoinedPreviously {
-//                    do {
-//                        let updatedRoom = try sharedDataManager.user!.joinRoom(roomName: roomNameTextField.text!)
-//                        sharedDataManager.currentRoom = Room(updatedRoom)
-//                        performSegue(withIdentifier: "room", sender: nil)
-//                    } catch let e as NSError {
-//                        showError("No room with such id, \(e.domain)")
-//                    }
-//                }
-//            } else {
-//                showError("No rooms to join")
-//            }
         } else {
             showError("Set the room id to join")
         }

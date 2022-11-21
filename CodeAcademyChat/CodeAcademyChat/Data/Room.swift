@@ -196,38 +196,6 @@ class Room {
         }
     }
     
-//    func loadMessages() {
-//        let res = defaults.string(forKey: "message")
-//        let list = instantiate(jsonString: res!) as [MessageData]?
-//
-//        var messagesOfRoom: [RoomMessage]
-//
-//        if let messages = list {
-//            for each in messages {
-//                print(each.uuid)
-//                print(
-//                    try rabbit.decrypt(
-//                        hex: each.encryptedMessage,
-//                        key: try rabbit.createKey(
-//                            password: roomNameTextField.text!,
-//                            username: roomNameTextField.text!
-//                        ) as [UInt8]
-//                    ) as String
-//                )
-//                print(
-//                    try rabbit.decrypt(
-//                        hex: each.encryptedUsername,
-//                        key: try rabbit.createKey(
-//                            password: roomNameTextField.text!,
-//                            username: roomNameTextField.text!
-//                        ) as [UInt8]
-//                    ) as String
-//                )
-//                print(each.date)
-//            }
-//        }
-//    }
-    
     func load() throws {
         let room = try self.data.load(using: self.key)
         self.messages = room.roomMessages
@@ -244,6 +212,5 @@ class Room {
         let room = try self.data.addMessage(message: message, username: username, key: self.key)
         self.messages = room.roomMessages
         self.users = room.roomUsers
-//        sharedDataManager.currentRoom = self
     }
 }

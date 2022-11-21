@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0FEDDA814F557A9033AA8CB2 /* Pods_CodeAcademyChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE91D404874818FE9D4076F /* Pods_CodeAcademyChat.framework */; };
 		846E5348292016F200539A1E /* Extendables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846E5347292016F200539A1E /* Extendables.swift */; };
 		846E534A29202D1300539A1E /* Rabbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846E534929202D1300539A1E /* Rabbit.swift */; };
 		8473CAC8291C012D00FEAF5D /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8473CAC7291C012D00FEAF5D /* Room.swift */; };
@@ -64,7 +63,6 @@
 		A0C2A6A629144FAB009A006C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0C2A6A829144FAB009A006C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AAF27AFE49C1CEF30FB7E085 /* Pods-CodeAcademyChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodeAcademyChat.release.xcconfig"; path = "Target Support Files/Pods-CodeAcademyChat/Pods-CodeAcademyChat.release.xcconfig"; sourceTree = "<group>"; };
-		BCE91D404874818FE9D4076F /* Pods_CodeAcademyChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CodeAcademyChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3F9FACCC4B098240F02A34 /* Pods-CodeAcademyChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CodeAcademyChat.debug.xcconfig"; path = "Target Support Files/Pods-CodeAcademyChat/Pods-CodeAcademyChat.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,7 +71,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FEDDA814F557A9033AA8CB2 /* Pods_CodeAcademyChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,7 +105,6 @@
 		84B4E55C29266BA1002B9627 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BCE91D404874818FE9D4076F /* Pods_CodeAcademyChat.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -455,7 +451,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CodeAcademyChat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -484,7 +480,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CodeAcademyChat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

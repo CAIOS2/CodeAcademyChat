@@ -7,14 +7,13 @@
 
 import Foundation
 
+let defaults = UserDefaults.standard
+
 enum DataType {
     case User, Room, Message
 }
 
 class Storage {
-    // UD - UserDefaults
-    static let defaults = UserDefaults.standard
-    // Storage
     var users: [UserData]?
     var rooms: [RoomData]?
     var messages: [MessageData]?
@@ -26,8 +25,8 @@ class Storage {
     
     // MARK: User login data
     func getUserLoginData() -> (String, String)? {
-        if let username = Storage.defaults.string(forKey: "username") {
-            if let password = Storage.defaults.string(forKey: "password") {
+        if let username = defaults.string(forKey: "username") {
+            if let password = defaults.string(forKey: "password") {
                 return (username, password)
             }
         }
@@ -35,13 +34,13 @@ class Storage {
     }
     
     func setUserLoginData(username: String, password: String) {
-        Storage.defaults.set(username, forKey: "username")
-        Storage.defaults.set(password, forKey: "password")
+        defaults.set(username, forKey: "username")
+        defaults.set(password, forKey: "password")
     }
     
     func removeUserLoginData() {
-        Storage.defaults.removeObject(forKey: "username")
-        Storage.defaults.removeObject(forKey: "password")
+        defaults.removeObject(forKey: "username")
+        defaults.removeObject(forKey: "password")
     }
     
     
@@ -111,7 +110,7 @@ class Storage {
     }
 
     private func getUsersUD() -> [UserData]? {
-        if let jUsers = Storage.defaults.string(forKey: "user") {
+        if let jUsers = defaults.string(forKey: "user") {
             if jUsers == "" {
                 return nil
             }
@@ -122,7 +121,7 @@ class Storage {
     }
 
     private func getRoomsUD() -> [RoomData]? {
-        if let jRooms = Storage.defaults.string(forKey: "room") {
+        if let jRooms = defaults.string(forKey: "room") {
             if jRooms == "" {
                 return nil
             }
@@ -133,7 +132,7 @@ class Storage {
     }
 
     private func getMessagesUD() -> [MessageData]? {
-        if let jMessages = Storage.defaults.string(forKey: "messages") {
+        if let jMessages = defaults.string(forKey: "messages") {
             if jMessages == "" {
                 return nil
             }
@@ -147,17 +146,17 @@ class Storage {
     
     private func setUsers(list: [UserData]) {
         self.users = list
-        Storage.defaults.set(list.toJSONString(), forKey: "user")
+        defaults.set(list.toJSONString(), forKey: "user")
     }
     
     private func setRooms(list: [RoomData]) {
         self.rooms = list
-        Storage.defaults.set(list.toJSONString(), forKey: "room")
+        defaults.set(list.toJSONString(), forKey: "room")
     }
     
     private func setMessages(list: [MessageData]) {
         self.messages = list
-        Storage.defaults.set(list.toJSONString(), forKey: "message")
+        defaults.set(list.toJSONString(), forKey: "message")
     }
     
     // MARK: Making new list by adding data and setting

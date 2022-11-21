@@ -25,6 +25,8 @@ struct MessageData: Decodable, Encodable {
         self.encryptedMessage = try rabbit.encrypt(data: message, key: key)
         self.encryptedUsername = try rabbit.encrypt(data: username, key: key)
         self.date = Date.now
+        
+        let _ = sharedDataManager.storage.update(to: "message", data: self)
     }
     
     func show(using key: [UInt8]) throws -> MessageOpenData {

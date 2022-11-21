@@ -56,31 +56,72 @@ class HomeViewController: UIViewController {
     @IBAction func openSettings(_ sender: Any) {
         performSegue(withIdentifier: "settings", sender: nil)
     }
+    
     @IBAction func joinRoom(_ sender: Any) {
         if roomNameTextField.text! != "" {
-            let res = sharedDataManager.userJoinedRooms
-            if let roomsAndKeys = res {
-                // there're rooms
-                var isRoomJoinedPreviously = false
-                for each in roomsAndKeys {
-                    if each.data.roomName == roomNameTextField.text! {
-                        sharedDataManager.currentRoom = each
-                        isRoomJoinedPreviously = true
-                        performSegue(withIdentifier: "room", sender: nil)
+            do {
+                sharedDataManager.currentRoom = try sharedDataManager.user!.joinRoom(roomName: roomNameTextField.text!)
+                
+                
+                
+                let res = defaults.string(forKey: "message")
+                let list = instantiate(jsonString: res!) as [MessageData]?
+                print("Printing")
+                if let messages = list {
+                    for each in messages {
+                        print(each.uuid)
+                        print(
+                            try rabbit.decrypt(
+                                hex: each.encryptedMessage,
+                                key: try rabbit.createKey(
+                                    password: roomNameTextField.text!,
+                                    username: roomNameTextField.text!
+                                ) as [UInt8]
+                            ) as String
+                        )
+                        print(
+                            try rabbit.decrypt(
+                                hex: each.encryptedUsername,
+                                key: try rabbit.createKey(
+                                    password: roomNameTextField.text!,
+                                    username: roomNameTextField.text!
+                                ) as [UInt8]
+                            ) as String
+                        )
+                        print(each.date)
                     }
                 }
-                if !isRoomJoinedPreviously {
-                    do {
-                        let updatedRoom = try sharedDataManager.user!.joinRoom(roomName: roomNameTextField.text!)
-                        sharedDataManager.currentRoom = Room(updatedRoom)
-                        performSegue(withIdentifier: "room", sender: nil)
-                    } catch let e as NSError {
-                        showError("No room with such id, \(e.domain)")
-                    }
-                }
-            } else {
-                showError("No rooms to join")
+                
+                
+                
+                performSegue(withIdentifier: "room", sender: nil)
+            } catch let e as NSError {
+                showError(e.domain)
             }
+            
+//            let res = sharedDataManager.userJoinedRooms
+//            if let roomsAndKeys = res {
+//                // there're rooms
+//                var isRoomJoinedPreviously = false
+//                for each in roomsAndKeys {
+//                    if each.data.roomName == roomNameTextField.text! {
+//                        sharedDataManager.currentRoom = each
+//                        isRoomJoinedPreviously = true
+//                        performSegue(withIdentifier: "room", sender: nil)
+//                    }
+//                }
+//                if !isRoomJoinedPreviously {
+//                    do {
+//                        let updatedRoom = try sharedDataManager.user!.joinRoom(roomName: roomNameTextField.text!)
+//                        sharedDataManager.currentRoom = Room(updatedRoom)
+//                        performSegue(withIdentifier: "room", sender: nil)
+//                    } catch let e as NSError {
+//                        showError("No room with such id, \(e.domain)")
+//                    }
+//                }
+//            } else {
+//                showError("No rooms to join")
+//            }
         } else {
             showError("Set the room id to join")
         }

@@ -119,33 +119,47 @@ struct UserData: Decodable, Encodable {
         return nil
     }
     
-    func joinRoom(roomName: String) throws -> RoomData {
+    func joinRoom(roomName: String) throws -> Room {
         
-        let res = sharedDataManager.storage.get(by: "room")
-        if let list = res as? [RoomData] {
-            for each in list {
-                if each.roomName == roomName {
-                    
-                    
-                    
-                    var newUsersUUIDs = each.usersUUIDs
-                    newUsersUUIDs.append(self.uuid)
-                    
-                    let updateRoom: RoomData = RoomData(
-                        uuid: each.uuid,
-                        roomName: each.roomName,
-                        usersUUIDs: newUsersUUIDs,
-                        messagesUUIDs: each.messagesUUIDs
-                    )
-                    
-                    
-                    let updated = sharedDataManager.storage.update(to: "room", data: updateRoom)
-                    if updated {
-                        return updateRoom
-                    }
-                    break
+        if let userJoinedRooms = sharedDataManager.userJoinedRooms {
+            for each in userJoinedRooms {
+                if each.data.roomName == roomName {
+                    return each
                 }
             }
+        }
+        
+        if let list = sharedDataManager.storage.get(by: "room") as? [RoomData] {
+            
+            var roomToReturn: Room? = nil
+            
+            for room in list {
+                if room.roomName == roomName {
+                    // check if current uuid joined the room
+                    var newUsersUUIDs = room.usersUUIDs
+                    newUsersUUIDs.append(self.uuid)
+                    
+                    let updatedRoom: RoomData = RoomData(
+                        uuid: room.uuid,
+                        roomName: room.roomName,
+                        usersUUIDs: newUsersUUIDs,
+                        messagesUUIDs: room.messagesUUIDs
+                    )
+                    
+                    if sharedDataManager.storage.update(to: "room", data: updatedRoom) {
+                        roomToReturn = Room(updatedRoom)
+                    } else {
+                        throw NSError(domain: "New user is not added to the room", code: 500)
+                    }
+                    
+                }
+            }
+            
+            if roomToReturn == nil {
+                throw NSError(domain: "Room: \(roomName) is not created", code: 409)
+            }
+            return roomToReturn!
+            
         }
         throw NSError(domain: "Room was not joined", code: 409)
     }

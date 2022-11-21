@@ -67,8 +67,7 @@ struct RoomData: Decodable, Encodable {
         // show them using key
         
         // get room from storage
-        let resR = sharedDataManager.storage.get(by: "room")
-        if let rooms = resR as? [RoomData] {
+        if let rooms = sharedDataManager.storage.get(by: "room") as? [RoomData] {
             // collecting messagesUUID of room
             var messagesUUIDs: [String] = []
             
@@ -97,42 +96,55 @@ struct RoomData: Decodable, Encodable {
                     
                 }
                 // collect messages in decrypted format
-                var messagesOpen: [MessageOpenData] = []
+                //                var messagesOpen: [MessageOpenData] = []
                 if !messagesUUIDs.isEmpty {
                     // open messages
-                    let resM = sharedDataManager.storage.get(by: "message")
+                    let res = defaults.string(forKey: "message")
+                    var messagesOfRoom: [RoomMessage] = []
                     
-                    if let messages = resM as? [MessageData] {
-                        for message in messages {
+                    if let messages = instantiate(jsonString: res!) as [MessageData]? {
+                        for each in messages {
                             for uuid in messagesUUIDs {
-                                if uuid == message.uuid {
-                                    messagesOpen.append(try message.show(using: key))
+                                if each.uuid == uuid {
+                                    
+                                    let username = try rabbit.decrypt(hex: each.encryptedUsername,
+                                                                      key: try rabbit.createKey(
+                                                                        password: self.roomName,
+                                                                        username: self.roomName
+                                                                      ) as [UInt8]) as String
+                                    
+                                    let message = try rabbit.decrypt(hex: each.encryptedMessage,
+                                                                     key: try rabbit.createKey(
+                                                                        password: self.roomName,
+                                                                        username: self.roomName
+                                                                     ) as [UInt8]) as String
+                                    
+                                    for every in roomUsers {
+                                        var online = false
+                                        if every.username == username {
+                                            if every.online {
+                                                online = true
+                                            }
+                                            
+                                            let roomMessage: RoomMessage = RoomMessage(
+                                                uuid: each.uuid,
+                                                roomUser: RoomUser(username: username, online: online),
+                                                message: message,
+                                                date: each.date
+                                            )
+                                            
+                                            messagesOfRoom.append(roomMessage)
+                                        }
+                                    }
                                 }
                             }
                         }
-                        
-                        var roomMessages: [RoomMessage] = []
-                        // prepare final messages, that have user online status
-                        for message in messagesOpen {
-                        inner: for user in roomUsers {
-                            if message.username == user.username {
-                                let room: RoomMessage = RoomMessage(
-                                    uuid: message.uuid,
-                                    roomUser: RoomUser(username: message.username, online: user.online),
-                                    message: message.message,
-                                    date: message.date
-                                )
-                                roomMessages.append(room)
-                                break inner
-                            }
-                        }
-                        }
-                        return (roomUsers, roomMessages)
+                        return (roomUsers: roomUsers, roomMessages: messagesOfRoom)
                     } else {
-                        return (roomUsers, nil)
+                        throw NSError(domain: "Room has messages uuid's, no messages in UD", code: 500)
                     }
                 } else {
-                    return (roomUsers, nil)
+                    return (roomUsers: roomUsers, roomMessages: nil)
                 }
             } else {
                 throw NSError(domain: "No users in the room were found", code: 404)
@@ -140,17 +152,13 @@ struct RoomData: Decodable, Encodable {
         } else {
             throw NSError(domain: "Room was not found", code: 404)
         }
-            
     }
+
     
     /// Adds encrypted message to UserDefaults
     /// Call from Room
     mutating func addMessage(message: String, username: String, key: [UInt8]) throws -> (roomUsers: [RoomUser], roomMessages: [RoomMessage]?) {
         let message = try MessageData(message: message, username: username, key: key)
-        let isMessageAdded = sharedDataManager.storage.update(to: "message", data: message)
-        if !isMessageAdded {
-            throw NSError(domain: "Message was not sent", code: 409)
-        }
         var newMessagesUUIDs: [String] = self.messagesUUIDs
         newMessagesUUIDs.append(message.uuid)
         try updateRoomMessagesUUIDs(list: newMessagesUUIDs)
@@ -188,15 +196,54 @@ class Room {
         }
     }
     
+//    func loadMessages() {
+//        let res = defaults.string(forKey: "message")
+//        let list = instantiate(jsonString: res!) as [MessageData]?
+//
+//        var messagesOfRoom: [RoomMessage]
+//
+//        if let messages = list {
+//            for each in messages {
+//                print(each.uuid)
+//                print(
+//                    try rabbit.decrypt(
+//                        hex: each.encryptedMessage,
+//                        key: try rabbit.createKey(
+//                            password: roomNameTextField.text!,
+//                            username: roomNameTextField.text!
+//                        ) as [UInt8]
+//                    ) as String
+//                )
+//                print(
+//                    try rabbit.decrypt(
+//                        hex: each.encryptedUsername,
+//                        key: try rabbit.createKey(
+//                            password: roomNameTextField.text!,
+//                            username: roomNameTextField.text!
+//                        ) as [UInt8]
+//                    ) as String
+//                )
+//                print(each.date)
+//            }
+//        }
+//    }
+    
     func load() throws {
         let room = try self.data.load(using: self.key)
         self.messages = room.roomMessages
         self.users = room.roomUsers
+        sharedDataManager.currentRoom = self
+        
+        print("Room: \(data.roomName)")
+        for each in self.data.messagesUUIDs {
+            print("messageUUID: \(each)")
+        }
     }
     
     func addMessage(message: String, username: String) throws {
         let room = try self.data.addMessage(message: message, username: username, key: self.key)
         self.messages = room.roomMessages
         self.users = room.roomUsers
+//        sharedDataManager.currentRoom = self
     }
 }

@@ -159,38 +159,6 @@ class Storage {
         defaults.set(list.toJSONString(), forKey: "message")
     }
     
-    // MARK: Making new list by adding data and setting
-    
-    private func addUser(user: UserData) {
-        if var newList = self.users {
-            newList.append(user)
-            setUsers(list: newList)
-        } else {
-            setUsers(list: [user])
-        }
-        
-    }
-    
-    private func addRoom(room: RoomData) {
-        if var newList = self.rooms {
-            newList.append(room)
-            setRooms(list: newList)
-        } else {
-            setRooms(list: [room])
-        }
-        
-    }
-    
-    private func addMessage(message: MessageData) {
-        if var newList = self.messages {
-            newList.append(message)
-            setMessages(list: newList)
-        } else {
-            setMessages(list: [message])
-        }
-        
-    }
-    
     // MARK: Making new list by replacing data and setting
     
     private func updateUser(user: UserData) {
@@ -237,9 +205,13 @@ class Storage {
     
     private func updateMessage(message: MessageData) {
         var newList: [MessageData] = []
-        if let prevList = self.messages {
+        let oldJList = defaults.string(forKey: "message")
+        
+        let oldList = instantiate(jsonString: oldJList!) as [MessageData]?
+        
+        if let list = oldList {
             var isMessageAdded = false
-            for each in prevList {
+            for each in list {
                 if each.uuid == message.uuid {
                     newList.append(message)
                     isMessageAdded = true

@@ -31,19 +31,22 @@ class Room {
         messages.append(message)
     }
     
-    func getMessages() -> [String] {
-        
-        guard  messages.count > 0 else {
-            return []
-        }
-        var messageList: [String] = []
-        
-        for message in messages {
-            let messageContent = message.content
-            messageList.append(messageContent)
-        }
-        return messageList
-    }
+    
+    
+//    func getMessages() -> [String] {
+//
+//        guard  messages.count > 0 else {
+//            return []
+//        }
+//        var messageList: [String] = []
+//
+//
+//        for message in messages {
+//            let messageContent = message.content
+//                messageList.append(messageContent)
+//        }
+//        return messageList
+//    }
     
     
 }

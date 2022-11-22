@@ -201,11 +201,6 @@ class Room {
         self.messages = room.roomMessages
         self.users = room.roomUsers
         sharedDataManager.currentRoom = self
-        
-        print("Room: \(data.roomName)")
-        for each in self.data.messagesUUIDs {
-            print("messageUUID: \(each)")
-        }
     }
     
     func addMessage(message: String, username: String) throws {

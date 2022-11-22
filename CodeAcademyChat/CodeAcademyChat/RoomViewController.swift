@@ -21,7 +21,6 @@ class RoomViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         if sharedDataManager.currentRoom!.messages != nil {
             messagesList = sharedDataManager.currentRoom!.messages!
-            print(messagesList.count)
         }
         
         

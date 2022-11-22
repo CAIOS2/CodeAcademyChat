@@ -206,7 +206,10 @@ class Storage {
     private func updateMessage(message: MessageData) {
         var newList: [MessageData] = []
         let oldJList = defaults.string(forKey: "message")
-        
+        if oldJList == nil {
+            setMessages(list: [message])
+            return
+        }
         let oldList = instantiate(jsonString: oldJList!) as [MessageData]?
         
         if let list = oldList {

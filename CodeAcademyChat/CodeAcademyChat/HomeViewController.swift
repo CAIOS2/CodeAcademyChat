@@ -60,40 +60,7 @@ class HomeViewController: UIViewController {
     @IBAction func joinRoom(_ sender: Any) {
         if roomNameTextField.text! != "" {
             do {
-                sharedDataManager.currentRoom = try sharedDataManager.user!.joinRoom(roomName: roomNameTextField.text!)
-                
-                
-                
-                let res = defaults.string(forKey: "message")
-                let list = instantiate(jsonString: res!) as [MessageData]?
-                print("Printing")
-                if let messages = list {
-                    for each in messages {
-                        print(each.uuid)
-                        print(
-                            try rabbit.decrypt(
-                                hex: each.encryptedMessage,
-                                key: try rabbit.createKey(
-                                    password: roomNameTextField.text!,
-                                    username: roomNameTextField.text!
-                                ) as [UInt8]
-                            ) as String
-                        )
-                        print(
-                            try rabbit.decrypt(
-                                hex: each.encryptedUsername,
-                                key: try rabbit.createKey(
-                                    password: roomNameTextField.text!,
-                                    username: roomNameTextField.text!
-                                ) as [UInt8]
-                            ) as String
-                        )
-                        print(each.date)
-                    }
-                }
-                
-                
-                
+                sharedDataManager.currentRoom = try sharedDataManager.user!.joinRoom(roomName: roomNameTextField.text!)  
                 performSegue(withIdentifier: "room", sender: nil)
             } catch let e as NSError {
                 showError(e.domain)

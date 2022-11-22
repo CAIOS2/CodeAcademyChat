@@ -26,6 +26,9 @@
 		84C73188291AD10A00B4F19A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C73187291AD10A00B4F19A /* HomeViewController.swift */; };
 		84E2A8C029252C6E00EA379C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2A8BF29252C6E00EA379C /* SettingsViewController.swift */; };
 		84E2A8C229252C7900EA379C /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2A8C129252C7900EA379C /* RoomViewController.swift */; };
+		84F8FF1C292CF188003918C1 /* ViewMessageHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F8FF1B292CF188003918C1 /* ViewMessageHistoryCell.xib */; };
+		84F8FF1E292CF275003918C1 /* HistoryMessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8FF1D292CF275003918C1 /* HistoryMessageViewCell.swift */; };
+		84F8FF20292CF891003918C1 /* MessageHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8FF1F292CF891003918C1 /* MessageHistoryViewController.swift */; };
 		A0C2A69B29144FA9009A006C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C2A69A29144FA9009A006C /* AppDelegate.swift */; };
 		A0C2A69D29144FA9009A006C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C2A69C29144FA9009A006C /* SceneDelegate.swift */; };
 		A0C2A69F29144FA9009A006C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C2A69E29144FA9009A006C /* ViewController.swift */; };
@@ -55,6 +58,9 @@
 		84C73187291AD10A00B4F19A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		84E2A8BF29252C6E00EA379C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		84E2A8C129252C7900EA379C /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
+		84F8FF1B292CF188003918C1 /* ViewMessageHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewMessageHistoryCell.xib; sourceTree = "<group>"; };
+		84F8FF1D292CF275003918C1 /* HistoryMessageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryMessageViewCell.swift; sourceTree = "<group>"; };
+		84F8FF1F292CF891003918C1 /* MessageHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHistoryViewController.swift; sourceTree = "<group>"; };
 		A0C2A69A29144FA9009A006C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0C2A69C29144FA9009A006C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A0C2A69E29144FA9009A006C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +122,8 @@
 				84B4E56A2927B3ED002B9627 /* ViewMessageLeft.xib */,
 				84B4E5702927BBD4002B9627 /* RightMessageViewCell.swift */,
 				84B4E5722927BC47002B9627 /* LeftMessageViewCell.swift */,
+				84F8FF1B292CF188003918C1 /* ViewMessageHistoryCell.xib */,
+				84F8FF1D292CF275003918C1 /* HistoryMessageViewCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -147,6 +155,7 @@
 				84C73187291AD10A00B4F19A /* HomeViewController.swift */,
 				84E2A8BF29252C6E00EA379C /* SettingsViewController.swift */,
 				84E2A8C129252C7900EA379C /* RoomViewController.swift */,
+				84F8FF1F292CF891003918C1 /* MessageHistoryViewController.swift */,
 			);
 			path = CodeAcademyChat;
 			sourceTree = "<group>";
@@ -228,6 +237,7 @@
 				84B4E56B2927B3ED002B9627 /* ViewMessageLeft.xib in Resources */,
 				A0C2A6A429144FAB009A006C /* Assets.xcassets in Resources */,
 				A0C2A6A229144FA9009A006C /* Main.storyboard in Resources */,
+				84F8FF1C292CF188003918C1 /* ViewMessageHistoryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +297,7 @@
 				84C7317D2916DD4700B4F19A /* AppEntryViewController.swift in Sources */,
 				8473CACE291C022900FEAF5D /* DataManager.swift in Sources */,
 				846E5348292016F200539A1E /* Extendables.swift in Sources */,
+				84F8FF20292CF891003918C1 /* MessageHistoryViewController.swift in Sources */,
 				A0C2A69B29144FA9009A006C /* AppDelegate.swift in Sources */,
 				84E2A8C029252C6E00EA379C /* SettingsViewController.swift in Sources */,
 				84B4E5622926715A002B9627 /* Random.swift in Sources */,
@@ -297,6 +308,7 @@
 				8473CACA291C013B00FEAF5D /* Message.swift in Sources */,
 				84E2A8C229252C7900EA379C /* RoomViewController.swift in Sources */,
 				84C7318129170ED400B4F19A /* Hashing.swift in Sources */,
+				84F8FF1E292CF275003918C1 /* HistoryMessageViewCell.swift in Sources */,
 				8473CAD0291C081500FEAF5D /* Storage.swift in Sources */,
 				8473CAC8291C012D00FEAF5D /* Room.swift in Sources */,
 				84B4E5732927BC47002B9627 /* LeftMessageViewCell.swift in Sources */,
